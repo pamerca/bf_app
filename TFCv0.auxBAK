@@ -1,0 +1,58 @@
+\relax 
+\catcode`"\active
+\catcode`<\active
+\catcode`>\active
+\@nameuse{es@quoting}
+\select@language{spanish}
+\@writefile{toc}{\select@language{spanish}}
+\@writefile{lof}{\select@language{spanish}}
+\@writefile{lot}{\select@language{spanish}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Resumen}{5}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Introducci\'on}{7}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Mundo de las apuestas y BetFair}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}API de servicios de BetFair}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Figura 4}}{9}}
+\newlabel{fig:Situaci\'on inicial partido}{{2.1}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Figura 5}}{9}}
+\newlabel{fig:Cambia el escenario del partido}{{2.2}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Apple y su SDK de desarrollo para iPhone}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces IPhone 3G}}{11}}
+\newlabel{fig:iPhone 3G}{{2.3}{11}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Objetivos}{13}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Requisitos}{15}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Escenario}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Historias de Uso vs Caso de uso}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Historias recopiladas}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Instalaci\'on}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Actualizar la aplicaci\'on}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Desinstalar}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Ejecuci\'on}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}Configurar la aplicaci\'on}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.6}Gesti\'on de los Eventos}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.7}Realizar una apuesta}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.8}Gestionar las apuestas}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.9}Realizar Trading sobre una apuesta ya realizada}{16}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Arquitectura}{17}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Descripci\'on general}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Arquitectura del iPhone y su SDK}{17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces IPhoneOS system layers}}{18}}
+\newlabel{fig:iPhoneOS layers}{{5.1}{18}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Arquitectura del API de BetFair}{20}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Arquitectura de la aplicaci\'on}{21}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Implementaci\'on}{23}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Entorno de ejecuci\'on}{23}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusiones}{25}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}

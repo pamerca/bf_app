@@ -1,0 +1,46 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Resumen}{5}
+\contentsline {chapter}{\numberline {2}Introducci\'on}{7}
+\contentsline {section}{\numberline {2.1}Mundo de las apuestas y BetFair}{7}
+\contentsline {section}{\numberline {2.2}API de servicios de BetFair}{9}
+\contentsline {section}{\numberline {2.3}Apple y su SDK de desarrollo para iPhone}{10}
+\contentsline {chapter}{\numberline {3}Objetivos}{13}
+\contentsline {chapter}{\numberline {4}Requisitos}{15}
+\contentsline {section}{\numberline {4.1}Escenario}{15}
+\contentsline {section}{\numberline {4.2}Historias de Uso vs Caso de uso}{15}
+\contentsline {section}{\numberline {4.3}Historias recopiladas}{15}
+\contentsline {subsection}{\numberline {4.3.1}Instalaci\'on}{15}
+\contentsline {subsection}{\numberline {4.3.2}Actualizar la aplicaci\'on}{15}
+\contentsline {subsection}{\numberline {4.3.3}Desinstalar}{15}
+\contentsline {subsection}{\numberline {4.3.4}Ejecuci\'on}{16}
+\contentsline {subsection}{\numberline {4.3.5}Configurar la aplicaci\'on}{16}
+\contentsline {subsection}{\numberline {4.3.6}Gesti\'on de los Eventos}{16}
+\contentsline {subsection}{\numberline {4.3.7}Realizar una apuesta}{16}
+\contentsline {subsection}{\numberline {4.3.8}Gestionar las apuestas}{16}
+\contentsline {subsection}{\numberline {4.3.9}Realizar Trading sobre una apuesta ya realizada}{16}
+\contentsline {chapter}{\numberline {5}Arquitectura}{17}
+\contentsline {section}{\numberline {5.1}Descripci\'on general}{17}
+\contentsline {section}{\numberline {5.2}Arquitectura del iPhone y su SDK}{17}
+\contentsline {section}{\numberline {5.3}Arquitectura del API de BetFair}{20}
+\contentsline {section}{\numberline {5.4}Arquitectura de la aplicaci\'on}{21}
+\contentsline {subsection}{\numberline {5.4.1}N\'ucleo de la aplicaci\'on}{21}
+\contentsline {subsection}{\numberline {5.4.2}Crontroladores de Vista}{22}
+\contentsline {subsection}{\numberline {5.4.3}Controlador Vista de tablas}{24}
+\contentsline {subsection}{\numberline {5.4.4}Arquitectura de la aplicaci\'on}{24}
+\contentsline {subsubsection}{Controlador principal}{24}
+\contentsline {subsubsection}{Controlador de men\'u principal}{25}
+\contentsline {subsubsection}{Controlador de tipos de eventos}{25}
+\contentsline {subsubsection}{Controlador de eventos y mercados}{25}
+\contentsline {subsubsection}{Controlador de informaci\'on de mercado}{26}
+\contentsline {subsubsection}{Controlador de apuesta por un mercado}{26}
+\contentsline {subsubsection}{Controlador de las categor\IeC {\'\i }as de Mis Apuestas}{27}
+\contentsline {subsubsection}{Controlador de Mis Apuestas}{27}
+\contentsline {subsubsection}{Controlador de detalles de una apuesta}{27}
+\contentsline {subsubsection}{API: Interfaz a Betfair}{27}
+\contentsline {section}{\numberline {5.5}Diagrama de Clases}{28}
+\contentsline {chapter}{\numberline {6}Implementaci\'on}{29}
+\contentsline {section}{\numberline {6.1}Entorno de ejecuci\'on}{29}
+\contentsline {section}{\numberline {6.2}Estructura de la aplicaci\'on}{30}
+\contentsline {section}{\numberline {6.3}Internalizaci\'on}{30}
+\contentsline {section}{\numberline {6.4}Interpretaci\'on XML de BetFair a Cocoa Touch}{30}
+\contentsline {chapter}{\numberline {7}Conclusiones}{31}
