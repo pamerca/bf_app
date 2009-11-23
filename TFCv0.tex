@@ -579,8 +579,49 @@ TradingController.xib & Explicacion \\
 
 
    Para comenzar, nuestra tarea fue construir la estructura de los mensajes a enviar en formato XML, haciendo un esquema por cada servicio disponible. Para ello, se desgloso el archivo en varias partes. La primera fue establecer la dirección web donde enviar los mensajes. La segunda fue construir las estructuras XML de cada servicio web. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. 
-   
-   Incluir ejemplo mensaje peticion SOAP bajo mensajes HTTP.
+
+ Ejemplo de XML de petición de Login:
+ 
+\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
+  <?xml version="1.0" encoding="UTF-8"?>
+  <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.betfair.com/publicapi/types/global/v3/" xmlns:ns1="http://www.betfair.com/publicapi/v3/BFGlobalService/">
+  <SOAP-ENV:Body>
+  <ns1:login>
+  <ns1:request>
+  <ipAddress>0.0.0.0</ipAddress>
+  <locationId>0</locationId>
+  <password>xxxxxxxx</password>
+  <productId>82</productId>
+  <username>user</username>
+  <vendorSoftwareId>0</vendorSoftwareId>
+  </ns1:request></ns1:login>
+  </SOAP-ENV:Body>
+  </SOAP-ENV:Envelope> 
+ \end{lstlisting}
+ 
+ Ejemplo de XML de respuesta a petición de Login:
+
+\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n2="http://www.betfair.com/publicapi/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+<n:loginResponse xmlns:n="http://www.betfair.com/publicapi/BFService/">
+<n:Result xsi:type="n2:LoginResp">
+<header xsi:type="n2:APIResponseHeader">
+<errorCode xsi:type="n2:APIErrorEnum">OK</errorCode>
+<minorErrorCode xsi:nil="1"></minorErrorCode>
+<sessionToken xsi:type="xsd:string">6XbAFn0tqfGgdWtQhRmspOctTJGPDOF0Unr2+5WWngk=</sessionToken>
+<timestamp xsi:type="xsd:dateTime">2009-11-23T11:39:45.644Z</timestamp>
+</header>
+<currency xsi:type="xsd:string">EUR</currency>
+<errorCode xsi:type="n2:LoginErrorEnum">OK</errorCode>
+<minorErrorCode xsi:nil="1"></minorErrorCode>
+<validUntil xsi:type="xsd:dateTime">0001-01-01T00:00:00.000Z</validUntil>
+</n:Result>
+</n:loginResponse>
+</soap:Body>
+</soap:Envelope>
+ \end{lstlisting}
    
     Teniendo ya todas las estructuras de los mensajes, lo siguiente era encapsularlas en mensajes SOAP y enviarlos mediante mensajes HTTP. Una vez enviado el mensaje de petición de un servicio, la aplicación se queda a la espera de la respuesta por parte del servidor. Una vez recibida se confirma que no hay errores ni en la recepción ni en los argumentos enviados en el mensaje. El siguiente paso fue construir un parser donde se transforma la información recibida en la estructura útil por la aplicación. Esta se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la siguiente figura se muestra el procedimiento completo del proceso.
     
