@@ -3,7 +3,7 @@
 %\usepackage [T1]{fontenc}
 \usepackage [latin1]{inputenc}
 \usepackage{graphicx}
-
+\usepackage{url}
 \usepackage{listings} % Activar formato codigo
 
 \usepackage{dcolumn} % Formato Tabla
@@ -70,7 +70,8 @@
 \newpage
 %\maketitle
 
-\chapter{Resumen}
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
 En este documento se describe el trabajo de fin de carrera acerca del desarrollo de una aplicación de apuestas de BetFair para el dispositivo iPhone. Esta aplicación contiene las siguientes funcionalidades:
 \begin{itemize}
     \item Consultar los eventos de BetFair por los que se puede apostar
@@ -87,7 +88,7 @@ En este documento se describe el trabajo de fin de carrera acerca del desarrollo
 
 Actualmente las apuestas deportivas por internet tienen gran aceptación en todo el mundo. En España ya hay una tradición de bastantes años por la quiniela y la lotería. Sin embargo, actualmente ya empiezan a estar desfasadas por poca capacidad de adaptarse a tiempos y gustos nuevos. En la quiniela, al tratarse de cantidades variables nunca sabemos por anticipado cuánto cobraremos en caso de acierto. Un acierto de 13 resultados puede convertirse en una gran decepcion por el premio consguido.
 
-Con el gran desarrollo de internet surgen las casas de apuesta en linea como Bwin.com, BetFair y MiApuesta.com, por citar las más conocidas. Las casas de apuestas nos ofrecen una gran variedad de apuestas en diferentes deportes que nos permiten adecuarnos a nuestros gustos y conocimientos. Esto unido a la evolución de Internet, facilita el acceso a la información y el pago de las apuestas a través de transferencias electrónicas seguras.
+Con el gran desarrollo de internet surgen las casas de apuesta en linea como Bwin\footnote{\url{www.bwin.com}}, BetFair\cite{betfair:web} y MiApuesta.com, por citar las más conocidas. Las casas de apuestas nos ofrecen una gran variedad de apuestas en diferentes deportes que nos permiten adecuarnos a nuestros gustos y conocimientos. Esto unido a la evolución de Internet, facilita el acceso a la información y el pago de las apuestas a través de transferencias electrónicas seguras.
 
 Un modalidad de apuesta derivada de la aparición de las casas de apuestas en Internet es el Trading.  Se trata de apostar en contra de tu ultima apuesta sobre un mismo evento obteniendo asi una ganancia segura en unos casos o minimizar la pérdida en otros. La primera casa de apuestas en ofrecer este servicio fue BetFair.com. Este método se suele dar en dos escenarios típicos:
 \begin{itemize}
@@ -99,12 +100,14 @@ Un modalidad de apuesta derivada de la aparición de las casas de apuestas en Int
  
 En el siguiente ejemplo exponemos un caso típico de Trading para su mejor entendimiento:
 
+
 \begin{figure} [h]
   \centering
     \includegraphics[width=1\textwidth]{./images/SampleTrading1.png}
   \caption{Situacion inicial}
   \label{fig:Inicio}
 \end{figure}
+
 
  Tal y como observamos en la figura X, vemos que el favorito para la victoria del partido es Nadal. Su cuota a favor esta mucho más alta que la de Roger Federer. En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas.
 
@@ -660,4 +663,29 @@ TradingController.xib & Explicacion \\
 
 \subsection{Trading global por lista de eventos}
  Una mejora, que por tiempo no hemos abordado, sería la de poder realizar Trading sobre un mercado entero. 
-\end{document}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMIENZO DE LA BIBLIOGRAFÍA
+%% (NO TOCAR)
+\bibliographystyle{plain}
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CABECERAS, PIES DE PÁGINA Y NUMERACIÓN PARA LA BIBLIOGRAFÍA
+%% (NO TOCAR)
+\pagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAFÍA
+%% (AÑADIR FICHEROS .bib CON LA BIBLIOGRAFÍA USADA EN EL TFC)
+\bibliography{betting}
+
+\end{document}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-PDF-mode: t
+%%% ispell-local-dictionary: "castellano"
+%%% End: 
