@@ -169,7 +169,7 @@ En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor
  
  Betfair fue fundado en Junio del año 2000. En un breve periodo de tiempo y debido a su innovación en las apuestas de intercambio se convierte en la empresa más grande de apuestas de Reino Unido y se destaca claramente por el mercado de apuestas deportivas. Es la primera casa de apuestas online en ofrecer la modalidad de apuestas a favor y en contra de un evento. En el año 2007 la casa ya cuenta con más de 1.000.000 de usuarios generando un volumen de negocio de más de 50 millones de libras a la semana. Rápidamente se expande en más de 120 países de todo el mundo ofreciendo un portal web en 18 idiomas que gestiona más de 5 millones de transacciones al día. 
 
-En el año 2007 BetFair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface: conjunto de funciones y procedimientos que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción} de acceso a sus servicios. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones de apuestas usando su portal de apuestas como base y que se adapten a cualquier dispositivo tanto fijo como los ordenadores como dispositivos móviles como las agendas personales o la telefonía móvil. Como era de esperar empezaron a salir multitud de aplicaciones dirigidas a un sector experto y aplicaciones para principiantes. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine..... es la hora de las aplicaciones móviles.
+En el año 2007 BetFair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface: conjunto de funciones y procedimientos que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción al sistema al que se quiere acceder} de acceso a sus servicios. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones de apuestas usando su portal de apuestas como base y que se adapten a cualquier dispositivo tanto fijo como los ordenadores como dispositivos móviles como las agendas personales o la telefonía móvil. Como era de esperar empezaron a salir multitud de aplicaciones dirigidas a un sector experto y aplicaciones para principiantes. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine..... es la hora de las aplicaciones móviles.
 
 \section{Apple y su terminal móvil iPhone}
  
@@ -227,16 +227,22 @@ La aplicación será capaz de recopilar todas las apuestas realizadas sobre BetFai
 El sistema será capaz de asesorar para realizar Trading sobre una apuesta ya realizada anteriormente. Para ello se mostrará una tabla con las opciones disponibles dentro del resumen de una apuesta ya realizada.
 
 \chapter{Arquitectura}
-En este capítulo se presentará la arquitectura de la aplicación. Para un mejor entendimiento de la misma explicaremos brevemente la arquitectura del dispositivo iPhone conocida técnicamente como Cocoa Touch. Seguiremos por una breve descripción del API de Betfair y terminaremos con una explicación detalla de la arquitectura desplegada en la aplicación.
+En este capítulo se presentará la arquitectura de la aplicación. Para un mejor entendimiento explicaremos brevemente la arquitectura del dispositivo iPhone conocida técnicamente como Cocoa Touch. Seguiremos por una breve descripción del API de acceso a los servicios de Betfair y terminaremos con una explicación detalla de la arquitectura desplegada en la aplicación.
 
 
 \section{Descripción general}
  
-  Como ya hemos visto en capítulos anteriores los requisitos de la aplicación dan como resultado la arquitectura actual de la aplicación. Para llevar a cabo su desarrollo, hemos tenido en cuenta la arquitectura del dispositivo y las herramientas adjuntas. Todas las decisiones tomadas en la construcción de la arquitectura de la aplicación se han basado en los límites o restricciones impuestas por el uso de la arquitectura de Apple y los límites impuestos en el uso del API de Betfair. Para comprender mejor la composición de la aplicación explicaremos brevemente la arquitectura impuesta por Apple en el iPhone y la tecnología en la que se basa el API que ofrece BetFair para el uso de sus servicios.
+  Los requisitos de la aplicación dan como resultado la arquitectura actual de la aplicación. Para llevar a cabo su desarrollo, hemos tenido en cuenta la arquitectura del dispositivo y las herramientas adjuntas para el desarrollo de aplicaciones. Todas las decisiones tomadas en la construcción de la arquitectura de la aplicación se han basado en los límites o restricciones impuestas por el uso de la arquitectura de Apple y los límites impuestos en el uso del API de Betfair. Para comprender mejor la composición de la aplicación explicaremos brevemente la arquitectura impuesta por Apple en el iPhone y la tecnología en la que se basa el API que ofrece BetFair para el uso de sus servicios.
 
-\section{Arquitectura del iPhone y su SDK}
- La Arquitectura del terminal móvil se basa en su sistema operativo iPhone OS capaz de ejecutar tanto aplicaciones web como aplicaciones nativas. La arquitectura del iPhone OS es similar a la arquitectura básica encontrada en los Mac OS X (ordenadores personales de Apple). Esta decisión fue tomada por Apple para facilitar la transición de los programadores de Mac a la plataforma del iPhone. En una descripción de alto nivel, el iPhone OS es un mero intermediario entre el hardware del dispositivo y las aplicaciones que disponemos en el dispositivo. 
-
+\section{API de iPhone/iPod Touch: Cocoa Touch}
+ La Arquitectura del terminal móvil se basa en su sistema operativo iPhone OS de Apple. Este sistema operativo, a grandes rasgos, es un subconjunto del sistema operativo que llevan los ordenadores personales de Apple. Esta decisión favorece el desarrollo de aplicaciones para sus plataformas, ya que para un desarrollador de ordenadores de sobremesa de Apple es transparente el salto a desarrollar aplicaciones móviles. El iPhone OS es capaz de ejecutar dos tipos de aplicaciones: 
+\begin{itemize}
+\item Aplicaciones nativas: Aquellas aplicaciones que usan bibliotecas del sistema para su ejecución. 
+\item Aplicaciones web: Desarrollos creados por lenguajes de programación usados para la creación de páginas web y solo se ejecutan al acceder por el navegador de Internet del dispositivo. Sorprende la capacidad de ciertos desarrolladores para generar aplicaciones con un look\&feel muy parecido a las aplicaciones nativas. Por supuesto, para su ejecución requieren de una conexión de datos hacia internet.
+ \end{itemize}
+  
+ La estructura del iPhone OS se puede ver como un conjunto de capas. En la parte baja del sistema se encuentran las capas encargadas de los servicios fundamentales que permiten la ejecución de las aplicaciones, y en las más altas contienen las capas sobre los servicios multimedia y de las mas altas tecnologías.
+ 
 \begin{figure} [h]
   \centering
     \includegraphics[width=0.5\textwidth]{./images/overview_systemlayers.jpg}
@@ -244,63 +250,58 @@ En este capítulo se presentará la arquitectura de la aplicación. Para un mejor e
   \label{fig:iPhoneOS layers}
 \end{figure}
 
- La implementación de las tecnologías del iPhone OS se puede ver como un conjunto de capas. En la parte baja del sistema se encuentran las capas encargadas de los servicios fundamentales que permiten la ejecución de las aplicaciones, y en las más altas contienen las capas sobre los servicios multimedia y de las mas altas tecnologías.
+ A continuación una breve descripción de cada capa:
 
  \begin{itemize}
+ \item Capa Core OS:  Es la capa que contiene el entorno del núcleo de sistema (kernel), controladores para dispositivos, interfaces básicas del sistema operativo. El kernel es el responsable de todos los aspectos relacionados con el sistema operativo. Es el encargado de gestionar la memoria virtual, threads (procesos ligeros), sistema de ficheros, red y procesos de comunicación. Los controladores son los encargados de proporcionar la interfaz entre el hardware y los frameworks de las capas superiores.
+ \item Capa Core Services: Es la capa responsable de proporcionar los servicios básicos del sistema a las aplicaciones para su uso. En ella encontramos el acceso a la agenda del dispositivo, la gestión de estructura de datos, gestión de las interface s de red, la gestión de la localización del dispositivo, gestión de la seguridad del sistema, soporte para bases de datos SQL y XML.   
+ \item Capa Media: Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video para proporcionar al usuario la mejor experiencia multimedia vista en un dispositivo móvil. Más importantes que las tecnologías en si, esta capa fue diseñada para facilitar al desarrollador su uso para crear aplicaciones con una gran apariencia en su interfaz de usuario y una reproducción de audio genial. 
 \item Capa Cocoa Touch:
-  Es una de las capas más importantes del iPhone OS. Es la encargada de proveer la infraestructura necesaria para la implementación de aplicaciones. Contiene los siguientes frameworks:
-
- \item UIKit FrameWork: Contiene todas las clases necesarias para la programación de la interfaz de usuario de las aplicaciones así como el acceso a las principales tecnologías físicas propias del dispositivo  móvil (acelerómetro, cámara ....)
-
- \item Foundation Framework: Es un framework heredado de la plataforma OS X. Provee el soporte para las siguientes características:
+  Es una de las capas más importantes del iPhone OS. Es la encargada de proveer la infraestructura necesaria para la implementación de aplicaciones. La puerta de acceso de los desarrolladores para el uso de los servicios de las anteriores capas.
+\end{itemize}
+  
+  Esta última capa es la que nos ofrece el conjunto de herramientas necesarias para desarrollar aplicaciones para el dispositivo. Es el API que nos ofrece Apple para el uso de las tecnologías del dispositivo. En ella podemos encontrar los siguientes frameworks\footnote{Es una estructura conceptual y tecnológica de soporte definida, normalmente con artefactos de software concretos, mediante la cual otro proyecto de software puede ser organizado y desarrollado.}: 
+  
  \begin{itemize}
-	\item Colecciones de datos (arrays, sets....)
-	\item Gestión del Tiempo y Fechas.
-	\item Gestión de las preferencias del dispositivo.
-	\item Gestión de URLs
-	\item internacionalización del dispositivo.
-\end{itemize}
-\item Address Book UI Framework: Una de las partes más importantes en un dispositivo móvil es la agenda de contactos del dispositivo. Este framework es el encargado de gestionar toda la interfaz de usuario relacionado con los contactos del dispositivo.
-
-\item Capa Media:
-
-Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video para proporcionar al usuario la mejor experiencia multimedia vista en un dispositivo móvil. Más importantes que las tecnologías en si, esta capa fue diseñada para facilitar al desarrollador su uso para crear aplicaciones con una gran apariencia en su interfaz de usuario y una reproducción de audio genial. 
-
- A continuación enumeramos las tecnologías soportadas:
-\begin{itemize}
-  \item Gráficos: Quartz, Quartz Core Animation, Open GL
-  \item Sonidos: ACC, Apple Lossless, A-law, IMA4, Linear PCM, u-law
-  \item Video: MPEG-4, H.264
-\end{itemize}
-\item Capa Core Services:
- La Core Services Layer es la encargada de proporcionar los servicios básicos del sistema a las aplicaciones para su uso. Contiene los siguientes frameworks:
-\begin{itemize}
-	\item Address Book: Provee los servicios básicos para acceder a los contactos almacenados en el dispositivo.
-	\item Core Foundation: Es un conjunto de interfaces para dar soporte de gestión de datos y servicios para el uso de las aplicaciones del dispositivo. 
-	\item CF Network: Conjunto de interfaces para que las aplicaciones hagan uso de los protocolos de red implementados en el terminal. 
-	\begin{itemize}
-		\item BSD Sockets.
-		\item Conexiones encriptadas
-          	\item Resolución de nombres DNS
-		\item HTTP, HTTPS
-		\item Servicios Bonjour
+ 	\item UIKit: Contiene todas las clases necesarias para la programación de la interfaz de usuario de las aplicaciones así como el acceso a las principales tecnologías físicas propias del dispositivo  móvil:
+		 \begin{itemize}
+ 			\item Soporte para copiar, cortar y pegar.
+ 			\item Soporte para la creación de gráficos y ventanas del sistema.
+ 			\item Soporte para la gestión de eventos multitouch, eventos realizados al pulsar la pantalla con más de un dedo.
+			 \item Soporta para la creación de contenido tanto de texto como de web.
+ 			\item Soporte para la creación de controles y objetos del sistema.
+ 			\item: Soporte para la accesibilidad de aplicaciones.
+ 			\item: Soporte para el acceso a las capacidades hardware del dispositivo: batería, cámara, acelerómetros, sensor de proximidad......
+ 		\end{itemize}
+ 	 \item Foundation: Es un framework heredado de la plataforma OS X. Provee el soporte para las siguientes características:
+ 		\begin{itemize}
+			\item Colecciones de datos (arrays, sets....)
+			\item Gestión del tiempo y fechas.
+			\item Gestión de las preferencias del dispositivo.
+			\item Gestión de URLs
+			\item internacionalización del dispositivo.
 		\end{itemize}
-	\item Core Location: Framework que permite determinar la actual posición (latitud, longitud) del dispositivo. Hace uso del dispositivo GPS implementado en el dispositivo. Ofrece todo lo necesario para que las aplicaciones implementen características de localización o guiado.
-	\item Security: Garantiza el acceso seguro a los datos y aplicaciones almacenadas en el dispositivo.
-	\item SQLite: Soporte para gestionar bases de datos para que las aplicaciones gestionen sus datos.
-	\item Soporte a XML: Soporte para dar a las aplicaciones métodos para manipular contenido XML.
-\end{itemize}
-\item Capa Core OS: 
+	\item Address Book UI: Una de las partes más importantes en un dispositivo móvil es la agenda de contactos. Nos proporciona las herramientas necesarias para gestionar toda la interfaz de usuario relacionado con el acceso a los contactos del dispositivo.
+	\item Message UI: Proporciona el soporte necesario para componer y gestionar mensajes de correo electrónico en nuestras aplicaciones.
+	\item Map kit: Esta interfaz proporciona la creación de una vista de un mapa geográfico escalable con posibilidad de incrustar en el información detallada. Como ejemplo típico la localización en un mapa de un restaurante sería posible con el uso de esta interfaz.
+	\item Game Kit: Nos permite añadir a nuestras aplicaciones el soporte de comunicaciones peer-to-peer o redes dos a dos. Especialmente importante en aplicaciones  o juegos multiusuario.
+	\item Push Notification Service: Proporciona un camino para notificar a los usuarios de que una aplicación tiene nueva información relevante. El sistema notifica al usuario del tal información incluso si la aplicación no esta ejecutada.
 
-	Es la capa que contiene el entorno del núcleo de sistema (kernel), controladores para dispositivos, interfaces básicas del sistema operativo. El kernel es el responsable de todos los aspectos relacionados con el sistema operativo. Es el encargado de gestionar la memoria virtual, threads (procesos ligeros), sistema de ficheros, red y procesos de comunicación. Los controladores son los encargados de proporcionar la interfaz entre el hardware y los frameworks de las capas superiores. 
 \end{itemize}
+
+ Para poder desarrollar aplicaciones y hacer uso del API del iPhone, Apple pone a disposición un SDK gratuito a los desarrolladores disponible en este enlace.
+
 
 \section{Arquitectura del API de BetFair}
 
-	El API de Betfair esta diseñado bajo una interfaz SOAP que esta disponible a través de una conexión web segura. (Explicación de SOAP).
+	El API de Betfair esta diseñado bajo un protocolo SOAP\footnote{Simple Object Access Protocol: Es un protocolo estándar que define cómo dos objetos en diferentes procesos pueden comunicarse por medio de intercambio de datos XML.} que esta disponible a través de una conexión web HTTPS\footnote{Hypertext Transfer Protocol Secure segura}.  
 
-          El API esta disponible a partir de un fichero en formato WSDL. Dicho formato describe la interfaz para los servicios web SOAP  y contiene todas las llamadas a los procedimientos remotos de los servicios proporcionados por BetFair.  Los servicios proporcionados por el API se dividen en dos conjuntos: Global y Exchange. Ambos conjuntos están disponibles en el portal de desarrolladores de BetFair.
-
+          El API esta disponible a partir de un fichero en formato WSDL\footnote{Web Services Description Language, un formato XML que se utiliza para describir servicios Web} en el portal de desarrolladores de Betfair. Dicho formato describe la interfaz para los servicios web SOAP  y contiene todas las llamadas a los procedimientos remotos de los servicios proporcionados por BetFair.  Los servicios proporcionados por el API se dividen en dos conjuntos: 
+          
+\begin{itemize}
+	\item Global: contiene todas las llamadas referentes a los servicios básicos de BetFair, tales como inicio de sesión, la administración de tu cuenta BetFair, tus fondos y las llamadas para navegar por los diferentes eventos disponibles en el portal de apuestas.
+	\item Exchange: contiene las llamadas a los servicios relacionados con las apuestas, es decir, apostar por un evento, descripción de los mercados disponibles, actualización o cancelación de las apuestas ya realizadas, historial de todas nuestra apuestas.....
+\end{itemize}
 \begin{figure} [h]
   \centering
     \includegraphics[width=0.6\textwidth]{./images/DeveloperBetFair.png}
@@ -308,17 +309,12 @@ Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video
   \label{fig:API Betfair}
 \end{figure}
 
-
-   El conjunto Global contiene todas las llamadas básicas referentes a los servicios de (login) a BetFair, la administración de tu cuenta BetFair, tus fondos y las llamadas para navegar por los diferentes eventos disponibles en el portal de apuestas.
-
-   El conjunto Exchange contiene las llamadas a los servicios de apuestas, es decir, apostar por un evento, descripción de los mercados disponibles, actualización o cancelación de las apuestas ya realizadas, historial de todas nuestra apuestas.....
-
-  Existen dos formas de acceso al API:
+  Para cada conjunto existen dos formas de acceso al API:
 \begin{itemize}
-		\item Free Access API: con este acceso tendremos disponibles los servicios básicos del portal. Las herramientas suficientes para poder apostar por los eventos disponibles. Gratuita pero con acceso limitado a las llamadas de los servicios.
-		\item Full Access API: Acceso de pago donde están disponibles servicios exclusivos del portal tales como información avanzada de los mercados, gestión avanzada de nuestra cuenta de usuario.... Cuota anual y sin límites en las llamadas.
+	\item Free Access API: con este acceso tendremos disponibles los servicios básicos del portal. Las herramientas suficientes para poder apostar por los eventos disponibles. Gratuita pero con acceso limitado a las llamadas de los servicios.
+	\item Full Access API: Acceso de pago donde están disponibles servicios exclusivos del portal tales como información avanzada de los mercados, gestión avanzada de nuestra cuenta de usuario.... Se gestiona a partir de una cuota anual y no existen límites en las llamadas a los servicios del API.
 \end{itemize}
-    Para nuestra aplicación, al no soportar la plataforma de desarrollo los archivos WSDL ,hubo que implementar cada llamada a los servicios de Betfair bajo la tecnología Apple y su posterior serialización para el tratamiento de datos de la aplicación. Por cada llamada descrita en el archivo de definición de servicios hemos tenido que implementar la estructura de la comunicación mediante mensajes XML, uno de petición y otro de respuesta con un parser asociado que traduzca dichos mensajes.
+    Para nuestra aplicación, al no soportar la plataforma de desarrollo los archivos WSDL ,hubo que implementar cada llamada a los servicios de Betfair bajo la tecnología Apple y su posterior serialización para el tratamiento de datos de la aplicación. Por cada llamada descrita en el archivo de definición de servicios hemos tenido que implementar la estructura de la comunicación mediante mensajes XML\footnote{Extensible Markup Language, es un metalenguaje extensible de etiquetas desarrollado por el World Wide Web Consortium (W3C)}, uno de petición y otro de respuesta con un parser asociado que traduzca dichos mensajes.
 
     Los servicios básicos que hemos usado para el desarrollo de la aplicación han sido:
 \begin{itemize}
@@ -336,22 +332,25 @@ Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video
 		Esta llamada nos devuelve todos los datos referentes a un mercado.
 	\item PlaceBets:
 		Con esta llamada enviamos una apuesta a betfair.
+	\item ViewProfile: 
+		Esta llamada nos devuelve los datos de perfil de usuario.
+	\item RetrieveLIMBMessage:
+		 Con esta llamada obtenemos los mensajes del sistema pendientes de acción por parte del usuario.
+		
 \end{itemize}
 \section{Arquitectura de la aplicación}
- Para el diseño de la arquitectura nos hemos basado en el patrón de diseño "Modelo Vista Controlador". La razón del uso de este patrón se ha debido a dos cuestiones fundamentales:
+ Para el diseño de la arquitectura nos hemos basado en el patrón de diseño "Modelo Vista Controlador". Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes.La razón del uso de este patrón se ha debido a dos cuestiones fundamentales:
 \begin{itemize}
 	\item La facilidad entre la comunicación entre el modelo de datos y la interfaz. Añadir también que cualquier cambio en la interfaz de usuario no afecta al resto del modelo, por lo que se gana en facilidad a la hora de seguir desarrollando la solución en el futuro.
-	\item Apple, en el uso de las herramientas de desarrolla del SDK, te recomienda el uso de dicho patrón para la creación de la interfaz de usuario de la aplicación. Esta recomendación es debido a la arquitectura interna del iPhone OS visto en un capítulo anterior y a que sus herramientas de desarrollo también están orientadas a esta solución.
-	\item La estructura jerárquica de los datos obtenidos a través del API de Betfair: Eventos -> Mercados -> Runners.
+	\item Apple, en el uso de las herramientas de desarrolla del SDK, recomienda el uso de dicho patrón para la creación de la interfaz de usuario de la aplicación. Esta recomendación es debido a la arquitectura interna del iPhone OS visto en un capítulo anterior y a que sus herramientas de desarrollo también están orientadas a esta solución.
+	\item La estructura jerárquica de los datos obtenidos a través del API de Betfair. Este patrón nos facilita la representación de los mismos.
 \end{itemize}
 
-
 \subsection{Núcleo de la aplicación}
-	Toda aplicación para el iPhone esta desarrollada usando el framework UIKit y tienen la misma arquitectura base. UIKit proporciona todo lo necesario para lanzar la aplicación, coordinar los inputs del usuario y mostrar contenido en la pantalla. 
+	Toda aplicación para el iPhone se desarrolla usando principalmente el framework UIKit y tienen la misma arquitectura base. UIKit proporciona todo lo necesario para lanzar la aplicación, coordinar los inputs del usuario y mostrar contenido en la pantalla. 
+	Desde que el usuario pulsa el icono de la aplicación hasta que esta es ejecutada , el framework UIKit gestiona todo lo necesario para lanzar la infraestructura. Toda aplicación, principalmente, recibe eventos continuamente desde el sistema y debe responder a todos estos eventos. 
 	
-	Desde que el usuario pulsa el icono de la aplicación hasta que esta es ejecutada , el framework UIKit gestiona todo lo necesario para lanzar la infraestructura. Toda aplicación, principalmente, recibe eventos contínuamente desde el sistema y debe responder a todos estos eventos. La recepción de los eventos es responsabilidad del objeto UIApplication pero la respuesta a cada uno de ellos es responsabilidad del código de la aplicación que estamos desarrollando. 
-	
-	El ciclo de vida de una aplicación constituye la secuencia de eventos que ocurren entre la ejecución y la finalización de la aplicación. En el SO del iPhone el usuario lanza la aplicación pulsando sobre el icono de la misma. En un corto periodo de tiempo, el sistema muestra una animación y procede a la ejecución de la aplicación en cuestión llamando a la función "main". A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada o bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a determinados objetos que determinemos en nuestra aplicación así como las coordinar las respuestas de las mismas. 
+	El ciclo de vida de una aplicación constituye la secuencia de eventos que ocurren entre la ejecución y la finalización de la aplicación. En el sistema operativo del iPhone el usuario lanza la aplicación pulsando sobre el icono de la misma.  A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada o bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a determinados objetos que determinemos en nuestra aplicación así como las coordinar las respuestas de las mismas. 
 	     
  \begin{figure} [h]
   \centering
@@ -360,20 +359,21 @@ Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video
   \label{fig:iPhoneOS layers}
 \end{figure}
      
-   La figura muestra el ciclo de vida de una aplicación para el iPhone. Tal y como vemos en la figura, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique de la finalización de la aplicación.
+   La figura muestra el ciclo de vida de una aplicación para el iPhone. Tal y como vemos, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique de la finalización de la aplicación.
    
     En el iPhone solo se finaliza una aplicación por tres motivos:
     \begin{itemize}
 	\item El usuario desea finalizar la misma pulsando el botón "Home".
 	\item El sistema recibe una notificación prioritaria que atender (una llamada por ejemplo) y por tanto finaliza la aplicación.
-	\item El sistema detecta un comportamiento erróneo de la aplicación y para salvaguardar la estabilidad del sistema finaliza nuestra aplicación.\end{itemize}
+	\item El sistema detecta un comportamiento erróneo de la aplicación y para salvaguardar la estabilidad del sistema finaliza nuestra aplicación.
+     \end{itemize}
     
     
 \subsection{Crontroladores de Vista}	   
  
  Un controlador de vista proporciona la lógica básica de interfaz de usuario para dibujar las vistas de la aplicación al usuario. Apple dispone de varios patrones de interfaces de usuario para ayudar a representar en las aplicaciones el conjunto de datos hacia el usuario dentro de los dispositivos móviles. 
  
-  Un controlador de vistas gestiona la vista de nuestra aplicación que aparecen entre las barras superiores e inferiores (véase figura). La vista de la aplicación aparece entre la barra de estado y la barra de navegación si ésta está presente. Análogamente, también aparece entre la barra de esta y la barra de tabuladores o la barra de herramientas . En una vista de aplicación se muestra un porción de datos y controles que el desarrollador quiere mostrar al usuario en un tiempo determinado. El controlador de la vista simplemente gestiona la presentación de esta vista y la siguiente en aparecer para un patrón de diseño establecido.
+  Un controlador de vistas gestiona la vista de nuestra aplicación que aparecen entre las barras superiores e inferiores (véase figura 4.4). La vista de la aplicación aparece entre la barra de estado y la barra de navegación si ésta está presente. En una vista de aplicación se muestra una parte de datos y controles que el desarrollador quiere mostrar al usuario en un tiempo determinado. El controlador de la vista simplemente gestiona la presentación de esta vista y la siguiente en aparecer para un patrón de diseño establecido.
  
  \begin{figure} [h]
   \centering
@@ -384,11 +384,11 @@ Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video
  
  Usando controladores de vista eliminamos el código redundante e innecesario en las aplicaciones y proporcionamos una interfaz de usuario familiar hacia los usuarios. No necesitamos implementar la presentación de aquellas vistas de aplicaciones. También ayudan al diseño orientado de objetos separando los detalles de la interfaz de usuario de la lógica de la aplicación.
  
-  Los controladores de vista soportan el patrón de diseño Modelo - Vista - Controlador, patrón muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes. Todos los datos y la lógica de la aplicación se ha implementado usando objetos para una mayor facilidad a la hora de la implementación. En este caso los controladores de vista son los encargados de proporcionar los métodos delegados y la fuente de datos para las vistas de  tipo tabla.
+  Como ya hemos comentado los controladores de vista soportan el patrón de diseño Modelo - Vista - Controlador. Todos los datos y la lógica de la aplicación se ha implementado usando objetos para una mayor facilidad a la hora de la implementación. En este caso los controladores de vista son los encargados de proporcionar los métodos delegados y la fuente de datos para las vistas de  tipo tabla.
   
  \subsection{Controlador Vista de tablas}	
  
-  Es muy común usar vistas de tabla para mostrar un conjunto de datos de tipo jerárquico unido a los controladores de navegación. Para ello Apple dispone de una plantilla de controlador llamada "Controlador de vistas de tabla" que nos proporciona todo lo necesario para ello. En nuestra aplicación, cuando hacemos una petición para obtener todos los eventos y mercados de Betfair este nos envía una colección de datos en forma de diccionarios y array conservando una jerarquía de eventos entre ellos. La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomienda Apple. Es la siguiente figura podemos ver un esquema representativo.
+  Es muy común usar vistas de tabla para mostrar un conjunto de datos de tipo jerárquico unido a los controladores de navegación. Para ello Apple dispone de una plantilla de controlador llamada "Controlador de vistas de tabla" que nos proporciona todo lo necesario para ello. En nuestra aplicación, cuando hacemos una petición para obtener todos los eventos y mercados de Betfair este nos envía una colección de datos en forma de diccionarios y arrays  conservando una jerarquía de eventos entre ellos. La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomienda Apple. Es la siguiente figura podemos ver un esquema representativo.
   
  \begin{figure}[h!]
   \centering
@@ -430,11 +430,7 @@ Es la capa encargada de dar soporte a las tecnologías de gráficos, audio y video
  Es la clase principal de la aplicación. Es la encargada de inicializar el controlador de vista que será encargado de recoger los eventos del usuario, así como de la gestión de memoria y de la gestión de los eventos del sistema.
  
 \subsubsection{Controlador de menú principal}
- Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el login de usuario para los servicios web de Betfair. Para ello hace uso de los siguientes servicios web de Betfair a través de la clase de comunicación llamada API:
- \begin{itemize}
-	\item Login: Método necesario para identificarse y poder usar los servicios de Betfair y así como obtener un token válido de servicio.
-\end{itemize}
- 
+ Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicios login de Betfair a través de la clase de comunicación llamada API.
  
 \subsubsection{Controlador de tipos de eventos}
  Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de BetFair.En un futuro se podrá gestionar por fecha de finalización, órden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair GetActiveEventsTypes  a través de la clase API del modelo de la aplicación.
