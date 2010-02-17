@@ -273,30 +273,44 @@ El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iP
 	\item Asesorar el usuario sobre cuando realizar el trading a las apuestas ya realizadas.
 \end{itemize}
 
-\fxnote{Objetivos, desde mi punto de vista: desarrollar una aplicación para iPhone que (i) permita navegar a través de los mercados de apuestas de BF (ii) permita realizar apuestas (iii) asesore al usuario (de forma incluso automática) sobre posibilidades de trading}
+\fxnote{Objetivos, desde mi punto de vista: (1) explorar el API de acceso a los servicios web de BetFair para (2) desarrollar una aplicación para iPhone que (i) permita navegar a través de los mercados de apuestas de BF, (ii) permita realizar apuestas, (iii) y asesore al usuario (de forma incluso automática) sobre posibilidades de trading.}
 
 \chapter{Requisitos}
+\fxnote{En este capítulo, bla bla bla}
+
 \section{Escenario}
-El escenario que prentende cubrir la aplicación es la gestión de los eventos del portal de apuestas Betfair. Se pretende cubrir las mismas funcionalidades que ofrece BetFair en su portal web.
+\fxnote{¿Qué signfica ``escenario'' aquí? La palabra escenario tiene un significado muy claro en la ingeniería de requisitos y suelen ser descripciones de situaciones de uso de la aplicación.}
+
+El escenario que prentende \fxnote{corrección ortográfica?} cubrir la aplicación es la gestión de los eventos del portal de apuestas Betfair. Se pretende cubrir las mismas funcionalidades que ofrece BetFair en su portal web. \fxnote{Cuidado, las funcionalidades son importantes a través de la web, nosotros no las hemos implementado todas.}
+
 \section{Historias de Uso vs Caso de uso}
+
+\fxnote{¿Qué vas a contar aquí? ¿Qué significa ``historias de uso''? ¿No será ``historias de usuario''? ¿Vas a seguir algún ``estándar''? ¿XP? Como ejemplo: en \url{http://en.wikipedia.org/wiki/User_story} puedes encontrar algo de texto introductorio, incluidas ventajas e inconvenientes. En \url{http://www.agilemodeling.com/artifacts/userStory.htm} puedes encontrar más detalle sobre cómo hacerlas. En el TFC de Antonio puedes encontrar incluso macros latex para que aparezcan más bonitas.}
+
+\fxnote{Entre los requisitos puedes añadir seguir alguna guía de estilo de Apple o del desarrollo para iPhone (que no se si existen).}
+
 \section{Historias recopiladas}
-\subsection{Instalación} Para poder instalar la aplicación solo se necesitará una cuenta del programa iTunes Store de Apple. Es gratuito. La aplicación estará disponible dentro del programa App Store del dispositivo. Solamente habrá que descargar la aplicación de dicho portal.
+\fxnote{Mejor ``Historias de Uso''}
+\subsection{Instalación} Para poder instalar la aplicación solo se necesitará una cuenta del programa iTunes Store de Apple. Es gratuito. La aplicación estará disponible dentro del programa App Store del dispositivo. Solamente habrá que descargar la aplicación de dicho portal.\fxnote{¿No existen otras forma de instalar las aplicaciones?}
 \subsection{Actualizar la aplicación}
-La aplicación  App Store  del dispositivo será la encargada de comunicar al usuario la aparición de una nueva versión del aplicativo. Para actualizarla simplemente habrá que seguir las indicaciones de dicho programa.
+La aplicación  App Store  del dispositivo será la encargada de comunicar al usuario la aparición de una nueva versión del aplicativo. Para actualizarla simplemente habrá que seguir las indicaciones de dicho programa. \fxnote{Lo mismo  de antes}
 \subsection{Desinstalar}
-Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma una segundos e inmediatamente pulsamos sobre la X que aparecerá sobre la misma.
+Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma una segundos e inmediatamente pulsamos sobre la X \fxnote{¿qué es la ``X''? ¿es estándar?} que aparecerá sobre la misma.
 \subsection{Ejecución}
 Para lanzar la aplicación solo hay que pulsar el icono que aparece en la pantalla principal del dispositivo.
 \subsection{Configurar la aplicación}
-Para poder usar los servicios de BetFair a través de la aplicación hay que configurar los datos de acceso al servicio. Para ello, cuando ejecutamos la aplicación por primera vez se nos pedirá los datos de usuario del portal BetFair, concretamente los campos "Usuario" y "Contraseña". Si posteriormente queremos cambiar alguno de estos parámetros lo podremos hacer yendo a la aplicación "Ajustes" del dispositivo y pulsar sobre el campo "BetFair App".
+Para poder usar los servicios de BetFair a través de la aplicación hay que configurar los datos de acceso al servicio. Para ello, cuando ejecutamos la aplicación por primera vez se nos pedirá los datos de usuario del portal BetFair, concretamente los campos "Usuario" \fxnote{El uso de comillas en LaTeX tiene sus propias reglas: ``hola''.} y "Contraseña" \fxnote{Yo usaría un tipo de letra determinado para referirme al interfaz gráfico del iPhone y de la aplicación. Probablemente en el estilo del código (\lstinline{Usuario} y  \lstinline{Usuario}) o directamente sans serif: \textsf{Usuario}}. Si posteriormente queremos cambiar alguno de estos parámetros lo podremos hacer yendo a la aplicación "Ajustes" del dispositivo y pulsar sobre el campo "BetFair App".
 \subsection{Gestión de los Eventos}
-Se podrá navegar y obtener información de todos los eventos disponibles del portal BetFair a través de la jerarquía de menús de la aplicación.
+Se podrá navegar y obtener información de todos los eventos disponibles del portal BetFair a través de la \fxnote{más bien de ``una''} jerarquía de menús de la aplicación. \fxnote{¿Qué es un evento?}
 \subsection{Realizar una apuesta}
-Una vez lanzada la aplicación pulsamos sobre Eventos. Navegamos por los menús hasta llegar al evento de nuestro interés. Una vez en la pantalla de información del evento observamos las cuotas y cantidades del mercado e ntroducimos el tipo de apuesta, la cantidad y la cuota deseados. Seguidamente pulsamos sobre el botón Apostar y confirmamos la apuesta. El sistema nos mostrará si la apuesta se ha realizado con éxito.
+\fxnote{Recuerda que esto son requisitos, no el manual de usuario. Debemos decir lo que la aplicación ``va'' a permitir o lo que esperamos de ella. El ``cómo'' está más adelante.}
+Una vez lanzada la aplicación pulsamos sobre Eventos. Navegamos por los menús hasta llegar al evento de nuestro interés. Una vez en la pantalla de información del evento observamos las cuotas y cantidades del mercado e ntroducimos el tipo de apuesta, la cantidad y la cuota deseados. Seguidamente pulsamos sobre el botón Apostar y confirmamos la apuesta. El sistema nos mostrará si la apuesta se ha realizado con éxito. 
 \subsection{Gestionar las apuestas}
-La aplicación será capaz de recopilar todas las apuestas realizadas sobre BetFair. Por cada apuesta el sistema mostrará· las opciones disponibles.
+La aplicación será capaz de recopilar todas las apuestas realizadas sobre BetFair. Por cada apuesta el sistema mostrará las opciones disponibles. \fxnote{¿Que son?}
 \subsection{Realizar Trading sobre una apuesta ya realizada}
 El sistema será capaz de asesorar para realizar Trading sobre una apuesta ya realizada anteriormente. Para ello se mostrará una tabla con las opciones disponibles dentro del resumen de una apuesta ya realizada.
+
+\fxnote{Aunque no acabemos implementando, el asesoramiento para trading automático debería estar en la lista de requisitos.}
 
 \chapter{Arquitectura}
 En este capítulo se presentará la arquitectura de la aplicación. Para un mejor entendimiento explicaremos brevemente la arquitectura del dispositivo iPhone conocida técnicamente como Cocoa Touch. Seguiremos por una breve descripción del API de acceso a los servicios de Betfair y terminaremos con una explicación detalla de la arquitectura desplegada en la aplicación.
