@@ -1,7 +1,7 @@
-\documentclass {book} 
-\usepackage [spanish] {babel} 
+\documentclass{book} 
+\usepackage[spanish]{babel} 
 %\usepackage [T1]{fontenc}
-\usepackage [latin1]{inputenc}
+\usepackage[latin1]{inputenc}
 \usepackage{graphicx}
 
 \usepackage{url}
@@ -44,6 +44,21 @@
      breaklines=true,
    }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fixmes
+%% macros: \fixme -critical-, \fxerror -noncritical-, \fxwarning, \fxnote
+%% env: afixme, anfxerror, anfxwarning, anfxnote
+%%\usepackage[marginclue,inline]{fixme}
+\usepackage[inline,nomargin,draft]{fixme} %% con el colorín ya vale
+%% \usepackage[marginclue,footnote]{fixme}
+\usepackage{framed}
+\renewcommand{\FXInline}[2]{\noindent{\color{red}#1: \emph{\small #2}}}
+\renewcommand{\FXMarginClue}[1]{\marginpar{\footnotesize\raggedleft\textbf{\color{red}#1~!}}}
+%% Use of color here is buggy...
+%%\renewcommand{\FXEnvBegin}{\begin{quotation}\color{red}}
+\renewcommand{\FXEnvBegin}{\begin{framed}\begin{small}}
+%%\renewcommand{\FXEnvEnd}{\end{quotation}}
+\renewcommand{\FXEnvEnd}{\end{small}\end{framed}}
 
 
 \begin{document} 
@@ -90,24 +105,38 @@ En este documento se describe el trabajo de fin de carrera acerca del desarrollo
 \chapter{Introducción}
 \label{ch:intro}
 
+\fxnote{En este capítulo, bla bla bla}
+
 \section{Mundo de las apuestas}
+
+\fxnote{``Mundo de la apuestas'' es demasiado genérico}
+
+\fxnote{Yo hablaría de apuestas, de casas de apuestas tradicionales y de su entrada en Internet. Pondría ejemplos sobre lo que se puede y no se puede hacer para que el lector se familiarice.}
+
+\fxnote{Luego hablaría del concepto de ``casa de intercambios'' en las que el ``bookie'' no es la casa si no cualquier otro apostador. La idea, como dices en algún momento es simple: los apostadores pueden apostar a favor (significado habitual de apostar) o en contra (con el significado de cubrir una apuesta a favor).}
 
 Actualmente las apuestas tienen gran aceptación en todo el mundo. En España ya hay una tradición de bastantes años por la quiniela y la lotería. Sin embargo, actualmente ya empiezan a estar desfasadas por poca capacidad de adaptarse a tiempos y gustos nuevos. En la quiniela, al tratarse de cantidades variables nunca sabemos por anticipado cuánto cobraremos en caso de acierto. Un acierto de 13 resultados puede convertirse en una gran decepción por el premio conseguido.
 
-En los últimos años hemos sido testigos de la llegada de las llamadas casas de apuestas de intercambio. En las ya existentes y desfasadas casas de apuestas tradicionales el apostante cruza su apuesta directamente contra la propia casa. Es decir, el apostante realiza una apuesta a un evento y la casa en contra del mismo. La casa de intercambio añade un nuevo concepto en el mundo de las apuestas introduciendo los conceptos de cuotas y cantidades a apostar siendo los apostantes quienes las deciden de mutuo acuerdo Simplemente la casa de apuestas hace de intermediario obteniendo un porcentaje en la ganancia del apostante. Las ventajas de las casas de apuestas de intercambio con respecto a las tradicionales son:
+En los últimos años hemos sido testigos de la llegada de las llamadas casas de apuestas de intercambio. En las ya existentes y desfasadas \fxnote{no creo que estén desfasadas} casas de apuestas tradicionales el apostante cruza su apuesta directamente contra la propia casa. Es decir, el apostante realiza una apuesta a un evento y la casa en contra del mismo \fxnote{Tb. puedes decir que la casa ``cubre'' la apuesta.}. La casa de intercambio añade un nuevo concepto en el mundo de las apuestas introduciendo los conceptos de cuotas \fxnote{Falso, las cuotas y cantidades a apostar existen siempre} y cantidades a apostar siendo los apostantes quienes las deciden de mutuo acuerdo. Simplemente la casa de apuestas hace de intermediario obteniendo un porcentaje en la ganancia del apostante.\fxnote{Creo que hace falta decir que los apostantes apuestan a favor y en contra} Las ventajas de las casas de apuestas de intercambio con respecto a las tradicionales son:
 \begin{itemize}
 	\item Las comisiones son menores que las correspondientes a una casa de apuestas tradicionales.
-	\item Estas casas de intercambio no establecen límites en las cantidades a apostar o las cantidades que pueden obtener como ganancia en una apuesta. Claramente es en este punto donde se obtienen las ganancias de la casa de apuestas.
+	\item Estas casas de intercambio no establecen límites en las cantidades a apostar o las cantidades que pueden obtener como ganancia en una apuesta. Claramente es en este punto donde se obtienen las ganancias de la casa de apuestas.\fxnote{Pero existen límites que pueden ser inferiores a los de las casas normales, si nadie apuesta en contra o a favor, por ejemplo.}
 \end{itemize}
 
- Debido a la aparición de estas casas de apuestas aparecen dos modalidades nuevas para realizar apuestas. Una de ellas es el poder realizar apuestas a favor (\emph{back}) y en contra (\emph{lay}) de un evento, diferenciándose claramente de las casas de apuestas tradicionales. La segunda modalidad es la llamada \emph{trading}.  Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros. Este método se suele dar en dos escenarios típicos:
+\fxnote{¿Y las desventajas?}
+
+Debido a la aparición de estas casas de apuestas aparecen dos modalidades nuevas para realizar apuestas. Una de ellas es el poder realizar apuestas a favor (\emph{back})\fxnote{Esta es la modalidad de siempre} y en contra (\emph{lay}) de un evento, diferenciándose claramente de las casas de apuestas tradicionales. La segunda modalidad es la llamada \emph{trading}.\fxnote{El trading es algo que tb se puede hacer en las casas normales, habitualmente utilizando varias casas}  Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros. Este método se suele dar en dos escenarios típicos:
 \begin{itemize}
 	\item Suceso sobrevalorado: apostamos por un evento con una cuota alta y según se va acercando al final del evento disminuye la misma.
 	\item Suceso infravalorado: apostamos por un evento con una cuota baja y esta va subiendo según se va acercando el final de evento.
 \end{itemize}
 
- La ventaja de realizar este tipo de apuestas es que en función de los resultados que hagamos podemos obtener beneficios pase lo que pase en el evento apostado.
- 
+\fxnote{Tienes que pensar en el lector, imagina a alguien que entiende de probabilidades pero que jamás ha hecho una apuesta.}
+
+ La ventaja de realizar este tipo de apuestas es que en función de los resultados que hagamos podemos obtener beneficios pase lo que pase en el evento apostado.\fxnote{Creo que no es posible de entender aún.}
+
+\fxnote{Hay que meter más secciones, aquí empezaría el ``trading''}
+
 En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor entendimiento:
 
 \begin{figure} [h]
@@ -117,10 +146,12 @@ En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor
   \label{fig:Inicio}
 \end{figure}
 
- Tal y como observamos en la figura 1.1, vemos que el favorito para la victoria del partido es Nadal. Su cuota a favor esta mucho más alta que la de Roger Federer. En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas.
+\fxnote{Hay que explicar el significado de la figura, ¿qué son esos números? ¿qué significan?}
+
+Tal y como observamos en la figura 1.1 \fxnote{En Latex jamás escribes un número, todo son referencias: \ref{fig:Inicio}}, vemos que el favorito para la victoria del partido es Nadal. Su cuota a favor esta mucho más alta que la de Roger Federer. En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas. \fxnote{Es inconsistente, si Nadal pierde el primer set se pagaría más alto que al principio del partido.}
 
   
-  Vemos ahora que el mercado ha cambiado. Ahora mismo se refleja una clara ventaja para la victoria del Roger Federer.
+  Vemos ahora que el mercado ha cambiado. Ahora mismo se refleja una clara \fxnote{¿clara?} ventaja para la victoria del Roger Federer.
    
   \begin{figure} [h]
     \centering
@@ -129,13 +160,34 @@ En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor
    \label{fig:Inicio}
 \end{figure}
 
-   En este ejemplo, al principio realizamos una apuesta a favor de Rafa Nadal por 50 euros, con lo que tendríamos:   	
+   En este ejemplo, al principio realizamos una apuesta a favor de Rafa Nadal por 50 euros, con lo que tendríamos:
+
+\fxnote{¿Por qué apostar a favor de Nada? ¿Sabemos algo que nadie sabe? ¿Intuímos algo? ¿Tenemos datos estadísticos?}   	
 	
 	Beneficio = (1.8 x 50) - 50 =  40 euros si gana Rafa Nadal
 	Riesgo = -50 euros si pierde Nadal
 	
   Un tiempo más adelante, el mercado a cambiado debido al resultado del primer set, Nadal ya no es tan favorito para la victoria.
   
+\begin{anfxnote}
+  Tienes que hacer tablas para mostrar toda esta información:
+  \begin{center}
+    \begin{tabular}{||l|c||}
+      \hline
+      \hline
+      Hola & Hola\\
+      \hline
+      \hline
+      a & b\\
+      \hline
+      c & d\\
+      \hline
+      \hline
+    \end{tabular}
+  \end{center}
+  Insisto, piensa en el lector.
+\end{anfxnote}
+
   Para asegurar el dinero apostado anteriormente realizamos una apuesta en contra de Nadal. De tal forma que nos queda:
   
   	Beneficio = 70 euros si pierde Nadal
@@ -157,6 +209,16 @@ En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor
  \item Odds: Es la cuota (probabilidad) de una apuesta. Por ejemplo se paga 3 que Fernando Alonso gane el mundial de Fórmula 1
  \item Beneficio: Es la ganancia que obtenemos de una apuesta ganadora cuyo resultado es el siguiente:
 				Beneficio = (stake x odd) - stake
+
+\begin{anfxnote}
+  Latex es famoso por la potencia a la hora de escribir fórmulas   matemáticas:
+
+\begin{displaymath}
+  B = s \times o
+\end{displaymath}
+
+\end{anfxnote}
+
  \item Pérdida: Lógicamente lo opuesto al beneficio. Lo que todo apostante quiere evitar o minimizar. 
  \item Yield: Expresado en porcentaje nos indica el beneficio obtenido del total apostado. Es lo que diferencia a un buen apostador del resto. El cálculo es el siguiente:
 			Yield = (beneficio / total apostado) x 100
@@ -165,15 +227,21 @@ En el siguiente ejemplo exponemos un caso típico de \emph{trading} para su mejor
    
 \section{BetFair}
 
- Debido al gran desarrollo de internet en los principios de siglo empiezan a aparecer las primeras casas de apuestas de intercambio online. Betfair\footnote{\url{www.betfair.com}}, Bwin\footnote{\url{www.bwin.com}}, , Miapuesta.com\footnote{\url{http://www.miapuesta.com}} son las más conocidas. Dentro de este grupo selecto aparece BetFair, la compañía más grande en el ámbito de apuestas online.
+ Debido al gran desarrollo de internet en los principios de siglo empiezan a aparecer las primeras casas de apuestas de intercambio \fxnote{Casas de apuestas y casa de intercambio, creo que son dos concpetos diferentes, bwin es una casa de apuestas tradicional, betfair es una casa de intercambios de apuestas} online. Betfair\footnote{\url{www.betfair.com}}, Bwin\footnote{\url{www.bwin.com}}, , Miapuesta.com\footnote{\url{http://www.miapuesta.com}} son las más conocidas \footnote{Ésto que dices no está claro: \url{http://www.sportsbookreview.com/Espanol/Default.aspx}}. Dentro de este grupo selecto aparece BetFair, la compañía más grande en el ámbito de apuestas online \footnote{No creo que sea cierto y si lo es necesitamos una fuente fiable. Tenemos que tener cuidado, hemos de contrastar la información}.
  
- Betfair fue fundado en Junio del año 2000. En un breve periodo de tiempo y debido a su innovación en las apuestas de intercambio se convierte en la empresa más grande de apuestas de Reino Unido y se destaca claramente por el mercado de apuestas deportivas. Es la primera casa de apuestas online en ofrecer la modalidad de apuestas a favor y en contra de un evento. En el año 2007 la casa ya cuenta con más de 1.000.000 de usuarios generando un volumen de negocio de más de 50 millones de libras a la semana. Rápidamente se expande en más de 120 países de todo el mundo ofreciendo un portal web en 18 idiomas que gestiona más de 5 millones de transacciones al día. 
+\fxnote{Please, menos marketing. Esto es un TFC, un documento eminentemente técnico.}
 
-En el año 2007 BetFair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface: conjunto de funciones y procedimientos que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción al sistema al que se quiere acceder} de acceso a sus servicios. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones de apuestas usando su portal de apuestas como base y que se adapten a cualquier dispositivo tanto fijo como los ordenadores como dispositivos móviles como las agendas personales o la telefonía móvil. Como era de esperar empezaron a salir multitud de aplicaciones dirigidas a un sector experto y aplicaciones para principiantes. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine..... es la hora de las aplicaciones móviles.
+ Betfair fue fundado en Junio del año 2000. En un breve periodo de tiempo y debido a su innovación en las apuestas de intercambio se convierte en la empresa más grande de apuestas de Reino Unido y se destaca claramente por el mercado de apuestas deportivas. Es la primera casa de apuestas online en ofrecer la modalidad de apuestas a favor y en contra de un evento. En el año 2007 la casa ya cuenta con más de 1.000.000 de usuarios generando un volumen de negocio de más de 50 millones de libras a la semana. Rápidamente se expande en más de 120 países de todo el mundo ofreciendo un portal web en 18 idiomas que gestiona más de 5 millones de transacciones al día. \footnote{Fuente?}
+
+\fxnote{No deberíamos explicar antes que el interfaz es Web y que e 2007 bla bla bla?}
+
+En el año 2007 BetFair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface: conjunto de funciones y procedimientos que ofrece cierta biblioteca para ser utilizado por otro software como una capa de abstracción al sistema al que se quiere acceder} \fxnote{Footnote demasiado largo} de acceso a sus servicios. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones de apuestas usando su portal de apuestas como base y que se adapten a cualquier dispositivo tanto fijo como los ordenadores como dispositivos móviles como las agendas personales o la telefonía móvil. Como era de esperar empezaron a salir multitud de aplicaciones dirigidas a un sector experto y aplicaciones para principiantes. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine..... \fxnote{\ldots para poner puntos susepnsivos} es la hora de las aplicaciones móviles. \fxnote{Esta última frase quedaría mejor para lo del iPhone}
+
+\fxnote{Has pasado muy de puntillas por lo del API de BF y parece importante para tu TFC.}
 
 \section{Apple y su terminal móvil iPhone}
  
-Apple inició la revolución del ordenador personal en la década de los setenta con el ordenador Apple II y reinventó el ordenador personal en los ochenta con el Macintosh. Hoy, Apple sigue liderando la industria en innovación con sus premiados ordenadores de sobremesa,portátiles, el sistema operativo \emph{OSX} y sus aplicaciones profesionales. Apple está también en la vanguardia de la revolución musical con sus reproductores de música y vídeo portátiles \emph{iPod} y la tan exitosa tienda de música online \emph{iTunes}.
+Apple inició la revolución del ordenador personal en la década de los setenta con el ordenador Apple II y reinventó el ordenador personal en los ochenta con el Macintosh. Hoy, Apple sigue liderando la industria en innovación con sus premiados ordenadores de sobremesa, portátiles, el sistema operativo \emph{OSX} y sus aplicaciones profesionales. Apple está también en la vanguardia de la revolución musical con sus reproductores de música y vídeo portátiles \emph{iPod} y la tan exitosa tienda de música online \emph{iTunes}. \fxnote{Please, menos marketing.}
 
 El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iPhone}. Para una empresa dedicada exclusivamente a equipos de sobremesa y portátiles con software propio era difícil de ver el éxito en su primera incursión en el mundo de los terminales móviles. Pero Apple, ya en el año 2001 hizo lo mismo en el mundo de los dispositivos multimedia con el iPod y hoy por hoy es el líder en ventas.
 
@@ -184,9 +252,9 @@ El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iP
   \label{fig:iPhone 3G}
 \end{figure}
   
- El iPhone muy pronto se convirtió en un fenómeno extraordinario. Horas antes de su salida al mercado ya había colas de espera de más de 8 horas, nunca antes visto en un lanzamiento de un móvil. Su gran pantalla táctil unida a las más novedosas tecnologías del momento convirtieron al dispositivo alcanzar el millón de ventas en EEUU. Apple quería distribuir el terminal por el resto de los países del mundo, pero para que su producto fuera competitivo en Europa tuvo que actualizar el dispositivo a una segunda versión. 
+ El iPhone muy pronto se convirtió en un fenómeno extraordinario. Horas antes de su salida al mercado ya había colas de espera de más de 8 horas, nunca antes visto en un lanzamiento de un móvil. Su gran pantalla táctil unida a las más novedosas tecnologías del momento convirtieron al dispositivo alcanzar el millón de ventas en EEUU. Apple quería distribuir el terminal por el resto de los países del mundo, pero para que su producto fuera competitivo en Europa tuvo que actualizar el dispositivo a una segunda versión. \fxnote{No aporta mucho a tu TFC}
 
-  En Marzo de 2008 Apple muestra el nuevo terminal con tecnología 3G y comunica su deseo de lanzar su propia tienda de aplicaciones para el iPhone, la iTunes application store. Para que la tienda fuera todo un éxito lanza un conjunto de herramientas de desarrollo iPhone SDK\footnote{Software Development Kit} para todos aquellos desarrolladores que quieran participar en la misma. 
+  En Marzo de 2008 Apple muestra el nuevo terminal con tecnología 3G y comunica su deseo de lanzar su propia tienda de aplicaciones para el iPhone, la iTunes application store. Para que la tienda fuera todo un éxito lanza un conjunto de herramientas de desarrollo iPhone SDK\footnote{Software Development Kit} para todos aquellos desarrolladores que quieran participar en la misma. \fxnote{Y sin embargo esta parte es fundamental: ¿Qué es el SDK? ¿Cómo es? ¿Quién puede usarlo? ¿Cómo se programa? etc. etc. etc.}
   
  En Europa hubo que esperar hasta Julio de 2008, de la mano de Telefónica se lanza el iPhone 3G, una versión mejorada del iPhone con tecnología de acceso a red 3G. Con este avance el dispositivo se afianza como uno de los más rápidos para acceder a la red de redes,Internet, y hacer uso de los servicios web 2.0 (fotos, blogs, localización, voz por IP...).
 
@@ -197,11 +265,15 @@ El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iP
    
 \chapter{Objetivos}
 
+\fxnote{Mover como sección del capítulo anterior}
+
  Los objetivos que se pretenden cubrir con el actual trabajo de fin de carrera son los siguientes:
  \begin{itemize}
  	\item Posibilidad de apostar por eventos del portal Betfair.com usando su API de acceso a sus servicios web.
 	\item Asesorar el usuario sobre cuando realizar el trading a las apuestas ya realizadas.
 \end{itemize}
+
+\fxnote{Objetivos, desde mi punto de vista: desarrollar una aplicación para iPhone que (i) permita navegar a través de los mercados de apuestas de BF (ii) permita realizar apuestas (iii) asesore al usuario (de forma incluso automática) sobre posibilidades de trading}
 
 \chapter{Requisitos}
 \section{Escenario}
