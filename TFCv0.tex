@@ -508,16 +508,18 @@ A continuación una breve descripción de cada capa:
 
  Para el diseño de la arquitectura nos hemos basado en el patrón de diseño "Modelo Vista Controlador". Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes.La razón del uso de este patrón se ha debido a dos cuestiones fundamentales:
 \begin{itemize}
-	\item La facilidad entre la comunicación entre el modelo de datos y la interfaz. Añadir también que cualquier cambio en la interfaz de usuario no afecta al resto del modelo, por lo que se gana en facilidad a la hora de seguir desarrollando la solución en el futuro.
+	\item La facilidad entre la comunicación entre \fxnote{entre-entre?} el modelo de datos y la interfaz. Añadir también que cualquier cambio en la interfaz de usuario no afecta al resto del modelo, por lo que se gana en facilidad a la hora de seguir desarrollando la solución en el futuro.
 	\item Apple, en el uso de las herramientas de desarrolla del SDK, recomienda el uso de dicho patrón para la creación de la interfaz de usuario de la aplicación. Esta recomendación es debido a la arquitectura interna del iPhone OS visto en un capítulo anterior y a que sus herramientas de desarrollo también están orientadas a esta solución.
 	\item La estructura jerárquica de los datos obtenidos a través del API de Betfair. Este patrón nos facilita la representación de los mismos.
 \end{itemize}
+
+\fxnote{MVC es un nombre demasiado genérico y bastante manido, quizás quieras explorar con más profundidad las características exactas del patrón que hayas aplicado: http://www.aspiringcraftsman.com/2007/08/interactive-application-architecture/, http://c2.com/cgi/wiki?MvcIsNotObjectOriented}
 
 \subsection{Núcleo de la aplicación}
 	Toda aplicación para el iPhone se desarrolla usando principalmente el framework UIKit y tienen la misma arquitectura base. UIKit proporciona todo lo necesario para lanzar la aplicación, coordinar los inputs del usuario y mostrar contenido en la pantalla. 
 	Desde que el usuario pulsa el icono de la aplicación hasta que esta es ejecutada , el framework UIKit gestiona todo lo necesario para lanzar la infraestructura. Toda aplicación, principalmente, recibe eventos continuamente desde el sistema y debe responder a todos estos eventos. 
 	
-	El ciclo de vida de una aplicación constituye la secuencia de eventos que ocurren entre la ejecución y la finalización de la aplicación. En el sistema operativo del iPhone el usuario lanza la aplicación pulsando sobre el icono de la misma.  A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada o bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a determinados objetos que determinemos en nuestra aplicación así como las coordinar las respuestas de las mismas. 
+	El ciclo de vida \fxnote{``ciclo de vida'' es un término ambiguo, si lo puedes evitar mejor.} de una aplicación constituye la secuencia de eventos \fxnote{¿Qué es un evento?} que ocurren entre la ejecución \fxnote{ejecución? quieres decir durante? quieres decir inicio?} y la finalización de la aplicación. En el sistema operativo del iPhone el usuario lanza la aplicación pulsando sobre el icono de la misma.  A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada o bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a determinados objetos que determinemos \fxnote{qué significa ``determinemos''?} en nuestra aplicación así como las coordinar las respuestas \fxnote{¿qué es una respuesta?} de las mismas. 
 	     
  \begin{figure} [h]
   \centering
@@ -526,42 +528,48 @@ A continuación una breve descripción de cada capa:
   \label{fig:iPhoneOS layers}
 \end{figure}
      
-   La figura muestra el ciclo de vida de una aplicación para el iPhone. Tal y como vemos, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique de la finalización de la aplicación.
+   La figura \fxnote{incluir la referencia a la figura: \ref{fig:iPhoneOS layers}} muestra el ciclo de vida de una aplicación para el iPhone. Tal y como vemos, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique de la finalización de la aplicación.
    
     En el iPhone solo se finaliza una aplicación por tres motivos:
     \begin{itemize}
-	\item El usuario desea finalizar la misma pulsando el botón "Home".
-	\item El sistema recibe una notificación prioritaria que atender (una llamada por ejemplo) y por tanto finaliza la aplicación.
+	\item El usuario desea finalizar la misma pulsando el botón "Home" \fxnote{Yo usaría tipografía para el UI, por ejemplo \textsf{Home}.}.
+	\item El sistema recibe una notificación prioritaria que atender (una llamada por ejemplo) y por tanto finaliza la aplicación. \fxnote{Qué brusquedad! ¿realmente finaliza la aplicación? ¿no la suspende o algo parecido?}
 	\item El sistema detecta un comportamiento erróneo de la aplicación y para salvaguardar la estabilidad del sistema finaliza nuestra aplicación.
      \end{itemize}
+
+\fixme{Dudas que me surgen y que no se si este es el sitio o el momento adecuado para resolverlas. Lo que sí se es que impactan en el diseño: ¿qué eventos llegan al ``Your code''? ¿Qué reglas existen para tratarlos? ¿Se enlazan los eventos a métodos? ¿Se puede modificar ese supuesto ``vector de interrupciones''? ¿Los eventos son independientes de los objetos gráficos? Seguro que contestas a estas preguntas más adelante pero a mi, como lector, me gustaría saber algo más ahora.}    
     
-    
-\subsection{Crontroladores de Vista}	   
+\subsection{Controladores de Vista}	   
+
+\fxnote{¿Qué es una vista? ¿Te refieres a vistas del MVC o del SDK del iphone? ¿te refieres a controladores del MVC o del SDK?}
  
  Un controlador de vista proporciona la lógica básica de interfaz de usuario para dibujar las vistas de la aplicación al usuario. Apple dispone de varios patrones de interfaces de usuario para ayudar a representar en las aplicaciones el conjunto de datos hacia el usuario dentro de los dispositivos móviles. 
  
-  Un controlador de vistas gestiona la vista de nuestra aplicación que aparecen entre las barras superiores e inferiores (véase figura 4.4). La vista de la aplicación aparece entre la barra de estado y la barra de navegación si ésta está presente. En una vista de aplicación se muestra una parte de datos y controles que el desarrollador quiere mostrar al usuario en un tiempo determinado. El controlador de la vista simplemente gestiona la presentación de esta vista y la siguiente en aparecer para un patrón de diseño establecido.
+  Un controlador de vistas gestiona la vista de nuestra aplicación que aparecen entre las barras superiores e inferiores (véase figura 4.4 \fxnote{\ref{fig:layout-of-views}}). La vista de la aplicación aparece entre la barra de estado y la barra de navegación si ésta está presente. En una vista de aplicación se muestra una parte de datos y controles que el desarrollador quiere mostrar al usuario en un tiempo determinado. El controlador de la vista simplemente gestiona la presentación de esta vista y la siguiente en aparecer para un patrón de diseño establecido.
  
  \begin{figure} [h]
   \centering
     \includegraphics[width=0.8\textwidth]{./images/vc-areas.jpg}
   \caption{Esquema de las vistas }
-  \label{fig: Layout of views}
+  \label{fig:layout-of-views}
+  \fixme{Cuidado con los labels, no debes utilizar blancos aunque puedes usar ``:'' y ``-'' y ``\_''. de hecho empezar por fig: es una convención.}
 \end{figure} 
  
- Usando controladores de vista eliminamos el código redundante e innecesario en las aplicaciones y proporcionamos una interfaz de usuario familiar hacia los usuarios. No necesitamos implementar la presentación de aquellas vistas de aplicaciones. También ayudan al diseño orientado de objetos separando los detalles de la interfaz de usuario de la lógica de la aplicación.
+ Usando controladores de vista eliminamos el código redundante e innecesario en las aplicaciones \fxnote{¿en qué sentido?} y proporcionamos una interfaz de usuario familiar \fxnote{¿familiar al ser usada por ``todos'' los programadores?} hacia los usuarios \fxnote{usuario-usuario}. No necesitamos implementar la presentación de aquellas vistas de aplicaciones \fxnote{¿Qué quieres decir?}. También ayudan al diseño orientado de objetos separando los detalles de la interfaz de usuario de la lógica de la aplicación.
  
-  Como ya hemos comentado los controladores de vista soportan el patrón de diseño Modelo - Vista - Controlador. Todos los datos y la lógica de la aplicación se ha implementado usando objetos para una mayor facilidad a la hora de la implementación. En este caso los controladores de vista son los encargados de proporcionar los métodos delegados y la fuente de datos para las vistas de  tipo tabla.
+  Como ya hemos comentado los controladores de vista soportan el patrón de diseño MVC \fxnote{Pero\ldots ¿cómo funciona?}. Todos los datos y la lógica de la aplicación se ha implementado usando objetos para una mayor facilidad a la hora de la implementación \fxnote{Francisco, esta frase no dice nada, ¿de qué otra forma podrías implementarlos en ObjectiveC? ¿Donde están esos datos? ¿En las vistas? ¿En los controladores? ¿Donde está el modelo?}. En este caso los controladores de vista son los encargados de proporcionar los métodos delegados \fxnote{¿qué es un método delegado?} y la fuente de datos para las vistas de  tipo tabla.
   
  \subsection{Controlador Vista de tablas}	
- 
-  Es muy común usar vistas de tabla para mostrar un conjunto de datos de tipo jerárquico unido a los controladores de navegación. Para ello Apple dispone de una plantilla de controlador llamada "Controlador de vistas de tabla" que nos proporciona todo lo necesario para ello. En nuestra aplicación, cuando hacemos una petición para obtener todos los eventos y mercados de Betfair este nos envía una colección de datos en forma de diccionarios y arrays  conservando una jerarquía de eventos entre ellos. La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomienda Apple. Es la siguiente figura podemos ver un esquema representativo.
+
+  Es muy común usar vistas de tabla para mostrar un conjunto de datos de tipo jerárquico unido a los controladores de navegación \fxnote{¿Quieres decir que para implementar un modelo de datos jerárquico utilizas tablas + controladores de navegación? ¿qué es un controlador de navegación?}. Para ello Apple \fxnote{Yo evitaría utilizar tanto la palabra ``Apple'', puedes decir ``Para ello disponemos\ldots{}''.} dispone de una plantilla \fxnote{¿Qué es una plantilla?} de controlador llamada "Controlador de vistas de tabla" que nos proporciona todo lo necesario para ello. En nuestra aplicación, cuando hacemos una petición para obtener todos los eventos y mercados de Betfair este nos envía una colección de datos en forma de diccionarios y arrays  conservando una jerarquía de eventos entre ellos. La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomienda Apple. Es la siguiente figura podemos ver un esquema representativo.
+
+\fixme{Creo que es muy importante resaltar esta justificación y para ello hemos de hablar antes del modelo de datos que impone Betfair.}
   
  \begin{figure}[h!]
   \centering
     \includegraphics[width=0.7\textwidth]{./images/tv_datamodel_top.jpg}
   \caption{Vista de tabla del top de la jerarquía }
-  \label{fig: Table View Top}
+  \label{fig:table-view-top}
 \end{figure} 
 
 
@@ -569,28 +577,30 @@ A continuación una breve descripción de cada capa:
   \centering
     \includegraphics[width=0.7\textwidth]{./images/tv_datamodel_middle.jpg}
   \caption{Vista de tabla de la mitad de la jerarquía}
-  \label{fig:Table View Middle}
+  \label{fig:table-view-middle}
 \end{figure} 
 
 \begin{figure}[ht!]
   \centering
     \includegraphics[width=0.8\textwidth]{./images/tv_datamodel_detail.jpg}
   \caption{Vista de tabla detallada del final de la jerarquía }
-  \label{fig: Detail Table View}
+  \label{fig:detail-table-view}
 \end{figure} 
+
+\fixme{Estas tres figuras así sueltas no aportan nada, tienes que explicar su significado y me parece superrelevante porque parece que con ello explicas cómo haces aparecer las listas en el iPhone.}
 
 \subsection{Arquitectura de la aplicación}	
    
-   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con el API de Betfair.
+   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con el API de Betfair. \fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
    
-    \begin{figure} [h]
-  \centering
-    \includegraphics[width=0.8\textwidth]{./images/modelo1.png}
-  \caption{Esquema simplifado }
-  \label{fig: Esquema simplificado}
-\end{figure}
+   \begin{figure} [h]
+     \centering
+     \includegraphics[width=0.8\textwidth]{./images/modelo1.png}
+     \caption{Esquema simplifado }
+     \label{fig:esquema-simplificado}
+   \end{figure}
    
-    En la figura X podemos ver un esquema simplificado de la misma. Los controladores de vista se encargan de recoger los inputs del usuario. En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
+    En la figura \ref{fig:esquema-simplificado} podemos ver un esquema simplificado de la misma \fxnote{de la arquitectura?}. Los controladores de vista se encargan de recoger los inputs del usuario \fxnote{eventos?}. En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
     
 \subsubsection{Controlador principal}
 
