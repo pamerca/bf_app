@@ -503,7 +503,9 @@ A continuación una breve descripción de cada capa:
 		
 \end{itemize}
 
-\section{Arquitectura de la aplicación}
+\section{Meta-arquitectura}
+\fixme{Hay una subsección que se llama igual y que creo que debe ser otra sección. Creo que ésta sección puede tener otro título, alqo que explique que su contenido son los elementos sobre los que se fundamenta el diseño final. Lo analizamos con más cuidado en una reunión. El cambio de título que he hecho es tentativo y pretencioso.}
+
 \fixme{Las comillas en LaTeX se escriben ``así''.}
 
  Para el diseño de la arquitectura nos hemos basado en el patrón de diseño "Modelo Vista Controlador". Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes.La razón del uso de este patrón se ha debido a dos cuestiones fundamentales:
@@ -587,9 +589,10 @@ A continuación una breve descripción de cada capa:
   \label{fig:detail-table-view}
 \end{figure} 
 
-\fixme{Estas tres figuras así sueltas no aportan nada, tienes que explicar su significado y me parece superrelevante porque parece que con ello explicas cómo haces aparecer las listas en el iPhone.}
+\fixme{Éstas tres figuras así sueltas no aportan nada, tienes que explicar su significado y me parece superrelevante porque parece que con ello explicas cómo haces aparecer las listas en el iPhone. De hecho yo no las pondría como figuras si no que las incrustaría en la descripción de las mismas.}
 
-\subsection{Arquitectura de la aplicación}	
+\section{Arquitectura de la aplicación}	
+\fxnote{He promocionado esto a sección.}
    
    Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con el API de Betfair. \fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
    
@@ -598,23 +601,53 @@ A continuación una breve descripción de cada capa:
      \includegraphics[width=0.8\textwidth]{./images/modelo1.png}
      \caption{Esquema simplifado }
      \label{fig:esquema-simplificado}
+     \fixme{Propongo hacer explícito que el API es el de BF}
+     \fixme{No tengo claro si estás usando algún diagrama de UML para describir la arquitectura, yo usaría alguno de estos diagramas: objetos, componentes, deployment. Podemos hablarlo en detalle en una reunión, lo que no quiero es utilizar algo que no se sabe lo que significa.}
    \end{figure}
    
-    En la figura \ref{fig:esquema-simplificado} podemos ver un esquema simplificado de la misma \fxnote{de la arquitectura?}. Los controladores de vista se encargan de recoger los inputs del usuario \fxnote{eventos?}. En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
+    En la figura \ref{fig:esquema-simplificado} podemos ver un esquema simplificado de la misma \fxnote{de la arquitectura?}. Los controladores de vista se encargan de recoger los inputs del usuario \fxnote{eventos?}. En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair.  \fxnote{¿ES el controlador el que ``carga'' la información en las vistas? ¿cada controlador tienen una sola vista bajo su control?}}
+
+\begin{afixme}
+  Desde mi punto de vista, lo que llamas API en la arquitectura es el
+  modelo de datos. No propongo cambiar el nombre pero sí que el lector
+  entienda que el modelo utilizado es directamente el que proporciona
+  el API de BF. Esto tiene ventajas (prototipado rápido) e
+  inconvenientes (acceso a web continuamente, tiempos de respuesta,
+  generación de tráfico, etc.). Estas cosas hay que escribirlas, aquí
+  o en conclusiones (probablemente aquí sin entrar en detalle y en
+  conclusiones para aportar soluciones).
+\end{afixme}
     
+\begin{afixme}
+  Antes de comenzar a describir cada controlador es necesario
+  listarlos. ¿Podemos ponerlos en un diagrama todos juntos? ¿Hay una
+  relación de dependencia o jerarquía entre ellos?
+\end{afixme}
+
 \subsubsection{Controlador principal}
 
- Es la clase principal de la aplicación. Es la encargada de inicializar el controlador de vista que será encargado de recoger los eventos del usuario, así como de la gestión de memoria y de la gestión de los eventos del sistema.
+ Es la clase principal \fxnote{¿es una clase singleton? ¿son todos los controladores singleton? ¿hay varios objetos controladores de los distintos ``tipos'' de controlador?} de la aplicación. Es la encargada de inicializar el controlador de vista que será encargado de recoger los eventos del usuario, así como de la gestión de memoria y de la gestión de los eventos del sistema.
+
+\begin{afixme}
+  Me cuesta un poco digerir tanta ``prosa''. Yo creo que hay aspectos
+  de cada controlador que puedes presentar de forma algo más
+  metódica. Tienes una ``descripción'' y una enumeración de las
+  responsabilidades. ¿No estaría bien incluir a qué eventos responde y
+  qué hace cuando recibe cada uno de ellos? ¿Podemos usar simplemente
+  diagramas de secuencia para describir ese comportamiento? ¿podemos
+  usar máquinas de estado? Tenemos que explorarlo y ver qué tal
+  quedaría y cuál es el grado de complejidad.
+\end{afixme}
  
 \subsubsection{Controlador de menú principal}
- Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicios login de Betfair a través de la clase de comunicación llamada API.
+ Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs \fxnote{inputs?} del usuario para lanzar el controlador adecuado a la elección del usuario \fxnote{¿puedes lanzar cualquier controlador? ¿podemos recoger esa info en la jerarquía que mencionaba anteriormente?}. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicios login de Betfair a través de la clase de comunicación llamada API.
  
 \subsubsection{Controlador de tipos de eventos}
- Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de BetFair.En un futuro se podrá gestionar por fecha de finalización, órden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair GetActiveEventsTypes  a través de la clase API del modelo de la aplicación.
+ Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos \fxnote{¿Qué es un evento? Hasta ahora no los has mencionado.} por los que se puede apostar dentro de BetFair. En un futuro se podrá gestionar por fecha de finalización, órden alfabético o búsqueda directa de eventos \fxnote{Si es futuro no va aquí.}. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair GetActiveEventsTypes  a través de la clase API del modelo de la aplicación.
  
 \subsubsection{Controlador de eventos y mercados}
 
- Es la clase encargada de mostrar de forma jerárquica los subeventos y mercados relacionados con un eventos seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionara por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un eventos se le mostrará los mercados y subeventos relacionados con los mismos. En caso de ser seleccionado un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web GetEvents de BetFair.
+ Es la clase encargada de mostrar de forma jerárquica los subeventos \fxnote{subeventos?} }y mercados \fxnote{mercados?} relacionados con un eventos seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionara por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un evento se le mostrará los mercados y subeventos relacionados con los mismos. En caso de ser seleccionado un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web GetEvents de BetFair.
  
 \subsubsection{Controlador de información de mercado}
 
@@ -641,13 +674,14 @@ A continuación una breve descripción de cada capa:
 
 \subsubsection{Controlador de detalles de una apuesta}
  Se encarga de gestionar todos los detalles sobre una apuesta determinada: parámetros, stake, apuesta a favor o en contra relacionadas con la presentada... También incluye información de mercado actual completa referente al mercado de la apuesta y el trading acerca de la misma.
-
  
 \subsubsection{API: Interfaz a Betfair}
+\fxnote{Habrá que analizar donde colocamos exáctamente esta descripción.}
  Esta clase se encarga de gestionar las comunicaciones con los servidores de BetFair. Envía las peticiones a los servicios web de BetFair y se encarga de parsear la respuesta a dichas peticiones en un formato adecuado para la aplicación.
 
 \section{Diagrama de Clases}
- En la siguiete figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase "API". Como bien hemos descrito es la encargada de comunicarse con el servidor de BetFair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un decodificador de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase "ParserXML".
+\fxnote{Es probable que esto haya que adelantarlo o que sea de esta información de la que podamos extraer los diagramas de arquitectura que te mencionaba antes.}
+ En la figura \ref{fig:diagrama-de-clases} podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase "API". Como bien hemos descrito es la encargada de comunicarse con el servidor de BetFair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un decodificador de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase "ParserXML".
  
   A partir de ahí observamos que el rodean todos los controladores de vista de la aplicación, ya que son los que reciben las peticiones de la vista y la envían a la clase "API". La clase "RootViewController" es la principal cuando se carga la aplicación y es la encargada de procesar el menú de la misma.
 
@@ -655,7 +689,7 @@ A continuación una breve descripción de cada capa:
     \centering
        \includegraphics[width=1.2\textwidth]{./images/DiagramaDeClases3.png}
      \caption{Diagrama de clases}
-   \label{fig:Diagrama de clases}
+   \label{fig:diagrama-de-clases}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
