@@ -105,7 +105,11 @@ En este documento se describe el trabajo de fin de carrera acerca del desarrollo
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{thebibliography}{X} \bibitem{Baz} {\sc Bazaraa, M. S.}, {\sc J. J. Jarvis} y {\sc H.D. Sherali}, {\it Programaci?on lineal y flujo en redes}, segundaedici?on, Limusa, M?exico, DF, 2004. \bibitem{Dan} {\sc Dantzig, G. B.} y {\sc P. Wolfe},<<Decomposition principle for linear programs>>, {\it OperationsResearch}, {\bf 8}, p?ags. 101--111, 1960. \end{thebibliography}
+\begin{thebibliography}{X} \bibitem{Baz} {\sc Bazaraa, M. S.}, {\sc J. J. Jarvis} y {\sc H.
+D. Sherali}, {\it Programaci?on lineal y flujo en redes}, segunda
+edici?on, Limusa, M?exico, DF, 2004. \bibitem{Dan} {\sc Dantzig, G. B.} y {\sc P. Wolfe},
+<<Decomposition principle for linear programs>>, {\it Operations
+Research}, {\bf 8}, p?ags. 101--111, 1960. \end{thebibliography}
 \chapter{Introducción}
 \label{ch:intro}
 
@@ -728,7 +732,7 @@ A continuación una breve descripción de cada capa:
    \end{figure}
    
     En la figura \ref{fig:esquema-MVC} podemos ver un esquema del modelo Vista Controlador usado. % \fxnote{de la arquitectura?}.
-     Los controladores de vista se encargan de recoger los eventos de la aplicación principalmente inputs del usuario. % \fxnote{eventos?}. 
+     Los controladores de vista se encargan de recoger los eventos de la aplicación principalmente \emph{inputs} del usuario. % \fxnote{eventos?}. 
      En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
     
 \subsubsection{Controlador principal}
@@ -736,34 +740,33 @@ A continuación una breve descripción de cada capa:
  Es la clase principal de la aplicación. Es la encargada de inicializar el controlador de vista que será encargado de recoger los eventos del usuario, así como de la gestión de memoria y de la gestión de los eventos del sistema.
  
 \subsubsection{Controlador de menú principal}
- Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicios login de Betfair a través de la clase de comunicación llamada API.
+ Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicio \emph{login} de Betfair a través de la clase de comunicación llamada API.
  
 \subsubsection{Controlador de tipos de eventos}
- Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de BetFair.En un futuro se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair GetActiveEventsTypes  a través de la clase API del modelo de la aplicación.
+ Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de BetFair.En un futuro se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
  
 \subsubsection{Controlador de eventos y mercados}
 
- Es la clase encargada de mostrar de forma jerárquica los subeventos y mercados relacionados con un eventos seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionara por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un eventos se le mostrará los mercados y subeventos relacionados con los mismos. En caso de ser seleccionado un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web GetEvents de BetFair.
+ Es la clase encargada de mostrar de forma jerárquica los subeventos y mercados relacionados con un evento seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un evento se le mostrará los mercados y subeventos relacionados con los mismos. En caso de ser seleccionado un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web \emph{GetEvents} de BetFair.
  
 \subsubsection{Controlador de información de mercado}
 
  Esta clase es la responsable de gestionar toda la información relevante al mercado en cuestión. Gestionará el estado del mercado y sus propiedades obteniendo todo lo necesario del portal de Betfair a través de API de sus servicios web para ello hace uso de las llamadas del API:
  
   \begin{itemize}
-	\item GetMarket: obtiene todos los parámetros acerca del mercado.
-	\item GetMarketPrices: obtiene todos los precios actuales del mercado en cuestión.
+	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado.
+	\item \emph{GetMarketPrices}: obtiene todos los precios actuales del mercado en cuestión.
 \end{itemize}
 
 \subsubsection{Controlador de apuesta por un mercado}
- Es la encarga de gestionar todos los datos necesarios e introducidos por el usuarios para realizar una apuesta y enviarla a BetFair. El método usado para enviar la apuesta a BetFair a través de la clase interfaz de comunicación es PlaceBets.
+ Es la encargada de gestionar todos los datos necesarios e introducidos por el usuarios para realizar una apuesta y enviarla a BetFair. El método usado para enviar la apuesta a BetFair a través de la clase interfaz de comunicación es \emph{PlaceBets}.
 
 \subsubsection{Controlador de las categorías de Mis Apuestas}
  Es la clase encargada de gestionar las apuestas ya realizadas en BetFair y que siguen activas. Las clasifica por categorías de mercado. Recoge la información como resultado de las llamadas a los siguientes servicios web de BetFair:
   \begin{itemize}
-	\item GetMarket: obtiene todos los parámetros acerca del mercado de una apuesta en cuestión.
-	\item GetCurrentBets: obtiene todas las apuestas realizadas por el usuario del servicios BetFair.
+	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado de una apuesta en cuestión.
+	\item \emph{GetCurrentBets}: obtiene todas las apuestas realizadas por el usuario del servicios BetFair.
 \end{itemize}
-
  
 \subsubsection{Controlador de Mis Apuestas}
  Esta clase se encarga de gestionar las apuesta realizadas por el usuario dentro de una categoría determinada. En ella se muestra resumidamente el nombre de la apuesta en cuestión, la cuota apostada y la cuota actualizada en ese momento. 
@@ -776,9 +779,9 @@ A continuación una breve descripción de cada capa:
  Esta clase se encarga de gestionar las comunicaciones con los servidores de BetFair. Envía las peticiones a los servicios web de BetFair y se encarga de realizar la decodificación de la respuesta a dichas peticiones en un formato adecuado para la aplicación.
 
 \section{Diagrama de Clases}
- En la siguiente figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase "API". Como bien hemos descrito es la encargada de comunicarse con el servidor de BetFair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un decodificador de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase ``ParserXM''.
+ En la siguiente figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase "API". Como bien hemos descrito es la encargada de comunicarse con el servidor de BetFair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un \emph{parser} de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase ``ParserXML''.
  
-  A partir de ahí observamos que el rodean todos los controladores de vista de la aplicación, ya que son los que reciben las peticiones de la vista y la envían a la clase ``API''. La clase ``RootViewController'' es la principal cuando se carga la aplicación y es la encargada de procesar el menú de la misma.
+  A partir de ahí observamos que le rodean todos los controladores de vista de la aplicación, ya que son los que reciben las peticiones de la vista y la envían a la clase ``API''. La clase ``RootViewController'' es la principal cuando se carga la aplicación y es la encargada de procesar el menú de la misma.
 
  \begin{figure}[h!]
     \centering
@@ -790,13 +793,17 @@ A continuación una breve descripción de cada capa:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Implementación}
 \label{ch:implemetacion}
- En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos describiendo el entorno de ejecución y del lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevante de la implementación.
+ En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos describiendo el entorno de ejecución y del lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevantes de la implementación.
  
 \section{Entorno de ejecución}
- La aplicación desarrollada se ejecuta en un entorno llamado Cocoa Touch. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el SO del iPhone. También forma parte del entorno de desarrollo que facilita a los desarrolladores la tarea de pasar de la etapa diseño a la etapa del desarrollo para crear una aplicación. Cocoa Touch proviene del entorno de la plataforma Mac OS. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
+ La aplicación desarrollada se ejecuta en un entorno llamado \emph{Cocoa Touch}. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el sistema operativo del terminal iPhone. Este entorno de desarrollo nos facilita a los desarrolladores la tarea de pasar de la etapa diseño a la etapa del desarrollo para crear una aplicación. Cocoa Touch proviene del entorno de la plataforma \emph{Mac OS}, entorno de la que dependen los equipo de sobremesa de Apple. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
  
- Como ya hemos comentado, Cocoa presenta dos caras: tiene una parte de entorno de ejecución y otra de desarrollo. En cuando al entorno de ejecución las aplicaciones Cocoa presentan la interfaz de usuario y están fuertemente integradas con otras partes de sistema operativo como por ejemplo el buscador del sistema de ficheros. La parte del desarrollo, Cocoa es una suite de componentes software orientados a objetos que te permiten rápidamente crear robustas y completas aplicaciones para el sistema operativo. 
- 
+ Como ya hemos comentado, Cocoa presenta dos caras: 
+ \begin{itemize}
+	\item Entorno de ejecución: las aplicaciones desarrolladas en Cocoa presentan la interfaz de usuario de la aplicación y están fuertemente integradas con otras partes de sistema operativo como por ejemplo el buscador del sistema de ficheros.
+	\item Entorno de desarrollo: Cocoa es una suite de componentes software orientados a objetos que te permiten rápidamente crear robustas y completas aplicaciones para el sistema operativo.
+\end{itemize}
+  
  \begin{figure}[ht!]
     \centering
        \includegraphics[width=0.9\textwidth]{./images/architecture_stack.jpg}
@@ -804,10 +811,22 @@ A continuación una breve descripción de cada capa:
    \label{fig:Iphone OS Platform}
 \end{figure}
  
- A pesar de que la estructura del iPhone OS es similar a la del Mac OSX, existen diferencias significantes. El diagrama del iPhone S muestra una plataforma como una serie de capas que van desde en núcleo de SO hasta un conjunto de framework de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
+ A pesar de que la estructura del iPhone OS es similar a la de la plataforma Mac OS, existen diferencias significantes. El diagrama del iPhone OS muestra una plataforma como una serie de capas que van desde en núcleo de sistema operativo hasta un conjunto de frameworks de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
+ 
+ Para desarrollar en entornos Cocoa se utiliza el lenguaje \emph{Objective-C}. Este lenguaje esta basado en la programación orientada a objetos. Se define como un superconjunto del lenguaje de programación \emph{C}, es decir, podemos considerarle como una fina capa que complementa a C. La sintaxis de objetos de Objective-C deriva de \emph{Smalltalk}\footnote{Smalltalk es un lenguaje de programación que permite realizar tareas de computación mediante la interacción con un entorno de objetos virtuales.}.
+ 
+  Como todo lenguaje de programación orientada a objetos, Objective-C nos proporciona principalmente:
+ \begin{itemize}
+	\item Un lenguaje de programación orientada a objetos.
+	\item Una extensa librería de objetos.
+	\item Una conjunto software de herramientas de desarrollo.
+	\item Un entorno de ejecución propio.
+\end{itemize}
+
+ Aparte de las características propias del lenguaje, al estar basado en el lenguaje C, su compilador es capaz de ejecutar líneas de código codificadas en C. Esta característica permite usar librerías realizadas en C en programas desarrollados en Objective-C. 
  
 \section{Estructura de la aplicación}
- Cuando construimos una aplicación del iPhone, Xcode lo resume en un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por la misma (por ejemplo, el icono de la aplicación, imágenes contenidas ...). La tabla X.X lista el contenido del paquete de esta aplicación.
+ Cuando construimos una aplicación del iPhone usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar poryecto escrito en Objective-C. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que Xcode es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas ...). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
  
 \begin{tabularx}{15cm}{|lX|Xl|} 
 \hline 
@@ -817,11 +836,11 @@ BetFairApp & El fichero ejecutable de la aplicación. El nombre de este fichero e
 \hline 
 Default.png & Imagen de 480 x 320 pixeles que se muestra nada más iniciarse la aplicación  a modo de introducción. El sistema usa esta imagen mientras realiza tareas en segundo plano que requieren de un tiempo sensible para el usuario.\\
 \hline
-Settings.bundle & Es un fichero que contiene las preferencias de la aplicación a personalizar por el usuario, como por ejemplo el lenguaje de la aplicación, el tipo de moneda a mostrar... \\
+Settings.bundle & Es un fichero que contiene las preferencias de la aplicación a personalizar por el usuario, como por ejemplo el lenguaje de la aplicación, el tipo de moneda a mostrar\ldots \\
 \hline
 iconBF.png & Icono de 57 x 57 pixeles que representa la aplicación en la pantalla principal del dispositivo. \\
 \hline
-Info.plist & También conocida como lista de propiedades, este ficher es un lista donde se definen la valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
+Info.plist & También conocida como lista de propiedades, este fichero es un lista donde se definen la valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
 \hline
 en.lproj & Archivo que contiene los textos de la interfaz en Inglés. Usado por el sistema cuando este lenguaje esta por defecto para lanzar aplicación o definido en las preferencias de la aplicación.\\
 \hline
@@ -829,34 +848,35 @@ es.lproj &Archivo que contiene los textos de la interfaz en Español.\\
 \hline
 MainWindows.xib & Contiene la interfaz por defecto a cargar por el sistema una vez lanzada la aplicación. Contiene la ventana principal de la interfaz de usuario. \\
 \hline
-RootViewController.xib & Contiene los objetos necesario de la interfaz de usuario del menú principal. \\
+RootViewController.xib & Contiene los objetos necesarios de la interfaz de usuario del menú principal. \\
 \hline
-EventsControllerView.xib &Contiene los objetos necesario de la interfaz de usuario del menú de los eventos activos. \\
+EventsControllerView.xib &Contiene los objetos necesarios de la interfaz de usuario del menú de los eventos activos. \\
 \hline
-EventsTypesControllerView.xib & Contiene los objetos necesario de la interfaz de usuario de los tipos de eventos de BetFair. \\
+EventsTypesControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los tipos de eventos de BetFair. \\
 \hline
-EventsAndMarketsControllerView.xib & Contiene los objetos necesario de la interfaz de usuario de los eventos y mercados disponibles. \\
+EventsAndMarketsControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los eventos y mercados disponibles. \\
 \hline
-MarketInfoControllerView.xib & Contiene los objetos necesario de la interfaz de usuario de las características de un mercado. \\
+MarketInfoControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de las características de un mercado. \\
 \hline
-PutBetControllerView.xib & Contiene los objetos necesario de la interfaz de usuario de la realización de una apuesta. \\
+PutBetControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de la realización de una apuesta. \\
 \hline
-MyBetsControllerView.xib & Contiene los objetos necesario de la interfaz de usuario del menú de las apuestas ya realizadas por el usuario. \\
+MyBetsControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario del menú de las apuestas ya realizadas por el usuario. \\
 \hline
-MyBetsCategoryController.xib & Contiene los objetos necesario de la interfaz de usuario de las categorías de apuestas realizadas por el usuario. \\
+MyBetsCategoryController.xib & Contiene los objetos necesarios de la interfaz de usuario de las categorías de apuestas realizadas por el usuario. \\
 \hline
-MyBetsDetailsView.xib & Contiene los objetos necesario de la interfaz de usuario de los detalles de una apuesta ya realizada con las opciones disponibles. \\
+MyBetsDetailsView.xib & Contiene los objetos necesarios de la interfaz de usuario de los detalles de una apuesta ya realizada con las opciones disponibles. \\
 \hline
 MyBetPropertiesView.xib & Explicacion \\
 \hline
-TradingController.xib & Explicacion \\
+TradingController.xib & Contiene los objetos necesarios de la interfaz de usuario de los detalles acerca del trading sobre una apuesta. \\
 \hline 
+\label{fig:componentes}
 \end{tabularx} 
   
   
  
 \section{Internacionalización}
- Una parte a destacar en el proyecto es la posibilidad de establecer el lenguaje de la aplicación. Mediante la tienda de aplicaciones iTunes App Store se puede distribuir la aplicación por diferentes países. Una aplicación del iPhone debe tener la posibilidad de poder mostrar varios lenguajes y tener uno por defecto. Cada lenguaje esta implementado en la carpeta X.lprj del paquete de implementación. En el conjunto para proporcionar el soporte a distintos lenguajes también se podrá especificar una imagen  de portada, icono de la aplicación, mensajes de alerta.... Aunque siempre se debe especificar un lenguaje por defecto en el caso de que no este disponible el lenguaje deseado por el usuario. Por defecto, el SSOO del iPhone, arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo lenguaje especificado en el SSOO. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
+ Una parte a destacar en el proyecto es la posibilidad de establecer el lenguaje de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación del iPhone debe tener la posibilidad de poder mostrar varios lenguajes y tener uno por defecto. Cada lenguaje esta implementado en la carpeta X.lprj del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos lenguajes también se podrá especificar una imagen  de portada, icono de la aplicación, mensajes de alerta\ldots adecuado al lenguaje escogido por el usuario. Por defecto, el sistema operativo del iPhone, arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo lenguaje especificado en las preferencias del terminal, es decir, es el mismo lenguaje que este configurado este. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
 
   \begin{figure}[h!]
     \centering
@@ -868,23 +888,46 @@ TradingController.xib & Explicacion \\
  
   En esta implementación se procederá a dar soporte al Español y al Inglés, estando estos dos lenguajes dentro de la lista mundial de los más hablados.
   
-  (ADJUNTAR IMAGEN COMPARATIVA ENTRE LAS DOS PANTALLAS)
   
+  
+  (ADJUNTAR IMAGEN COMPARATIVA ENTRE LAS DOS PANTALLAS).
+  
+  
+  
+  Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}. Este archivo se ubica dentro de la carpeta es.lpjr o en.lpjr según sea la tabla de traducción en inglés o en español. A continuación se muestra un ejemplo del contenido de dicho fichero.
+  
+\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
+/* 
+   Localizable.strings
+   BetFair App
+
+   Created by Francisco on 21/12/09.
+   Copyright 2009  . All rights reserved.
+*/
+"Events" = "Eventos";
+"My bets" = "Mis apuestas";
+"My account" = "Mi cuenta";
+"Announcements" = "Mensajes del sistema";
+"Profile" = "Cuenta";
+"Bet info" = "Info. apuesta";
+"Your bet" = "Tu apuesta";
+"Nothing" = "Vacio";
+"Active events" = "Eventos activos";
+"Available markets" = "Mercados disponibles";
+"Bet for" = "Apostar por";  
+\end{lstlisting}
+
    
 \section{Interpretación XML de BetFair a Cocoa Touch}
- Como ya tratamos en el tema de introducción, un tema clave de este trabajo de Fin de Carrera a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
+ Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave de este trabajo de fin de carrera a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
  
-  BetFair ofrece el acceso a todos sus servicios a todos aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas que la web o para usuarios expertos que requieren de una interfaz de usuario más experto. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
-  
-  Para poder acceder a los servicios web ofrecidos por Betfair, éste ha definido una interfaz para hacer uso de su API (Application Programing Interface). La descripción de la interfaz se define en un archivo WSDL (Web Services Description Languaje). Este formato se basa en la estructura de información XML
- 
-  En el diseño de una aplicación que debe hacer uso de servicios ofrecidos por un sistema externo se necesita algún tipo de API para acceder a los mismos. Lo primero a tener es que es lo que se necesita para hacer uso de las funciones proporcionadas por el API. Para accder a los servicios ofrecidos por Betfair, éste define una interfaz de acceso mediante un archivo en formato WSDL (Web Services Description Language). Este tipo de archivo es muy común y se usa para interfaces públicas de acceso a servicios web. Esta basado en XML y contiene la descripción de la forma de comunicación con el servidor de los servicios web. Es decir, los requisitos, parámetros y formatos de os mensajes necesarios para interactuar con los servicios disponibles. 
-  
-   Lo anterior es solo la descripción en sí de acceso a los servicios. La comunicación se realiza a través de protocolo SOAP (Simple Object Access Protocol). SOAP es un protocolo de comunicación para el intercambio de estructura de información, normalmente XML. Este intercambio se hace efectivo mediante el intercambio de mensajes HTTP entre la máquina cliente y el servidor.
+  BetFair ofrece el acceso a todos sus servicios a todos aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas o para usuarios expertos que requieran de una interfaz de usuario más experta, orientada a sus necesidades. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
    
-   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo de los aspecto más básicos de la comunicación. Siendo el iPhone una plataforma novedosa, no existe a día de hoy este tipo de herramientas con lo que se afronto el desarrollo de la comunicación bajo los protocolos anteriormente descritos.
+  En el diseño de una aplicación que debe hacer uso de servicios ofrecidos por un sistema externo se necesita algún tipo de API o interfaz para acceder a los mismos. Lo primero a tener en cuenta es lo que se necesita para hacer uso de las funciones proporcionadas por el API. Para acceder a los servicios ofrecidos por Betfair, ya vimos que su interfaz de acceso se describía mediante un archivo en formato WSDL. Este tipo de archivo es muy común y se usa para describir interfaces públicas de acceso a servicios web. Esta basado en XML y contiene la descripción de la forma de comunicación con el servidor que ofrece los servicios web, es decir, los requisitos, parámetros y formatos de los mensajes necesarios para interactuar con los servicios disponibles. 
    
-   A continuación se muestra en la figura X un fragmento del archivo de definición WSDL que ofrece Betfair. En él se muestra la descripción de los parámetros necesarios de la comunicación para acceder al servicio de Login de Betfair.
+   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo de los aspectos más básicos de la comunicación. Siendo el iPhone una plataforma novedosa, no existe a día de hoy este tipo de herramientas con lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
+      
+   A continuación se muestra un ejemplo del proceso de comunicación con Betfair para, en este caso, hacer uso del servicio \emph{Login } definido en el archivo WSDL que ofrece Betfair. En él se muestra la descripción de los parámetros necesarios de la comunicación.
    
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
 
@@ -901,9 +944,7 @@ TradingController.xib & Explicacion \\
 \end{lstlisting}
 
 
-   Para comenzar, nuestra tarea fue construir la estructura de los mensajes a enviar en formato XML, haciendo un esquema por cada servicio disponible. Para ello, se desgloso el archivo en varias partes. La primera fue establecer la dirección web donde enviar los mensajes. La segunda fue construir las estructuras XML de cada servicio web. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. 
-
- Ejemplo de XML de petición de Login:
+   Para comenzar, construimos la estructura de los mensajes a enviar en formato XML, haciendo un esquema por cada servicio disponible. Para ello, se desglosó el archivo en varias partes. La primera fue establecer la dirección web donde enviar los mensajes. La segunda fue construir las estructuras XML de cada servicio web. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. Para este caso concreto, formato del mensaje en XML a enviar sería el siguiente:
  
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
   <?xml version="1.0" encoding="UTF-8"?>
@@ -922,7 +963,15 @@ TradingController.xib & Explicacion \\
   </SOAP-ENV:Envelope> 
  \end{lstlisting}
  
- Ejemplo de XML de respuesta a petición de Login:
+  Una vez construido el cuerpo del mensaje, solo nos hace falta conocer la dirección de destino para el mensaje HTML a enviar a los servidores de Betfair:
+  
+\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
+  	URL = "https://api.betfair.com/betex-api-public-ws/BFService";
+\end{lstlisting}
+
+  Con todo lo necesario se encapsula toda la información bajo un mensaje HTML y se envía a Betfair. 
+  
+  Para este caso concreto, una vez enviado el mensaje de petición esperamos la respuesta con el siguiente formato:
 
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -945,14 +994,14 @@ TradingController.xib & Explicacion \\
 </soap:Body>
 </soap:Envelope>
  \end{lstlisting}
-   
-    Teniendo ya todas las estructuras de los mensajes, lo siguiente era encapsularlas en mensajes SOAP y enviarlos mediante mensajes HTTP. Una vez enviado el mensaje de petición de un servicio, la aplicación se queda a la espera de la respuesta por parte del servidor. Una vez recibida se confirma que no hay errores ni en la recepción ni en los argumentos enviados en el mensaje. El siguiente paso fue construir un parser donde se transforma la información recibida en la estructura útil por la aplicación. Esta se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la siguiente figura se muestra el procedimiento completo del proceso.
-    
+ 
+  Si observamos los campos errorCode vemos que se reciben en ambos casos un OK al envío anterior. Una vez comprobado la coherencia en la respuesta a salvo de fallos de recepción se procede a descifrar la respuesta. Para ello se implementó un parser que convierte este mensaje en una estructura de datos válida para nuestra aplicación.  Este se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la figura \ref{fig:proceso} se muestra el procedimiento completo del proceso.
+       
  \begin{figure}[h!]
     \centering
        \includegraphics[width=1.2\textwidth]{./images/modelo_accion.png}
      \caption{Ejemplo de comunicación API }
-   \label{fig:Ejemplo API BetFair}
+   \label{fig:proceso}
 \end{figure}
  
     
@@ -965,50 +1014,44 @@ TradingController.xib & Explicacion \\
 
  En el presente trabajo de Fin de Carrera se ha documentado el proceso de diseño y  creación de una herramienta software para manejar apuestas bajo el terminal móvil iPhone 3GS. 
  
- Uno de los puntos más importantes de trabajado ha sido el portado de un servicio web originalmente diseño para el mundo de navegadores web a una plataforma móvil de última generación. En este trabajo de fin de carrera se ha elegido el API de BetFair y su portado ha sido exitoso. Para ello se ha diseñado y codificado un parser que hace de nexo de unión entre el servidor de Betfair y la aplicación realizando las funciones de un codificador y encapsulador de datos.
+ Uno de los puntos más importantes de trabajado ha sido el portado de un servicio web originalmente diseñado para el mundo de navegadores web a una plataforma móvil de última generación. En este trabajo de fin de carrera se ha elegido el API de BetFair y su portado ha sido exitoso. Para ello se ha diseñado y codificado un parser que hace de nexo de unión entre el servidor de Betfair y la aplicación realizando las funciones de un codificador y encapsulador de datos.
  
  No todas las funcionalidades del API se han implementado, se ha debido al tipo de licencia elegido. Por eso, se ha diseñado desde el primer momento la aplicación de tipo modular para que en un futuro se agreguen el resto de las funcionalidades sin ningún tipo de complicación. La arquitectura del desarrollo permite este tipo de ampliaciones siguiendo las técnicas de software específicas.
  
- Se ha conseguido no almacenar información redundante de la aplicación. Debido al uso de servicios web todos los datos de consulta y de generación por parte del usuario se guarda en el servidor. Por lo tanto, si el usuario no dispone de cobertura móvil o usa algún otra aplicación en otra plataforma no sería necesario ningún mecanismo de sincronización.
+ Se ha implementado la funcionalidad de trading. La aplicación es capaz de recalcular las condiciones del mercado basándose en una apuesta ya realizada y asistir al usuario para una ganancia segura o minimizar la pérdida según evolucione el mercado. Se ha dejado preparada la arquitectura de la aplicación para que en un futuro cercano el trading se realicé sobre múltiples eventos y mercados.
+ 
+ Se ha conseguido no almacenar información redundante de la aplicación. Debido al uso de servicios web todos los datos de consulta y de generación por parte del usuario se guardan en el servidor. Por lo tanto, si el usuario no dispone de cobertura móvil o usa algún otra aplicación en otra plataforma no sería necesario ningún mecanismo de sincronización. En este tipo de contextos en mejor recuperar datos actualizados directamente desde el servidor que manejar cache de datos desactualizadas al poco tiempo de descargarse del servidor.
  
  Una decisión de diseño importante ha sido la implementación de la internacionalización de la aplicación. La aplicación estará disponible a través de la tienda iTunes Store. Esta tienda tiene un acceso mundial y debido a ello se ha adoptado los principales idiomas para que la aplicación sea lo mas extendida posible. 
  
- Se ha implementado la funcionalidad de trading. La aplicación es capaz de recalcular las condiciones del mercado basándose en una apuesta ya realizada y asistir al usuario para una ganancia segura. Se ha dejado preparada la arquitectura de la aplicación para que en un futuro cercano el trading se realicé sobre múltiples eventos y mercados.
- 
-  
- 
-  
- 
- 
 \section{Trabajo futuro}
- Como ya hemos visto en la arquitectura de la aplicación, el sistema esta preparado para posibles futuras funcionalidades extras que podemos aportar con los datos que nos ofrece el API. Debido a que el núcleo de la aplicación es la obtención y proceso de la información contenido en Betfair, cualquier desarrollador puede añadir una funcionalidad extra usando los datos anteriores y acoplarlas fácilmente a la arquitectura de la aplicación. Al usar el modelo vista-controlador, la sencillez a la hora de implementar nuevas funcionalidades está mas que probada.
+ Como ya hemos visto en la arquitectura de la aplicación, el sistema esta preparado para posibles futuras funcionalidades extras que podemos aportar con los datos que nos ofrece el API. Debido a que el núcleo de la aplicación es la obtención y proceso de la información contenida en Betfair, cualquier desarrollador puede añadir una funcionalidad extra usando los datos anteriores y acoplarlas fácilmente a la arquitectura de la aplicación. Al usar el modelo vista-controlador, la sencillez a la hora de implementar nuevas funcionalidades está mas que probada.
  
-
 \subsection{Trading global por lista de eventos}
- Una mejora a implementar en un futuro sería la de poder realizar Trading sobre un mercado entero. Al principio del presente trabajo hemos definido el Trading como apostar a favor y en contra de un evento determinado para, según nuestra primera apuesta, obtener beneficio seguro o minimizar la pérdida. Pero, apostar a favor de un evento ¿puede suponer que este afecte al resto del mercado? Pongamos un ejemplo. Supongamos que estamos apostando por quien va a ser el campeón del mundial de Sudáfrica. Apostar a favor de un equipo puede llevar la consecuencia de apostar en contra de los restantes participantes si en vez de pensar en un equipo concreto pensamos en el mercado completo. 
+ Una mejora interesante a implementar en un futuro sería la de poder realizar trading sobre un mercado entero. Al principio del presente trabajo hemos definido el trading como apostar a favor y en contra de un evento determinado para, según nuestra primera apuesta, obtener beneficio seguro o minimizar la pérdida. Pero, apostar a favor de un evento ¿puede suponer que este afecte al resto del mercado? Pongamos un ejemplo, supongamos que estamos apostando por quien va a ser el campeón del mundial de Sudáfrica. Apostar a favor de un equipo puede llevar la consecuencia de apostar en contra de los restantes participantes si en vez de pensar en un equipo concreto pensamos en el mercado completo. 
  
-  Este cambio en nuestro planteamiento supone llevar a cabo un gran control sobre todas las variables que afectan al mercado completo y no solo por un evento. Para poder analizar completamente los datos de mercado (cuota y precio) necesitamos analizar los datos concretos de cada evento de dicho mercado. Para poder obtener cual sería el conjunto de apuestas a realizar en el mercado para obtener el beneficio tenemos que resolver un conjunto de ecuaciones lineas que representan al mercado cuyas incognitas serán las coutas y cantidad a apostar por cada eventos de dicho mercado.
+  Este cambio en nuestro planteamiento supone llevar a cabo un gran control sobre todas las variables que afectan al mercado completo y no solo por un evento. Para poder analizar completamente los datos de mercado (cuota y precio) necesitamos analizar los datos concretos de cada evento de dicho mercado. Para poder obtener cual sería el conjunto de apuestas a realizar en el mercado para obtener el beneficio tenemos que resolver un conjunto de ecuaciones linealess que representan al mercado cuyas incógnitas serán las cuotas y cantidad a apostar por cada eventos de dicho mercado.
    
     Incluir ejemplo de información de todo el mercado
     
   
- Normalmente los mercados tienen unos 30 eventos. Para poder obtener una solución óptima tenemos que echar mano de herramientas de software de resolución de ecuaciones lineales, tales como zympl y glpsol. 
+ Normalmente los mercados tienen unos 30 eventos. Para poder obtener una solución óptima tenemos que echar mano de herramientas de software de resolución de ecuaciones lineales, tales como \emph{zympl} y \emph{glpsol}. 
   
   
   
-   La idea es tener una máquina servidora capaz de realizar estas cálculos cada, pongamos por ejemplo, una hora. Se trata de analizar continuamente el mercado para encontrar el momento idóneo para el Trading global. El incluir otra máquina a parte del terminal es debido a la restricción de la batería. Si hiciéramos uso del terminal para estos cálculos reduciría drásticamente la vida útil de la misma. La máquina avisaría a la aplicación móvil del terminal en cuanto encontrase una solución adecuada a los parámetros configurados. 
+   La idea es tener una máquina servidora capaz de realizar estas cálculos cada, pongamos por ejemplo, una hora. Se trata de analizar continuamente el mercado para encontrar el momento idóneo para el trading global. El incluir otra máquina a parte del terminal es debido a la restricción de la batería. Si hiciéramos uso del terminal para estos cálculos reduciría drásticamente la vida útil de la misma. La máquina avisaría a la aplicación móvil del terminal en cuanto encontrase una solución adecuada a los parámetros configurados. 
    
-    El procedimiento por el cual es usuario es notificado con la solución es implementar la solución de mensajería tipo push de Apple en el iPhone. A continuación mostramos como las notificaciones en el terminal.
+    El procedimiento por el cual es usuario es notificado con la solución es implementar la solución de mensajería tipo push de Apple en el iPhone. A continuación mostramos como son las notificaciones en el terminal, también como mejora a añadir al proyecto.
     
  \subsubsection{Notificación por mensajes Push de Apple}
    
-   En un modelo típico de cliente-servidor, el cliente es el encargado de contactar con el servidor para la descarga de nuevos datos, como por ejemplo el servicio de correos electrónicos. En el móvil, el cuál siempre tiene el inconveniente de la batería, esta solución no es válida debido al consumo energético en cada consulta al servidor. Para estos casos las notificaciones push son las solución a este dilema. Una notificación push es un mensaje corto que el servidor envía al cliente para notificarle que tiene datos para ser descargados. 
+   En un modelo típico de cliente-servidor, el cliente es el encargado de contactar con el servidor para la descarga de nuevos datos, como por ejemplo el servicio de correo electrónico. En el móvil, el cuál siempre tiene el inconveniente de la batería, esta solución no es válida debido al consumo energético en cada consulta al servidor. Para estos casos las notificaciones push son las solución a este dilema. Una notificación push es un mensaje corto que el servidor envía al cliente para notificarle que tiene datos para ser descargados. 
    
     Cuando un terminal recibe una notificación de una aplicación que no esta ejecutada en ese momento, ésta notifica al usuario a través de un mensaje de alerta, un sonido determinado o un número indicador en el icono de la aplicación (o una combinación de este conjunto) de un evento a tratar por parte del usuario. El usuario, en todo momento, tiene la posibilidad de ejecutar la aplicación para obtener los datos notificado o simplemente ignorar el mensaje.
 
      \begin{figure}[h!]
     \centering
-       \includegraphics[width=0.3\textwidth]{./images/badged_app.jpg}
+       \includegraphics[width=0.2\textwidth]{./images/badged_app.jpg}
      \caption{Alerta 1 }
    \label{fig:Alerta 1}
 \end{figure}
@@ -1040,7 +1083,7 @@ TradingController.xib & Explicacion \\
 \end{figure}
    \subsubsection{Registro}
 
-     El primer paso del proceso es el registro de la aplicación en el servidor de Apple para activar el servicio de notificaciones. Tal y como se muestra en la imagen X, la aplicación cliente se conecta al APNS (Apple Push Notification Server) para la obtención de un identificador (token) único para cada aplicación cliente y terminal. El APNS, después de comprobar las credenciales del terminal, genera y registra el token a partir del ID del dispositivo y devuelve al terminal su token generado. Este token identifica al terminal y por lo tanto lo ha de usar nuestro servidor para poder enviar a este terminal un mensaje push. Por eso, el último paso del registro es notificar al servidor desde el terminal el token generado para su registro interno.
+     El primer paso del proceso es el registro de la aplicación en el servidor de Apple para activar el servicio de notificaciones. Tal y como se muestra en la figura \ref{fig:Notificacion Registro}, la aplicación cliente se conecta al \emph{APNS}\footnote{Apple Push Notification Server, el servidor encargado de recibir y enviar el mensaje de un tercero a un terminal iphone} para la obtención de un identificador (token) único para cada aplicación cliente y terminal. El APNS, después de comprobar las credenciales del terminal, genera y registra el token a partir del ID del dispositivo y devuelve al terminal su token generado. Este token identifica al terminal y por lo tanto lo ha de usar nuestro servidor para poder enviar a este terminal un mensaje push. Por eso, el último paso del registro es notificar al servidor desde el terminal el token generado para su registro interno.
      
  \begin{figure}[h!]
     \centering
@@ -1051,14 +1094,16 @@ TradingController.xib & Explicacion \\
   
      \subsubsection{Envío de una notificación}
      
-     Cuando el servidor requiere enviar una notificación a un cliente determinado para indicarle que dispone de datos nuevos que descargar, éste envía el mensaje en cuestión junto con el identificado al APNS. El servidor APNS comprueba que el token ha sido generado por un certificado válido y que identifica a un terminal registrado previamente. Si todo esta correcto le envía el mensaje a la aplicación cliente del terminal.
+     Tal y como se muestra en la figura \ref{fig:Notificacion envio} cuando el servidor requiere enviar una notificación a un cliente determinado para indicarle que dispone de datos nuevos que descargar, éste envía el mensaje en cuestión junto con el identificador del terminal al APNS. El servidor APNS comprueba que el token ha sido generado por un certificado válido y que identifica a un terminal registrado previamente. Si todo esta correcto le envía el mensaje a la aplicación cliente del terminal.
      
  \begin{figure}[h!]
     \centering
        \includegraphics[width=0.8\textwidth]{./images/token_trust.jpg}
-     \caption{Envio }
+     \caption{Envío}
    \label{fig:Notificacion envio}
 \end{figure}
+
+ Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.
 
 \end{document}
 
