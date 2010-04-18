@@ -785,7 +785,7 @@ A continuación una breve descripción de cada capa:
 
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.2\textwidth]{./images/DiagramaDeClases3.png}
+       \includegraphics[width=1.2\textwidth]{./images/ClassView.png}
      \caption{Diagrama de clases}
    \label{fig:Diagrama de clases}
 \end{figure}
@@ -888,11 +888,12 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
  
   En esta implementación se procederá a dar soporte al Español y al Inglés, estando estos dos lenguajes dentro de la lista mundial de los más hablados.
   
-  
-  
-  (ADJUNTAR IMAGEN COMPARATIVA ENTRE LAS DOS PANTALLAS).
-  
-  
+   \begin{figure}[h!]
+    \centering
+       \includegraphics[width=1.2\textwidth]{./images/idiomas.png}
+     \caption{Ejemplo de internacionalización }
+   \label{fig:Soporte multilenguaje}
+\end{figure}  
   
   Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}. Este archivo se ubica dentro de la carpeta es.lpjr o en.lpjr según sea la tabla de traducción en inglés o en español. A continuación se muestra un ejemplo del contenido de dicho fichero.
   
@@ -999,7 +1000,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
        
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.2\textwidth]{./images/modelo_accion.png}
+       \includegraphics[width=1.2\textwidth]{./images/modelo_secuencia.png}
      \caption{Ejemplo de comunicación API }
    \label{fig:proceso}
 \end{figure}
@@ -1103,7 +1104,12 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
    \label{fig:Notificacion envio}
 \end{figure}
 
- Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.
+ Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.\cite{betfair:web}
+
+\bibliographystyle{plain}
+\bibliography{betting.bib}
+
+
 
 \end{document}
 
