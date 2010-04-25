@@ -534,9 +534,9 @@ A continuación una breve descripción de cada capa:
 
  Para poder desarrollar aplicaciones para el iPhone, Apple pone a disposición un conjunto de herramientas de desarrollo (SDK) gratuito a los desarrolladores disponible a través de su portal web. %\fixme{No entiendo.}
 
-\begin{afixme}
-  Entiendo que la parte más importante, en lo que afecta a la  aplicación, de todo lo que has contado es el UKit y quizá algo del Foundation. Tendrás que hablar en algún momento sobre en qué forma influye en la arquitectura final y porqué y para ello es probable que antes ofrezcas algún dato extra sobre sus típicos usos, incluso algún ejemplo. No lo tengo claro, estoy pensando en el lector y aún no he leído el resto así que puedo estar equivocándome.
-\end{afixme}
+%\begin{afixme}
+ % Entiendo que la parte más importante, en lo que afecta a la  aplicación, de todo lo que has contado es el UKit y quizá algo del Foundation. Tendrás que hablar en algún momento sobre en qué forma influye en la arquitectura final y porqué y para ello es probable que antes ofrezcas algún dato extra sobre sus típicos usos, incluso algún ejemplo. No lo tengo claro, estoy pensando en el lector y aún no he leído el resto así que puedo estar equivocándome.
+%\end{afixme}
 
 \section{Arquitectura del API de BetFair}
 
@@ -607,7 +607,7 @@ A continuación una breve descripción de cada capa:
 \end{itemize}
 
 \section{Meta-arquitectura}
-\fixme{Hay una subsección que se llama igual y que creo que debe ser otra sección. Creo que ésta sección puede tener otro título, alqo que explique que su contenido son los elementos sobre los que se fundamenta el diseño final. Lo analizamos con más cuidado en una reunión. El cambio de título que he hecho es tentativo y pretencioso.}
+\fixme{Hay una subsección que se llama igual y que creo que debe ser otra sección. Creo que ésta sección puede tener otro título, alqo que explique que su contenido son los elementos sobre los que se fundamenta el diseño final. Lo analizamos con más cuidado en una reunión. El cambio de título que he hecho es tentativo y pretencioso.  -> Estructura? Elementos de la arquitectura?}
 %\fixme{Las comillas en LaTeX se escriben ``así''.}
 
  Para el diseño de la arquitectura nos hemos basado en el patrón de diseño ``Modelo Vista Controlador (MVC)''. Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes. Fundamentalmente consiste en separar los datos de una aplicación, la interfaz de usuario, y la lógica de control en tres componentes distintos:
@@ -727,9 +727,9 @@ A continuación una breve descripción de cada capa:
 \fixme{No es necesario que pongas cualquier diagrama o imagen dentro de una figura, puedes incrustarla entre los párrafos.}
 
 \section{Arquitectura de la aplicación}	
-\fxnote{He promocionado esto a sección.}
+%\fxnote{He promocionado esto a sección.}
    
-   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con el API de Betfair. %\fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
+   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con la interfaz de los servicios web de Betfair. A este módulo le llamaremos de aquí en adelante API. %\fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
    
    \begin{figure} [h]
      \centering
@@ -744,62 +744,87 @@ A continuación una breve descripción de cada capa:
      Los controladores de vista se encargan de recoger los eventos de la aplicación principalmente \emph{inputs} del usuario. % \fxnote{eventos?}. 
      En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
 
-\begin{afixme}
-  Desde mi punto de vista, lo que llamas API en la arquitectura es el
-  modelo de datos. No propongo cambiar el nombre pero sí que el lector
-  entienda que el modelo utilizado es directamente el que proporciona
-  el API de BF. Esto tiene ventajas (prototipado rápido) e
-  inconvenientes (acceso a web continuamente, tiempos de respuesta,
-  generación de tráfico, etc.). Estas cosas hay que escribirlas, aquí
-  o en conclusiones (probablemente aquí sin entrar en detalle y en
-  conclusiones para aportar soluciones).
-\end{afixme}
+%\begin{afixme}
+ % Desde mi punto de vista, lo que llamas API en la arquitectura es el
+ % modelo de datos. No propongo cambiar el nombre pero sí que el lector
+ % entienda que el modelo utilizado es directamente el que proporciona
+ % el API de BF. Esto tiene ventajas (prototipado rápido) e
+  %inconvenientes (acceso a web continuamente, tiempos de respuesta,
+  %generación de tráfico, etc.). Estas cosas hay que escribirlas, aquí
+  %o en conclusiones (probablemente aquí sin entrar en detalle y en
+  %conclusiones para aportar soluciones).
+%\end{afixme}
     
-\begin{afixme}
-  Antes de comenzar a describir cada controlador es necesario
-  listarlos. ¿Podemos ponerlos en un diagrama todos juntos? ¿Hay una
-  relación de dependencia o jerarquía entre ellos?
-\end{afixme}
+%\begin{afixme}
+ % Antes de comenzar a describir cada controlador es necesario
+  %listarlos. ¿Podemos ponerlos en un diagrama todos juntos? ¿Hay una
+  %relación de dependencia o jerarquía entre ellos?
+%\end{afixme}
 
 \subsubsection{Controlador principal}
 
- Es la clase principal \fxnote{¿es una clase singleton? ¿son todos los controladores singleton? ¿hay varios objetos controladores de los distintos ``tipos'' de controlador?} de la aplicación. Es la encargada de inicializar el controlador de vista que será encargado de recoger los eventos del usuario, así como de la gestión de memoria y de la gestión de los eventos del sistema.
+ Es la clase principal %\fxnote{¿es una clase singleton? ¿son todos los controladores singleton? ¿hay varios objetos controladores de los distintos ``tipos'' de controlador?} 
+ de la aplicación, común en todas los desarrollos para la plataforma iPhone. Es la encargada de:
+ 
+ \begin{itemize}
+	\item La gestión de memoria de la aplicación.
+	\item La gestión de los eventos del sistema: describir comportamiento al recibir por ejemplo una llamada telefónica, un correo electrónica\ldots
+	\item Será encargado de recoger los eventos del usuario, es decir, de recoger las posiciones de pantalla donde el usuario ha pulsado y lanzar las acciones que el desarrollador haya especificado.
+    \end{itemize} 
 
-\begin{afixme}
-  Me cuesta un poco digerir tanta ``prosa''. Yo creo que hay aspectos
-  de cada controlador que puedes presentar de forma algo más
-  metódica. Tienes una ``descripción'' y una enumeración de las
-  responsabilidades. ¿No estaría bien incluir a qué eventos responde y
-  qué hace cuando recibe cada uno de ellos? ¿Podemos usar simplemente
-  diagramas de secuencia para describir ese comportamiento? ¿podemos
-  usar máquinas de estado? Tenemos que explorarlo y ver qué tal
-  quedaría y cuál es el grado de complejidad.
-\end{afixme}
+%\begin{afixme}
+ % Me cuesta un poco digerir tanta ``prosa''. Yo creo que hay aspectos
+  %de cada controlador que puedes presentar de forma algo más
+ % metódica. Tienes una ``descripción'' y una enumeración de las
+  %responsabilidades. ¿No estaría bien incluir a qué eventos responde y
+  %qué hace cuando recibe cada uno de ellos? ¿Podemos usar simplemente
+  %diagramas de secuencia para describir ese comportamiento? ¿podemos
+  %usar máquinas de estado? Tenemos que explorarlo y ver qué tal
+  %quedaría y cuál es el grado de complejidad. -> OK, lo podemos ver en la siguiente reunión.
+%\end{afixme}
  
 \subsubsection{Controlador de menú principal}
- Esta clase es la encargada de mostrar las opciones principales del programa y recoger los inputs \fxnote{inputs?} del usuario para lanzar el controlador adecuado a la elección del usuario \fxnote{¿puedes lanzar cualquier controlador? ¿podemos recoger esa info en la jerarquía que mencionaba anteriormente?}. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicios \emph{login} de Betfair a través de la clase de comunicación llamada API.
+ Esta clase es la encargada de mostrar las opciones principales del programa y  lanzar el controlador adecuado a la elección del usuario %\fxnote{¿puedes lanzar cualquier controlador? ¿podemos recoger esa info en la jerarquía que mencionaba anteriormente?}.
+  Los controladores que gestiona son los siguientes:
+   \begin{itemize}
+	\item Controlador de eventos y mercados.
+	\item Controlador de las categorías de mis apuestas.
+	\item Controlador de la información de cuenta de Betfair.
+	\item Controlador de inicio de sesión para los servicos web de Betfair. Para ello hace uso del servicios \emph{login} de Betfair a través de la clase de comunicación llamada API que explicaremos más adelante.
+    \end{itemize} 
+    \includegraphics[width=1.2\textwidth]{./images/c_principal.png}
  
 \subsubsection{Controlador de tipos de eventos}
- Es el encargado de mostrar al usuario una lista con todos los tipos de eventos activos \fxnote{¿Qué es un evento? Hasta ahora no los has mencionado.} por los que se puede apostar dentro de BetFair. En un futuro se podrá gestionar por fecha de finalización, órden alfabético o búsqueda directa de eventos \fxnote{Si es futuro no va aquí.}. Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
+ Es el encargado de mostrar al usuario una lista con todos los tipos de eventos deportivos activos de los que dispone Betfair %\fxnote{¿Qué es un evento? Hasta ahora no los has mencionado.} 
+ por los que se puede apostar. %\fxnote{Si es futuro no va aquí.}. 
+ Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
  
 \subsubsection{Controlador de eventos y mercados}
 
- Es la clase encargada de mostrar de forma jerárquica los subeventos \fxnote{subeventos?} y mercados \fxnote{mercados?} relacionados con un eventos seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionara por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un evento se le mostrará los mercados y subeventos relacionados con los mismos. En caso de ser seleccionado un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web \emph{GetEvents} de BetFair.
- 
+ Betfair nos proporciona una lista de eventos deportivos donde podemos realizar una apuesta. Dentro de un evento deportivo encontramos la información de mercado relativa al evento, es decir, las cuotas para los distintos protagonistas de los eventos. Esta clase es la encargada de mostrar de forma jerárquica los eventos %\fxnote{subeventos?}
+  y mercados %\fxnote{mercados?} 
+  relacionados con un eventos seleccionado previamente en el \emph{controlador de eventos}. Gestiona dos tipos de acciones: 
+ \begin{itemize}
+  \item En caso de ser seleccionado un evento se mostrará los mercados y eventos relaciones con la selección.
+  \item En caso de ser seleccionado un mercado se procederá a lanzar el \emph{controlador de información de mercado} . Para ello recaba la información obtenida a través del servicio web \emph{GetEvents} de BetFair.
+  \end{itemize}
+    
+     \includegraphics[width=0.8\textwidth]{./images/c_eventos.png}
+
 \subsubsection{Controlador de información de mercado}
 
- Esta clase es la responsable de gestionar toda la información relevante al mercado en cuestión. Gestionará el estado del mercado y sus propiedades obteniendo todo lo necesario del portal de Betfair a través de API de sus servicios web para ello hace uso de las llamadas del API:
+ Esta clase es la responsable de gestionar toda la información relevante al mercado en cuestión. Gestionará el estado del mercado y sus propiedades obteniendo todo lo necesario del portal de Betfair a través de sus servicios web para ello hace uso de las llamadas:
  
   \begin{itemize}
 	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado.
-	\item \emph{GetMarketPrices}: obtiene todos los precios actuales del mercado en cuestión.
+	\item \emph{GetMarketPrices}: obtiene todos los precios y cuotas actuales del mercado en cuestión.
 \end{itemize}
 
 \subsubsection{Controlador de apuesta por un mercado}
  Es la encargada de gestionar todos los datos necesarios e introducidos por el usuarios para realizar una apuesta y enviarla a BetFair. El método usado para enviar la apuesta a BetFair a través de la clase interfaz de comunicación es \emph{PlaceBets}.
 
 \subsubsection{Controlador de las categorías de Mis Apuestas}
- Es la clase encargada de gestionar las apuestas ya realizadas en BetFair y que siguen activas. Las clasifica por categorías de mercado. Recoge la información como resultado de las llamadas a los siguientes servicios web de BetFair:
+ Es la clase encargada de gestionar las apuestas ya realizadas en BetFair por el usuario y que siguen activas. Las clasifica por categorías de mercado. Recoge la información como resultado de las llamadas a los siguientes servicios web de BetFair:
   \begin{itemize}
 	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado de una apuesta en cuestión.
 	\item \emph{GetCurrentBets}: obtiene todas las apuestas realizadas por el usuario del servicios BetFair.
@@ -808,12 +833,15 @@ A continuación una breve descripción de cada capa:
 \subsubsection{Controlador de Mis Apuestas}
  Esta clase se encarga de gestionar las apuesta realizadas por el usuario dentro de una categoría determinada. En ella se muestra resumidamente el nombre de la apuesta en cuestión, la cuota apostada y la cuota actualizada en ese momento. 
 
+     \includegraphics[width=0.8\textwidth]{./images/c_miapuesta.png}
+
+
 \subsubsection{Controlador de detalles de una apuesta}
- Se encarga de gestionar todos los detalles sobre una apuesta determinada: parámetros, stake, apuesta a favor o en contra relacionadas con la presentada\ldots También incluye información de mercado actual completa referente al mercado de la apuesta y el trading acerca de la misma.
+ Se encarga de gestionar todos los detalles sobre una apuesta determinada: parámetros, stake, apuesta a favor o en contra relacionadas con la presentada\ldots También incluye información de mercado actual completa referente al mercado de la apuesta y el asesoramiento de trading acerca de la misma.
  
 \subsubsection{API: Interfaz a Betfair}
-\fxnote{Habrá que analizar donde colocamos exáctamente esta descripción.}
- Esta clase se encarga de gestionar las comunicaciones con los servidores de BetFair. Envía las peticiones a los servicios web de BetFair y se encarga de realizar la decodificación de la respuesta a dichas peticiones en un formato adecuado para la aplicación.
+%\fxnote{Habrá que analizar donde colocamos exáctamente esta descripción.}
+ Esta clase se encarga de gestionar las comunicaciones con los servidores de BetFair. Envía las peticiones a los servicios web de BetFair y se encarga de realizar la decodificación de la respuesta a dichas peticiones en un formato adecuado para la aplicación. En el apartado \ref{sc:xml} se describe con mas detalle la interfaz.
 
 \section{Diagrama de Clases}
 \fxnote{Es probable que esto haya que adelantarlo o que sea de esta información de la que podamos extraer los diagramas de arquitectura que te mencionaba antes.}
@@ -958,6 +986,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 
    
 \section{Interpretación XML de BetFair a Cocoa Touch}
+\label{sc:xml}
  Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave de este trabajo de fin de carrera a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
  
   BetFair ofrece el acceso a todos sus servicios a todos aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas o para usuarios expertos que requieran de una interfaz de usuario más experta, orientada a sus necesidades. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
@@ -1044,7 +1073,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 \end{figure}
  
     
-    Toda la aplicación gira en torno a este proceso. Es lógico tratarlo así ya que las aplicaciones móviles suelen usar siempre servicios web y por tanto necesitan de conectividad. Esta aplicación no guarda información alguna salvo los datos de acceso al servicio. Es la definición en si de aplicación móvil, la información que necesito disponible este donde este, donde tener información duplicada en el dispositivo no tendría mucho sentido debido a la actualización constante de la información relevantes al mundo de las apuestas, eso sí, tendría sentido quizá dotar en un futuro a la aplicación de una cache con caducidad para minimizar el consumo de batería del dispositivo.    
+    Toda la aplicación gira en torno a este proceso. Es lógico tratarlo así ya que las aplicaciones móviles suelen usar siempre servicios web y por tanto necesitan de conectividad. Esta aplicación no guarda información alguna salvo los datos de acceso al servicio. Es la definición en si de aplicación móvil, la información que necesito disponible este donde este, donde tener información duplicada en el dispositivo no tendría mucho sentido debido a la actualización constante de la información relevantes al mundo de las apuestas, eso sí, tendría sentido quizá dotar en un futuro a la aplicación de una cache con caducidad para minimizar el consumo de batería del dispositivo. Por supuesto estas son todas las ventajas de guardar toda la información en servidores externos a la aplicación. Los contras a cambio suponen un tiempo de retardo entre que se pide la información y se recibe. Afortunadamente hoy el día los terminales están dotados con la tecnología de acceso a la red 3G, lo que supone velocidades de acceso a la red cercana a un ADSL, con lo que el retardo máximo lo podemos estimas en pocos segundos, siendo un tiempo aceptable para este tipo de aplicaciones.  
    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
