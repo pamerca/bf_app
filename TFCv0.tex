@@ -8,12 +8,13 @@
 \usepackage{hyperref}
 \usepackage{listings} % Activar formato codigo
 
+\usepackage{eurosym} % Símbolo para el euro
+\DeclareInputText{164}{\euro}
+
 \usepackage{dcolumn} % Formato Tabla
 \usepackage{colortbl} 
 \usepackage{longtable}
 \usepackage{tabularx}
-
-\usepackage{eurosym} % Símbolo para el euro
 
 
 
@@ -51,19 +52,19 @@
 %% Fixmes
 %% macros: \fixme -critical-, \fxerror -noncritical-, \fxwarning, \fxnote
 %% env: afixme, anfxerror, anfxwarning, anfxnote
-%%\usepackage[marginclue,inline]{fixme}
-\usepackage[inline,nomargin,draft]{fixme} %% con el colorín ya vale
+% % \usepackage[marginclue,inline]{fixme}
+\usepackage[inline,nomargin,draft]{fixme}
 %% \usepackage[marginclue,footnote]{fixme}
 \usepackage{framed}
-\renewcommand{\FXInline}[2]{\noindent{\color{red}#1: \emph{\small #2}}}
-\renewcommand{\FXMarginClue}[1]{\marginpar{\footnotesize\raggedleft\textbf{\color{red}#1~!}}}
-\renewcommand{\FXEnvBegin}{\begin{framed}\begin{small}\color{red}}
-\renewcommand{\FXEnvEnd}{\end{small}\end{framed}}
+%%\renewcommand{\FXInline}[2]{\noindent{\color{red}#1: \emph{\small #2}}}
+%%\renewcommand{\FXMarginClue}[1]{\marginpar{\footnotesize\raggedleft\textbf{\color{red}#1~!}}}
+%%\renewcommand{\FXEnvBegin}{\begin{framed}\begin{small}\color{red}}
+%%\renewcommand{\FXEnvEnd}{\end{small}\end{framed}}
 
 
 \begin{document} 
 
-\title{Aplicacion BetFair para iPhone}
+\title{Adaptación servicios web BetFair al sistema móvil iOS}
 \author{Francisco Miguel Merchan Casado}
 \date{Enero de 2010}                                           % Activate to display a given date or no date
 
@@ -74,11 +75,11 @@
 	{\Large FACULTAD DE INFORMÁTICA}\\ [4cm]
 	{\Large Trabajo de Fin de Carrera}\\[1cm]
 	
-	{\Huge Adaptación servicios web BetFair a iPhone 3GS}\\[8cm]
+	{\Huge Adaptación de servicios web BetFair al sistema móvil iOS}\\[8cm]
 	
 	{\Large AUTOR: Francisco Miguel Merchán Casado}\\
 	{\Large TUTOR: Ángel Herranz Nieva}\\
-\date{Abril de 2009}
+\date{Enero de 2012}
 \end{center}
 \end{titlepage}
 
@@ -90,36 +91,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Resumen}
 \addcontentsline{toc}{chapter}{Resumen}
-En este documento se describe el trabajo de fin de carrera acerca del desarrollo de una aplicación de apuestas de BetFair para el dispositivo iPhone. Esta aplicación contiene las siguientes funcionalidades:
+En este documento se describe el trabajo de fin de carrera acerca del desarrollo de una aplicación de apuestas de BetFair para los dispositivos iOS\footnote{iPhone Operating System}. Esta aplicación contiene las siguientes funcionalidades:
 \begin{itemize}
-    \item Consultar los eventos de BetFair por los que se puede apostar
-    \item Apostar en los eventos.
+    \item Consultar los eventos de Betfair por los que se puede apostar.
+    \item Apostar sobre los eventos.
     \item Realizar seguimientos a la evolución de los mercados.
     \item Asesoramiento para realizar  \emph{tradings}  sobre apuestas ya realizadas.
   \end{itemize}
-    
-    A continuación se explica con más detalle la realización del trabajo.
-    
+        
      En el capítulo \ref{ch:intro} se presentan los conceptos básicos
     de las apuestas deportivas.
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{thebibliography}{X} \bibitem{Baz} {\sc Bazaraa, M. S.}, {\sc J. J. Jarvis} y {\sc H.
-D. Sherali}, {\it Programaci?on lineal y flujo en redes}, segunda
-edici?on, Limusa, M?exico, DF, 2004. \bibitem{Dan} {\sc Dantzig, G. B.} y {\sc P. Wolfe},
+\begin{thebibliography}{X} 
+\bibitem{Baz} {\sc Bazaraa, M. S.}, {\sc J. J. Jarvis} y {\sc H.
+D. Sherali}, {\it Programación lineal y flujo en redes}, segunda
+edición, Limusa, México, DF, 2004. 
+\bibitem{Dan} {\sc Dantzig, G. B.} y {\sc P. Wolfe},
 <<Decomposition principle for linear programs>>, {\it Operations
-Research}, {\bf 8}, p?ags. 101--111, 1960. \end{thebibliography}
-
-\begin{afixme}
-  No entiendo este environment thebibliography si ya tienes fichero bib.
-\end{afixme}
+Research}, {\bf 8}, págs. 101--111, 1960. \end{thebibliography}
 
 \chapter{Introducción}
 \label{ch:intro}
 
-%\fxnote{En este capítulo, bla bla bla}
-En este capítulo, se introduce al lector en el dominio de las apuestas en internet y se presenta el terminal elegido como plataforma de la aplicación de apuestas, resultado del presente trabajo de fin de carrera.
+En este capítulo, se introduce al lector en el dominio de las apuestas deportivas en Internet y se presenta el terminal elegido como plataforma de la aplicación de apuestas, resultado del presente trabajo de fin de carrera.
 
 \section{Apuestas por Internet}
 
@@ -131,37 +127,63 @@ En este capítulo, se introduce al lector en el dominio de las apuestas en intern
 
 %\fxnote{Recuerda este enlace en el que hay dos documentos que creo que pueden ayudar con esta presentación del dominio del problema: \url{http://www.iapuestas.com/Guia/introduccionintercambiodeapuestas.asp} y \url{http://www.iapuestas.com/Guia/lasmatematicasdelasapuestas.doc}. Quizá pueda salir algo de \url{http://www.sportsbookreview.com/Espanol/Default.aspx}, \url{http://internetgamblingreport.com/ o http://anjaander.blogspot.com/} o incluso \url{http://en.wikipedia.org/wiki/Bet_exchange}}
 
-Actualmente las apuestas tienen gran aceptación en todo el mundo. En España ya hay una tradición de bastantes años por la quiniela y la lotería. En la quiniela, al tratarse de cantidades variables nunca sabemos por anticipado cuánto cobraremos en caso de acierto. Un acierto de 13 resultados puede convertirse en una gran decepción por el premio conseguido. En las casas de apuestas tradicionales el apostante cruza su apuesta directamente contra la propia casa. En un típico ejemplo tenemos las clásicas carreras de caballos sobre las que se apuesta sobre un caballo ganador. La casa de apuesta tradicionales se limita siempre a cubrir nuestras apuestas. 
+Actualmente las apuestas tienen gran aceptación en todo el mundo. En España ya hay una tradición de bastantes años por la quiniela y la lotería. En la quiniela, por ejemplo, nunca sabemos por anticipado cuánto cobraremos en caso de acierto ya que depende del número de participantes que hayan acertado el resultado de la jornada de la Liga Profesional de Fútbol. Un acierto de 13 resultados puede convertirse en una gran decepción por el premio conseguido si junto con nosotros han acertado el resultado otras 100 personas. Sin embargo, si eres el único acertante ya no tienes que repartir el premio. En las casas de apuestas tradicionales el apostante cruza su apuesta directamente contra la propia casa. En un típico ejemplo tenemos las clásicas carreras de caballos sobre las que se apuesta sobre un caballo ganador. La casa de apuesta tradicional se limita siempre a cubrir nuestras apuestas. 
 
 
 En los últimos años hemos sido testigos de la llegada de las llamadas casas de intercambio. 
 %\fxnote{no creo que estén desfasadas} 
 % \fxnote{Tb. puedes decir que la casa ``cubre'' la apuesta.}. 
-La casa de intercambio añade un nuevo concepto en el mundo de las apuestas. Los usuarios realizan las apuestas sobre los eventos y entre ellos mismos se cubren las apuestas, es decir, los apostantes pueden realizar apuestas a favor o en contra de los eventos. 
+Las casas de intercambio añaden un nuevo concepto en el mundo de las apuestas. Los usuarios realizan las apuestas sobre los eventos y entre ellos mismos se cubren las apuestas, es decir, los apostantes pueden realizar apuestas a favor o en contra de los eventos. 
 %\fxnote{Falso, las cuotas y cantidades a apostar existen siempre}
- En este caso la casa de apuestas hace de intermediario obteniendo un porcentaje en la ganancia del apostante.%\fxnote{Creo que hace falta decir que los apostantes apuestan a favor y en contra} 
+ En este caso, la casa de apuestas hace de intermediario obteniendo un porcentaje en la ganancia del apostante. %\fxnote{Creo que hace falta decir que los apostantes apuestan a favor y en contra} 
  Las ventajas de las casas de apuestas de intercambio con respecto a las tradicionales son:
 \begin{itemize}
 	\item Las comisiones son menores que las correspondientes a una casa de apuestas tradicionales.
-	\item Cuanto mayores sean las cantidades apostadas, mayor será la comisión que se lleve la casa de intercambio, es por eso que no suelen existir límites en las cantidades a apostar en contra de las casas de apuestas tradicionales.%\fxnote{Pero existen límites que pueden ser inferiores a los de las casas normales, si nadie apuesta en contra o a favor, por ejemplo.}
+	\item Cuanto mayores sean las cantidades apostadas, mayor será la comisión que se lleve la casa de intercambio, es por eso que no suelen existir límites en las cantidades a apostar en contra de las casas de apuestas tradicionales siempre y cuando se cubra una apuesta a favor con otro en contra.%\fxnote{Pero existen límites que pueden ser inferiores a los de las casas normales, si nadie apuesta en contra o a favor, por ejemplo.}
 \end{itemize}
 Pero como en toda comparación siempre hay desventajas: 
 \begin{itemize}
-	\item Normalmente, debido a las nuevas posibilidades de apuesta de las casas de intercambio se requieren conocimientos avanzados y una mayor experiencia para obtener beneficios que la simplicidad que ofrecen las casas de apuestas tradicionales.
-	\item En las casas de intercambio son los propios usuarios los que proponen sus cuotas y los mercados tardan más tiempo en abrirse. En las casas de apuestas tradicionales es la propia casa la que establece las cuotas abriendo los mercados más rápidamente.
+	\item Normalmente, debido a las nuevas posibilidades de apuesta de las casas de intercambio se requieren conocimientos avanzados y una mayor experiencia para obtener beneficios en contraposición a la simplicidad que ofrecen las casas de apuestas tradicionales.
+	\item En las casas de intercambio son los propios usuarios los que proponen sus apuestas y los mercados tardan más tiempo en abrirse. Entendemos por mercado el evento deportivo por el cual podemos apostar a favor o en contra. Por ejemplo, en un partido de tenis apostar por cúal de los dos jugadores va a ganar. En las casas de apuestas tradicionales es la propia casa la que establece las cuotas abriendo los mercados más rápidamente.
 \end{itemize}
 
-%\fxnote{¿Y las desventajas?}
-
-Debido a la aparición de estas casas de intercambio aparecen dos nuevas modalidades para realizar apuestas. La primera el poder realizar apuestas en contra de un evento (\emph{lay})  diferenciándose claramente de las casas de apuestas tradicionales donde solo se pueden realizar apuesta a favor (\emph{lay}) de un evento.
-%\fxnote{Esta es la modalidad de siempre}
- La segunda modalidad es la llamada \emph{trading} que explicaremos en el siguiente apartado.
+Debido a la aparición de estas casas de intercambio, aparecen dos nuevas modalidades para realizar apuestas. La primera el poder realizar apuestas en contra de un evento (\emph{lay})  diferenciándose claramente de las casas de apuestas tradicionales donde sólo se pueden realizar apuestas a favor (\emph{back}) de un evento.
+ La segunda modalidad es la facilidad para realizar \emph{trading}, concepto que desarrollaremos en el siguiente apartado.
  %\fxnote{El trading es algo que tb se puede hacer en las casas normales, habitualmente utilizando varias casas}  
+
+ \subsection{Apuestas Back y Lay}
+ 
+   Para un mejor entendimiento y comprensión de la temática de este trabajo de fin de carrera, definiremos los principales conceptos en una apuesta:
+ \begin{itemize}
+ \item Bankroll: es la cantidad de dinero o capital  que estamos dispuestos a apostar. Lógicamente tendremos que administrarlo de la mejor manera posible, minimizando las pérdidas en caso de perder una apuesta y maximizar las ganancias de una apuesta ganadora. La disciplina y el conocimiento del mercado son las mejores aliadas de nuestro bankroll. La mayoría de las casas de apuestas por Internet nos regalan un mínimo bankroll para animarnos a participar en ellas.
+ \item Stake: es la cantidad de dinero que ofrecemos por un determinado evento en la apuesta . Es decir, apostar 10 euros a que gana el Sevilla F.C el campeonato de la Liga Profesional de Fútbol.
+ \item Odds: es la cuota (probabilidad) de una apuesta. Por ejemplo se paga una cuota de 3 a 1 que Fernando Alonso gane el mundial de Fórmula 1. Nos refleja que Fernando Alonso tiene más probabilidades de ganar el campeonato que no ganarlo.
+ \item Beneficio: es la ganancia que obtenemos de una apuesta ganadora cuyo cálculo es el siguiente:
+ \begin{displaymath}
+ Beneficio = (stake \times odd) - stake 
+\end{displaymath}
+
+%\begin{anfxnote}
+%  Latex es famoso por la potencia a la hora de escribir fórmulas   matemáticas:
+%
+%\begin{displaymath}
+%  B = s \times o
+%\end{displaymath}
+%
+%\end{anfxnote}
+
+\item Pérdida: lógicamente lo opuesto al beneficio. Lo que todo apostante quiere evitar o minimizar. 
+\item Yield: expresado en porcentaje. Nos indica el beneficio obtenido del total apostado. Es lo que diferencia a un buen apostador del resto. El cálculo es el siguiente:
+\begin{displaymath}
+ Yield = (beneficio / total apostado) \times 100 
+\end{displaymath}
+\end{itemize} 
+
 
  
  \subsection{Trading}
  
-  Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros.  Esta modalidad se puede realizar en la casa de apuestas tradicionales pero para ello necesitas usar varias casas. Es decir, en una casa cubre la apuesta a favor de un evento mientras que otra casa ve más interesante cubrir la opuesta. Este termino también se suele usar en operaciones financieras, como por ejemplo la Bolsa.
+  Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros.  Esta modalidad se puede realizar en la casa de apuestas tradicionales pero para ello necesitas usar varias casas. Es decir, en una casa cubre la apuesta a favor de un evento mientras que otra casa ve más interesante cubrir la opuesta. Este término también se suele usar en operaciones financieras, como por ejemplo la Bolsa.
   
   
   Este método se suele dar en dos escenarios típicos:
@@ -177,40 +199,14 @@ Debido a la aparición de estas casas de intercambio aparecen dos nuevas modalida
 %\fxnote{Tienes que pensar en el lector, imagina a alguien que entiende de probabilidades pero que jamás ha hecho una apuesta.}
 %\fxnote{Hay que meter más secciones, aquí empezaría el ``trading''}
 
-A continuación exponemos un ejemplo de caso típico de \emph{trading} pero para su mejor entendimiento y comprensión acerca de la temática de este trabajo de Fin de Carrera definiremos los principales conceptos en una apuesta:
- \begin{itemize}
- \item Bankroll: Es la cantidad de dinero o capital  que estamos dispuestos a apostar. Lógicamente tendremos que administrarlo de la mejor manera posible, minimizando las pérdidas en caso de perder una apuesta y maximizar las ganancias de una apuesta ganadora. La disciplina y el conocimiento del mercado son las mejores aliadas de nuestro bankroll. La mayoría de las casas de apuestas por Internet nos regalan un mínimo bankroll para animarnos a participar en ellas.
- \item Stake: Es la cantidad que ofrecemos en la apuesta por un determinado evento. Es decir, apostar 10 euros a que gana el Sevilla F.C el campeonato de liga de 2010.
- \item Odds: Es la cuota (probabilidad) de una apuesta. Por ejemplo se paga 3 que Fernando Alonso gane el mundial de Fórmula 1
- \item Beneficio: Es la ganancia que obtenemos de una apuesta ganadora cuyo resultado es el siguiente:
- \begin{displaymath}
- Beneficio = (stake \times odd) - stake 
-\end{displaymath}
-
-%\begin{anfxnote}
-%  Latex es famoso por la potencia a la hora de escribir fórmulas   matemáticas:
-%
-%\begin{displaymath}
-%  B = s \times o
-%\end{displaymath}
-%
-%\end{anfxnote}
-
-\item Pérdida: Lógicamente lo opuesto al beneficio. Lo que todo apostante quiere evitar o minimizar. 
-\item Yield: Expresado en porcentaje nos indica el beneficio obtenido del total apostado. Es lo que diferencia a un buen apostador del resto. El cálculo es el siguiente:
-\begin{displaymath}
- Yield = (beneficio / total apostado) \times 100 
-\end{displaymath}
-\end{itemize} 
-
-
+A continuación exponemos un ejemplo de caso típico de \emph{trading}.
 %\begin{figure} [h]
 %  \centering
 %    \includegraphics[width=0.6\textwidth]{./images/SampleTrading1.png}
 %  \caption{Situacion inicial}
 %  \label{fig:Inicio}
 %\end{figure}
- En el siguiente ejemplo nos basaremos en las apuestas deportivas sobre un partido de tenis.
+ Nos basaremos en las apuestas deportivas sobre un partido de tenis.
  
  \begin{center}
     \begin{tabular}{| c | c | c l}
@@ -232,11 +228,11 @@ A continuación exponemos un ejemplo de caso típico de \emph{trading} pero para s
 
 En la tabla
 % \fxnote{En Latex jamás escribes un número, todo son referencias: \ref{fig:Inicio}}, 
-podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nadal y Roger Federer. La cuota a favor de Rafa Nadal  esta mucho más alta que la de Roger Federer.  En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas. %\fxnote{Es inconsistente, si Nadal pierde el primer set se pagaría más alto que al principio del partido.}
+podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nadal y Roger Federer. La cuota a favor de Rafa Nadal está mucho más alta que la de Roger Federer.  En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas. %\fxnote{Es inconsistente, si Nadal pierde el primer set se pagaría más alto que al principio del partido.}
 
   Vemos ahora que el mercado ha cambiado. Ahora mismo se refleja una 
   %\fxnote{¿clara?} 
-  ventaja para la victoria del Roger Federer.
+  ventaja para la victoria de Roger Federer.
    
  \begin{center}
     \begin{tabular}{| c | c | c |}
@@ -262,83 +258,87 @@ podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nad
    %\label{fig:Inicio}
 %\end{figure}
 
-   En este ejemplo, al principio realizamos una apuesta a favor de Rafa Nadal por 50 euros, con lo que tendríamos:
+Al inicio del ejemplo realizamos una apuesta a favor de Rafa Nadal por 50 euros, con lo que tendríamos:
 
 %\fxnote{¿Por qué apostar a favor de Nada? ¿Sabemos algo que nadie sabe? ¿Intuímos algo? ¿Tenemos datos estadísticos?}   	
 	 
 \begin{displaymath}
-  Beneficio = (1.8 \times 50) - 50 = 40 
+  Beneficio = (1.8 \times 50) - 50 =  40 \euro  
 \end{displaymath}
 
- Por lo que tenemos 40 euros si ganal Nadal, en caso contrario:
+Por lo que tenemos 40 euros si ganal Nadal, en caso contrario:
  
  \begin{displaymath}
-  Riesgo = - 50 
+  Riesgo = - 50 \euro 
 \end{displaymath}
-  Tendremos una pérdida de 50 euros si pierda Nadal.
+Tendremos una pérdida de 50 euros si pierda Nadal.
 	
-  Un tiempo más adelante, el mercado a cambiado debido al resultado del primer set, Nadal ya no es tan favorito para la victoria.
+Un tiempo más adelante, el mercado ha cambiado debido al resultado del primer set, Nadal ya no es tan favorito para la victoria.
   
-  Para asegurar el dinero apostado anteriormente realizamos una apuesta en contra de Nadal. De tal forma que nos queda:
+Para asegurar el dinero apostado anteriormente realizamos una apuesta en contra de Nadal. De tal forma que nos queda:
   \begin{displaymath}
-  Beneficio = 70
+  Beneficio = 70 \euro 
   \end{displaymath} euros si pierde Nadal.
    \begin{displaymath}
-  Riesgo = 70 - (1.2 \times 70) = -14
+  Riesgo = 70 - (1.2 \times 70) = -14 \euro
   \end{displaymath} euros si gana Nadal.
   
 	 
-   Al final tenemos que si gana Rafa Nadal obtenemos: 
+Al final si gana Rafa Nadal obtenemos: 
    \begin{displaymath}
-   40 - 14 = 26 \euro
+   40 - 14 = 26 \euro 
    \end{displaymath}
    
-   Si pierda Nadal y por tanto gana Roger Federar tenemos:
+Si pierde Nadal y por tanto gana Roger Federar tenemos:
    
   \begin{displaymath}
   70 - 50 = 20 \euro
   \end{displaymath}
        
-   Con lo que estamos cubiertos ante cualquier resultado del partido. En ambos casos tenemos ganancias. El escenario expuesto es uno de los mejores casos que nos pueden dar ya que obtenemos beneficio en ambos casos. Pero puede suceder que hayamos apostado por un evento con demasiada confianza y luego en un futuro vemos que puede ser una ruina. En ese escenario el objetivo prioritario sería minimizar la pérdida apostando en contra del evento en cuestión.
+   Con lo que estamos cubiertos ante cualquier resultado del partido. En ambos casos tenemos ganancias. 
+   
+   El escenario expuesto es uno de los mejores casos que nos pueden dar ya que obtenemos beneficio en ambos casos. Pero puede suceder que hayamos apostado por un evento con demasiada confianza y luego en un futuro vemos que puede ser una ruina. En ese escenario, el objetivo prioritario sería minimizar la pérdida apostando en contra del evento en cuestión.
 
  Las casas de apuestas nos ofrecen una gran variedad de apuestas en diferentes deportes que nos permiten adecuarnos a nuestros gustos y conocimientos. 
    
-\section{BetFair}
+\section{Betfair}
 
- Debido al gran desarrollo de internet en los principios de siglo empiezan a aparecer las primeras casas de intercambio %\fxnote{Casas de apuestas y casa de intercambio, creo que son dos concpetos diferentes, bwin es una casa de apuestas tradicional, betfair es una casa de intercambios de apuestas}
-  online. Betfair\footnote{\url{www.betfair.com}}, Bwin\footnote{\url{www.bwin.com}}, , Miapuesta.com\footnote{\url{http://www.miapuesta.com}} son ejemplos de casas afianzadas en Internet.% \fxnote{Ésto que dices no está claro: \url{http://www.sportsbookreview.com/Espanol/Default.aspx}}.
-   Dentro de este grupo selecto aparece BetFair, la compañía con más usuarios de apuestas online según la Wikipedia.%\fxnote{No creo que sea cierto y si lo es necesitamos una fuente fiable. Tenemos que tener cuidado, hemos de contrastar la información. ¿En qué sentido es la más grande?}.
+ Debido al gran desarrollo de Internet en los principios de siglo empiezan a aparecer las primeras casas de intercambio %\fxnote{Casas de apuestas y casa de intercambio, creo que son dos concpetos diferentes, bwin es una casa de apuestas tradicional, betfair es una casa de intercambios de apuestas}
+  online. Betfair\footnote{\url{www.betfair.com}}, Bwin\footnote{\url{www.bwin.com}}, Miapuesta.com\footnote{\url{http://www.miapuesta.com}} son ejemplos de casas afianzadas en Internet. % \fxnote{Ésto que dices no está claro: \url{http://www.sportsbookreview.com/Espanol/Default.aspx}}.
+   Dentro de este grupo selecto aparece Betfair.%\fxnote{No creo que sea cierto y si lo es necesitamos una fuente fiable. Tenemos que tener cuidado, hemos de contrastar la información. ¿En qué sentido es la más grande?}.
  
 %\fxnote{Please, menos marketing. Esto es un TFC, un documento eminentemente técnico.}
 
- Betfair fue fundado en Junio del año 2000. Es la primera casa de apuestas online en ofrecer la modalidad de apuestas a favor y en contra de un evento. En el año 2007 la casa ya cuenta con más de 1.000.000 de usuarios generando un volumen de negocio de más de 50 millones de libras a la semana. Rápidamente se expande en más de 120 países de todo el mundo ofreciendo un portal web en 18 idiomas que gestiona más de 5 millones de transacciones al día. %\fxnote{Fuente?}
+ Betfair fue fundado en Junio del año 2000. Es una de las primeras casas de apuestas online en ofrecer la modalidad de apuestas a favor y en contra de un evento. En el año 2007 la casa ya cuenta con más de 1.000.000 de usuarios generando un volumen de negocio de más de 50 millones de libras a la semana. Rápidamente se expande en más de 120 países de todo el mundo ofreciendo un portal web en 18 idiomas que gestiona más de 5 millones de transacciones al día. %\fxnote{Fuente?}
 
 %\fxnote{No deberíamos explicar antes que el interfaz es Web y que e 2007 bla bla bla?}
 
-En el año 2007 BetFair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface} %\fxnote{Footnote demasiado largo}
- de acceso a sus servicios. El API de Betfair lo explicaremos con más detalle más adelante en el capítulo  \ref{ch:diseno}. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones de apuestas usando su portal de apuestas como base y que se adapten a cualquier dispositivo tanto fijo como los ordenadores como dispositivos móviles como las agendas personales o la telefonía móvil. Como era de esperar empezaron a salir multitud de aplicaciones dirigidas a un sector experto y aplicaciones para principiantes. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine\ldots %\fxnote{\ldots para poner puntos susepnsivos} 
+En el año 2007, Betfair es el primer portal de apuestas que ofrece un API\footnote{Application Programming Interface} %\fxnote{Footnote demasiado largo}
+ de acceso a sus servicios. El API de Betfair lo explicaremos con más detalle en el capítulo \ref{ch:diseno}. La estrategia es clara, enganchar a los desarrolladores para crear todo tipo de aplicaciones usando su portal de apuestas como base y que se adapten a cualquier dispositivo sea tanto un ordenador personal, agenda electrónica o dispositivo móvil. Como era de esperar, empezaron a salir multitud de aplicaciones, sobre todo dirigidas al sector de usuarios expertos en apuestas. Ahora, con las nuevas tecnologías móviles, el usuario busca realizar consultas en todo momento de sus servicios contratados. Ya sea email, servicios del banco, entradas de cine\ldots %\fxnote{\ldots para poner puntos susepnsivos} 
 % \fxnote{Esta última frase quedaría mejor para lo del iPhone}
 
 %\fxnote{Has pasado muy de puntillas por lo del API de BF y parece importante para tu TFC.}
 
 \section{Apple y su terminal móvil iPhone}
  
-Apple inició su trabajo sobre el ordenador personal en la década de los setenta con el ordenador Apple II y reinventó el ordenador personal en los ochenta con el Macintosh. Hoy, Apple sigue liderando la industria en innovación con sus ordenadores de sobremesa, portátiles, el sistema operativo \emph{OSX} y sus aplicaciones profesionales. Apple está también presente en el panoráma musical con sus reproductores de música y vídeo portátiles \emph{iPod} y con su  tienda de música online \emph{iTunes}. %\fxnote{Please, menos marketing.}
+Apple Computer, Inc. es una empresa estadounidense de tecnología informática fundada en 1976. Inició sus trabajos sobre los ordenadores personales en la década de los setenta con el ordenador Apple II y reinventó el ordenador personal en los ochenta con el Macintosh. Hoy en día, Apple es considerada como una de las principales empresas líderes en innovación con sus ordenadores.  %\fxnote{Please, menos marketing.}
 
-El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iPhone}. Para una empresa dedicada exclusivamente a equipos de sobremesa y portátiles con software propio era díficil pensar que entrase en la guerra de los termianles móviles.
+El 23 de octubre de 2001, Apple decidió introducirse en la industria musical con su famoso reproductor de música \emph{iPod} y su tienda de discos \emph{iTunes}.
+
+El 9 enero del año 2007 presenta su primer terminal móvil llamado \emph{iPhone}. Tal y como lo hizo años atrás en la industria musical, su terminal se hizo famoso en la industría de la telefonía móvil por su diseño, su sistema operativo \emph{iPhone OS} y la introducción de nuevas tecnologías como la pantalla táctil.
 
 \begin{figure} [h]
   \centering
-    \includegraphics[width=0.6\textwidth]{./images/main_overview.jpg}
-  \caption{IPhone 3G}
-  \label{fig:iPhone-3G}
+    \includegraphics[width=0.6\textwidth]{./images/iphone4.jpg} 
+  \caption{iPhone 4GS}
+  \label{fig:iPhone-4GS}
 \end{figure}
   
-  En Marzo de 2008 Apple muestra una nueva versión del terminal con tecnología 3G y comunica el lanzamiento de su propia tienda de aplicaciones para el iPhone, la \emph{iTunes application store}. Para nutrir esa tienda de aplicaciones  lanza un conjunto de herramientas de desarrollo iPhone SDK\footnote{Software Development Kit} para todos aquellos desarrolladores que quieran participar en la misma. En el capítulo XXXX explicamos con detalle dicho SDK ya que es una pieza clave en el presente trabajo de fin de carrera. %\fxnote{Y sin embargo esta parte es fundamental: ¿Qué es el SDK? ¿Cómo es? ¿Quién puede usarlo? ¿Cómo se programa? etc. etc. etc.}
+  En marzo de 2008 Apple muestra una nueva versión del terminal con tecnología 3G y comunica el lanzamiento de su propia tienda de aplicaciones para el iPhone, la \emph{iTunes application store}. Para nutrir esa tienda de aplicaciones  lanza un conjunto de herramientas de desarrollo iPhone SDK\footnote{Software Development Kit} para todos aquellos desarrolladores que quieran participar en la misma. En el capítulo \ref{ch:diseno}  explicamos con más detalle dicho SDK ya que es una pieza clave en el presente trabajo de fin de carrera. %\fxnote{Y sin embargo esta parte es fundamental: ¿Qué es el SDK? ¿Cómo es? ¿Quién puede usarlo? ¿Cómo se programa? etc. etc. etc.}
   
-  Hoy en día, con la tercera versión del dispositivo se ha alcanzado el millón de descargas de aplicaciones en la iTunes App Store. 
-
-  He aquí la importancia de la temática de este trabajo de fin de carrera, el acceso de los servicios de Betfair mediante la plataforma ofrecida en el terminal iPhone.  Es la hora de las aplicaciones móviles.
+   Otro hito importante a destacar ocurre el 27 de enero de 2010. Apple amplía la familia de dispositivos con una tableta táctil de 10 pulgadas denominada \emph{iPad}. Misma filosofía pero ahora en formato de pantalla más grande. De la misma forma que evoluciona sus dispositivos, evoluciona el \emph{SDK} para ofrecer a los desarrolladores las herramientas necesarias para crear aplicaciones compatibles entre la familia de dispositivos. A partir de 2010 el sistema operativo de los dispositivos para a denominarse \emph{iOS}. 
+    
+  Hoy en día, Apple dispone de un catálogo de más de 500.000 aplicaciones disponibles en su tienda\footnote{Fuente: www.apple.com y http://148apps.biz/app-store-metrics/} y más de 316 millones de terminales vendidos por todo el mundo.\footnote{Fuente: www.apple.com} He aquí la importancia de la temática de este trabajo de fin de carrera, adaptar el acceso de los servicios de Betfair a la plataforma móvil ofrecida por Apple.  Ha llegado el momento de las aplicaciones en los dispositivos móviles.
     
    
 \section{Objetivos}
@@ -348,21 +348,22 @@ El 9 enero del año 2007 Apple presenta su primer terminal móvil llamado \emph{iP
  Los objetivos que se pretenden cubrir con el actual trabajo de fin de carrera son los siguientes:
  \begin{itemize}
  	\item Explorar y adaptar el API de Betfair para la plataforma iPhone.
- 	\item Posibilidad de navegar y apostar por eventos del portal Betfair.com a través del terminal móvil.
+ 	\item Posibilidad de navegar y apostar por eventos del portal betfair.com a través del terminal móvil.
 	\item Asesorar al usuario sobre cuando realizar el trading a las apuestas ya realizadas.
 \end{itemize}
 
-%\fxnote{Objetivos, desde mi punto de vista: (1) explorar el API de acceso a los servicios web de BetFair para (2) desarrollar una aplicación para iPhone que (i) permita navegar a través de los mercados de apuestas de BF, (ii) permita realizar apuestas, (iii) y asesore al usuario (de forma incluso automática) sobre posibilidades de trading.}
+%\fxnote{Objetivos, desde mi punto de vista: (1) explorar el API de acceso a los servicios web de Betfair para (2) desarrollar una aplicación para iPhone que (i) permita navegar a través de los mercados de apuestas de BF, (ii) permita realizar apuestas, (iii) y asesore al usuario (de forma incluso automática) sobre posibilidades de trading.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Requisitos}
+\label{ch:requisitos}
 %\fxnote{En este capítulo, bla bla bla}
-En este capítulo se presentan los requisitos a cumplir por la aplicación. Comenzaremos explicando el escenario al que pertenece la aplicación y terminar presentando las historias de uso de la misma.
+En este capítulo se presentan los requisitos a cumplir por la aplicación. Comenzaremos explicando el escenario al que pertenece la aplicación y terminaremos presentando las historias de uso de la misma.
 \section{Escenario}
 %\fxnote{¿Qué signfica ``escenario'' aquí? La palabra escenario tiene un significado muy claro en la ingeniería de requisitos y suelen ser descripciones de situaciones de uso de la aplicación.}
 
-El escenario que se prentende %\fxnote{corrección ortográfica?} 
-cubrir con la aplicación es la posibilidad de navegar y realizar apuestas sobre eventos deportivos del portal Betfair.com. Se pretende cubrir las funcionalidades básicas que ofrece BetFair en su portal web para poder realizar apuestas. %\fxnote{Cuidado, las funcionalidades son importantes a través de la web, nosotros no las hemos implementado todas.}
+El escenario que se pretende %\fxnote{corrección ortográfica?} 
+cubrir con la aplicación es la posibilidad de navegar y realizar apuestas sobre eventos deportivos del portal Betfair.com. Se pretende cubrir las funcionalidades básicas que ofrece Betfair en su portal web para poder realizar apuestas. %\fxnote{Cuidado, las funcionalidades son importantes a través de la web, nosotros no las hemos implementado todas.}
 
 %\section{Historias de usuario}
 
@@ -376,26 +377,26 @@ cubrir con la aplicación es la posibilidad de navegar y realizar apuestas sobre 
 
 \section{Historias de usuario}
 %\fxnote{Mejor ``Historias de Uso''}
-\subsection{Instalación} Para poder instalar la aplicación solo se necesitará una cuenta del programa iTunes Store de Apple. Es gratuito. La aplicación estará disponible dentro del programa App Store del dispositivo. Solamente habrá que descargar la aplicación de dicho portal.%\fxnote{¿No existen otras forma de instalar las aplicaciones?}
+\subsection{Instalación} Para poder instalar la aplicación sólo se necesitará una cuenta del programa iTunes Store de Apple. Es gratuita. La aplicación estará disponible dentro del programa App Store del dispositivo. Solamente habrá que descargar la aplicación de dicho portal. Alternativamente podemos descargarla también desde el programa iTunes para Windows y Mac. Una vez descargada podemos transferirla al dispositivo sincronizando mediante Wifi o cable USB. %\fxnote{¿No existen otras forma de instalar las aplicaciones?}
 \subsection{Actualizar la aplicación}
 La aplicación  App Store  del dispositivo será la encargada de comunicar al usuario la aparición de una nueva versión del aplicativo. Para actualizarla simplemente habrá que seguir las indicaciones de dicho programa. %\fxnote{Lo mismo  de antes}
 
 \subsection{Desinstalar}
-Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma una segundos e inmediatamente pulsamos sobre el icono X %\fxnote{¿qué es la ``X''? ¿es estándar?} que aparecerá sobre la misma.
+Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma unos segundos hasta que el icono empiece a vibrar. Inmediatamente pulsamos sobre el icono X que aparecerá es la esquina superior izquierda del icono de la aplicación. %\fxnote{¿qué es la ``X''? ¿es estándar?} que aparecerá sobre la misma.
 \subsection{Ejecución}
-Para lanzar la aplicación solo hay que pulsar el icono que aparece en la pantalla principal del dispositivo.
+Para lanzar la aplicación sólo hay que pulsar el icono que aparece en la pantalla principal del dispositivo.
 \subsection{Configurar la aplicación}
-Se podrá configurar las diferentes aspectos de la aplicación tales como el idioma o las credenciales de usuario a través del menu de ajustes del dispositivo. En el caso de ser la primera vez que se lance la aplicación, está automáticamente redirigirá al usuario al dicha pantalla para configurarla.
-\subsection{Gestión de los Eventos}
-Se podrá navegar y obtener información de todos los eventos deportivos disponibles del portal BetFair a través una  %\fxnote{más bien de ``una''}
+Se podrán configurar los diferentes aspectos de la aplicación tales como el idioma o las credenciales de usuario a través del menú de ajustes del dispositivo. En el caso de ser la primera vez que se lance la aplicación, ésta automáticamente redirigirá al usuario a dicha pantalla para configurarla.
+\subsection{Gestión de los eventos}
+Se podrá navegar y obtener información de todos los eventos deportivos disponibles del portal Betfair a través una  %\fxnote{más bien de ``una''}
  jerarquía de menús de la aplicación siguiendo las hojas de estilo de interfaz de usuario de Apple.% \fxnote{¿Qué es un evento?}
 \subsection{Realizar una apuesta}
 %\fxnote{Recuerda que esto son requisitos, no el manual de usuario. Debemos decir lo que la aplicación ``va'' a permitir o lo que esperamos de ella. El ``cómo'' está más adelante.}
 La aplicación permitirá la realización de una apuesta sobre un evento específico incluyendo la cantidad y cuota deseada. El sistema notificará al usuario el resultado de la operación.
 \subsection{Gestionar las apuestas}
-La aplicación será capaz de recopilar todas las apuestas realizadas sobre BetFair. Por cada apuesta el sistema mostrará las opciones disponibles: información detallada de la apuesta, asesoramiento para trading, estado actual del mercado. %\fxnote{¿Que son?}
+La aplicación será capaz de recopilar todas las apuestas realizadas sobre Betfair. Por cada apuesta, el sistema mostrará las opciones disponibles: información detallada de la apuesta, asesoramiento para trading y estado actual del mercado. %\fxnote{¿Que son?}
 \subsection{Realizar trading sobre una apuesta ya realizada}
-El sistema será capaz de asesorar para realizar trading sobre una apuesta ya realizada anteriormente. Para ello se mostrará una tabla con las opciones disponibles dentro del resumen de una apuesta ya realizada. Se podrá configurar los tradings para que se lancen automáticamente por parte de la aplicación.
+El sistema será capaz de asesorar para realizar trading sobre una apuesta ya realizada anteriormente. Para ello, se mostrará una tabla con las opciones disponibles dentro del resumen de una apuesta ya realizada. Se podrán configurar los tradings para que se lancen automáticamente por parte de la aplicación.
 
 %\fxnote{Aunque no acabemos implementando, el asesoramiento para trading automático debería estar en la lista de requisitos.}
 
@@ -408,22 +409,23 @@ El sistema será capaz de asesorar para realizar trading sobre una apuesta ya rea
 
 %\fxnote{Mete un label en cada capítulo para poder referirnos a él.}
 
-En este capítulo se presentará el diseño de la aplicación. Para un mejor entendimiento explicaremos brevemente el diseño del dispositivo iPhone conocida técnicamente como Cocoa Touch. Seguiremos por una breve descripción del API de acceso a los servicios de Betfair y terminaremos con una explicación detalla de la arquitectura desplegada en la aplicación.
+En este capítulo se presentará el diseño de la aplicación. Para un mejor entendimiento explicaremos brevemente el diseño interno de un dispositivo iOS conocido técnicamente como Cocoa Touch. Seguiremos por una breve descripción del API de acceso a los servicios de Betfair y concluiremos con una explicación detalla de la arquitectura desplegada en la aplicación.
 
 
 \section{Descripción general}
  
   El análisis de los requisitos presentados en el capítulo \ref{ch:requisitos} %\fxnote{meter el label en el capítulo adecuado}
-   van a dar como resultado la arquitectura de la aplicación. Para llevar a cabo su desarrollo, hemos tenido en cuenta la arquitectura del dispositivo y las herramientas adjuntas para el desarrollo de aplicaciones. Todas las decisiones tomadas en la construcción de la arquitectura de la aplicación se han basado en los límites o restricciones impuestas por el uso de la arquitectura de Apple y los límites impuestos en el uso del API de Betfair. Para comprender mejor el diseño% \fxnote{¿qué significa composición aquí?}
-    de la aplicación explicaremos brevemente la arquitectura impuesta por Apple en el iPhone y la tecnología en la que se basa el API que ofrece BetFair para el uso de sus servicios.
+   dará como resultado la arquitectura de la aplicación. Para llevar a cabo su desarrollo, hemos tenido en cuenta la arquitectura del dispositivo y las herramientas adjuntas para el desarrollo de aplicaciones. Todas las decisiones tomadas en la construcción de la arquitectura de la aplicación se han basado en los límites o restricciones impuestas por el uso de la arquitectura de Apple y los límites impuestos en el uso del API de Betfair. Para comprender mejor el diseño de la aplicación expondremos brevemente la arquitectura impuesta por Apple en el iPhone y la tecnología en la que se basa el API que ofrece Betfair para el uso de sus servicios.
 
 \section{API de iPhone/iPod Touch: Cocoa Touch}
- La Arquitectura del terminal móvil se basa en su sistema operativo \emph{iPhone OS} de Apple. Este sistema operativo, a grandes rasgos, es un subconjunto del sistema operativo que llevan los ordenadores personales de Apple. Esta decisión favorece el desarrollo de aplicaciones para sus plataformas, ya que para un desarrollador de ordenadores de sobremesa de Apple es transparente el salto a desarrollar aplicaciones móviles. El iPhone OS es capaz de ejecutar dos tipos de aplicaciones: 
+ La arquitectura del terminal móvil se basa en su sistema operativo \emph{iOS} de Apple. Este sistema operativo, a grandes rasgos, es un subconjunto del sistema operativo que llevan los ordenadores personales de Apple. Esta decisión favorece el desarrollo de aplicaciones para sus plataformas. Simplifica la tarea a los desarrolladores de aplicaciones de ordenadores de sobremesa de Apple de programar aplicaciones móviles sin necesidad de aprender un lenguaje o arquitectura totalmente nueva.
+ 
+ El iOS es capaz de ejecutar dos tipos de aplicaciones: 
 \begin{itemize}
-\item Aplicaciones nativas: %\fxnote{Respetar ortografía: no hay mayúscula tras ``:''} 
+\item Aplicaciones nativas: 
 aquellas aplicaciones que usan bibliotecas del sistema para su ejecución. 
 \item Aplicaciones web: desarrollos basados % \fxnote{por?} 
-en lenguajes de programación usados para la creación de páginas web y solo se ejecutan al acceder por el navegador de Internet del dispositivo. Sorprende la capacidad de ciertos desarrolladores para generar aplicaciones con un look\&feel muy parecido a las aplicaciones nativas. Por supuesto, para su ejecución requieren de una conexión de datos hacia internet.
+en lenguajes de programación de páginas web y sólo se ejecutan al acceder por el navegador de Internet del dispositivo. Sorprende la capacidad de ciertos desarrolladores para generar aplicaciones con un look\&feel muy parecido a las aplicaciones nativas. Por supuesto, para su ejecución requieren de una conexión de datos hacia Internet.
  \end{itemize}
 
  %\fxnote{La introducción de gráficos o figuras puede hacerse de dos
@@ -433,7 +435,7 @@ en lenguajes de programación usados para la creación de páginas web y solo se ej
     % Betfair}, lo que creas más conveniente}
 
 \noindent
-La siguiente figura muestra la estructura de capas del iPhone OS:
+La siguiente figura muestra la estructura de capas del iOS:
 
 %\begin{center}
 %  \includegraphics[width=0.5\textwidth]{./images/overview_systemlayers.jpg}
@@ -442,17 +444,17 @@ La siguiente figura muestra la estructura de capas del iPhone OS:
 \begin{figure} [h]
   \centering
     \includegraphics[width=0.6\textwidth]{./images/overview_systemlayers.jpg}
-  \caption{Capas del iPhone OS}
-  \label{fig:Capas-del-iPhoneOS}
+  \caption{Capas del iOS}
+  \label{fig:Capas-del-iOS}
 \end{figure}
 
 En la parte baja del sistema se encuentran las capas encargadas de los
 servicios fundamentales que permiten la ejecución de las aplicaciones,
-y en las más altas contienen las capas sobre los servicios multimedia
-y de las mas altas tecnologías.
+y en las superiores contienen las capas sobre los servicios multimedia
+y de las más altas tecnologías.
  
 
-A continuación una breve descripción de cada capa:
+A continuación expondremos una breve descripción de cada capa:
 
 %\fxnote{He cambiado el entorno ``itemize'' a ``description'' para que
  % veas como queda, si te gusta lo mantienes, si no lo cambias. También
@@ -461,37 +463,34 @@ A continuación una breve descripción de cada capa:
  % cambios de linea consecutivos = nuevo párrafo).}
 
 \begin{description}
-\item[Core OS.]  Es la capa que contiene el entorno del núcleo de
+\item[Core OS.]  Es la capa que contiene el núcleo de
   sistema (\emph{kernel}) %\fxnote{Recuerda, inglés enfatizado, al
    % menos en la primera aparición, encárgate tú del resto.},
-  controladores para dispositivos, interfaces básicas del sistema
+  , los controladores para dispositivos internos y las interfaces básicas del sistema
   operativo. El kernel es el responsable de todos los aspectos
   relacionados con el sistema operativo. Es el encargado de gestionar
   la memoria virtual, \emph{threads} (procesos ligeros), sistema de ficheros,
   red y procesos de comunicación. Los controladores son los encargados
-  de proporcionar la interfaz entre el \emph{hardware} y los emph{frameworks} de
+  de proporcionar la interfaz entre el \emph{hardware} y los \emph{frameworks} de
   las capas superiores.
 \item[Core Services.] Es la capa responsable de proporcionar los
   servicios básicos del sistema a las aplicaciones para su uso. En
   ella encontramos el acceso a la agenda del dispositivo, la gestión
-  de estructura de datos, gestión de las interfaces de red, la
-  gestión de la localización del dispositivo, gestión de la seguridad
-  del sistema, soporte para bases de datos SQL y XML.
+  de estructura de datos, la gestión de las interfaces de red, la
+  gestión de la localización del dispositivo, la gestión de la seguridad
+  del sistema y el soporte para bases de datos SQL y XML.
 \item[Media.] Es la capa encargada de dar soporte a las
-  tecnologías de gráficos, audio y video para proporcionar al usuario
-  los medios multimedia vistos en un dispositivo móvil
+  tecnologías de gráficos y al audio y video para proporcionar al usuario
+  los medios multimedia vistos en un dispositivo móvil.
   %\fixme{No marketing, please.}. 
-  Más importantes que las tecnologías
-  en si, esta capa fue diseñada para facilitar al desarrollador su uso
+  Aún más importantes que las tecnologías
+  en sí, es el hecho de que esta capa fue diseñada para facilitar al desarrollador su uso
   para crear aplicaciones con una gran apariencia en su interfaz de
   usuario y una reproducción de audio. %\fixme{No marketing.}.
-\item[Cocoa Touch.]  Es una de las capas más importantes del iPhone OS
+\item[Cocoa Touch.]  Es una de las capas más importantes del iOS
   para un desarrollador. %\fxnote{desde el punto de vista del desarrollador, supongo}. 
   Es la encargada de proveer los objetos básicos necesarios para la
-  implementación de aplicaciones %\fixme{¿Qué significa
-    %``infraestructura necesaria''? Anticipar algo, avisar de que se
-    %entra en detalle luego.}. 
-    La puerta de acceso de los desarrolladores
+  implementación de aplicaciones. La puerta de acceso de los desarrolladores
   para el uso de los servicios de las anteriores capas.
 \end{description}
 
@@ -499,7 +498,7 @@ A continuación una breve descripción de cada capa:
   %entiendo bien del todo.}
   
   Esta última capa es la que diferencia la plataforma móvil de la plataforma PC en los entornos de Apple. Es el API que nos ofrece %\fxnote{ofrece-ofrece} 
-  Apple para el uso de las tecnologías asociadas a un dispositivo móvil. En ella podemos encontrar los siguientes frameworks%\fxnote{¿es la footnote una definición de ``framework''?}
+  Apple para el uso de las tecnologías asociadas a un dispositivo móvil, especialmente en el uso de la tecnología táctil. En ella podemos encontrar los siguientes frameworks%\fxnote{¿es la footnote una definición de ``framework''?}
   \footnote{Un framework es una estructura de soporte definida, en la cual otro proyecto de software puede ser organizado y desarrollado.}: 
 
 %\fxnote{Probablemente usaría description en vez de itemize.}
@@ -508,53 +507,50 @@ A continuación una breve descripción de cada capa:
  	\item [UIKit.] Contiene todas las clases necesarias para la programación de la interfaz de usuario de las aplicaciones así como el acceso a las principales tecnologías hardware % \fxnote{no me gusta el palabro ``tecnologías físicas''}
 	 propias del dispositivo  móvil:
 		 \begin{itemize}
- 			\item Soporte para copiar, cortar y pegar.
- 			\item Soporte para la creación de gráficos y ventanas del sistema.
- 			\item Soporte para la gestión de eventos multitouch, eventos realizados al pulsar la pantalla con más de un dedo.
-			 \item Soporta para la creación de contenido tanto de texto como de web.
- 			\item Soporte para la creación de controles y objetos del sistema.
- 			\item: Soporte para la accesibilidad de aplicaciones.
- 			\item: Soporte para el acceso a las capacidades hardware del dispositivo: batería, cámara, acelerómetros, sensor de proximidad......
+ 			\item soporte para copiar, cortar y pegar.
+ 			\item soporte para la creación de gráficos y ventanas del sistema.
+ 			\item soporte para la gestión de eventos \emph{multitouch} y eventos realizados al pulsar la pantalla con más de un dedo.
+			 \item soporte para la creación de contenido tanto de texto como de web.
+ 			\item soporte para la creación de controles y objetos del sistema.
+ 			\item soporte para la accesibilidad de aplicaciones.
+ 			\item soporte para el acceso a las capacidades hardware del dispositivo: batería, cámara, acelerómetros, sensor de proximidad \ldots 
  		\end{itemize}
- 	 \item [Foundation.] Es un framework heredado de la plataforma OS X. Provee el soporte para las siguientes funcionalidades: % \fxnote{funcionalidades mejor?}:
+ 	 \item [Foundation.] Es un \emph{framework} heredado de la plataforma OS X. Provee el soporte para las siguientes funcionalidades: % \fxnote{funcionalidades mejor?}:
  		\begin{itemize}
-			\item Colecciones de datos (arrays, sets....)
-			\item Gestión del tiempo y fechas.
-			\item Gestión de las preferencias del dispositivo.
-			\item Gestión de URLs
+			\item colecciones de datos (arrays, sets \ldots)
+			\item gestión del tiempo y fechas.
+			\item gestión de las preferencias del dispositivo.
+			\item gestión de URLs.
 			\item internacionalización del dispositivo.
 		\end{itemize}
 	\item [Address Book UI.] Una de las partes más importantes en un dispositivo móvil es la agenda de contactos. Nos proporciona las herramientas necesarias para gestionar toda la interfaz de usuario relacionado con el acceso a los contactos del dispositivo.
 	\item [Message UI.] Proporciona el soporte necesario para componer y gestionar mensajes de correo electrónico en nuestras aplicaciones.
-	\item [Map kit.]  Esta interfaz proporciona la creación de una vista de un mapa geográfico escalable con posibilidad de incrustar en el información detallada. Como ejemplo típico la localización en un mapa de un restaurante sería posible con el uso de esta interfaz.
-	\item [Game Kit.] Nos permite añadir a nuestras aplicaciones el soporte de comunicaciones peer-to-peer o redes dos a dos. Especialmente importante en aplicaciones  o juegos multiusuario.
-	\item [Push Notification Service] Proporciona un camino para notificar a los usuarios de que una aplicación tiene nueva información relevante. El sistema notifica al usuario del tal información incluso si la aplicación no esta ejecutada.
+	\item [Map kit.]  Esta interfaz proporciona la creación de una vista de un mapa geográfico escalable con posibilidad de incrustar en él información detallada. Un típico ejemplo es la localización en un mapa de un restaurante.
+	\item [Game Kit.] Nos permite añadir a nuestras aplicaciones el soporte de comunicaciones \emph{peer-to-peer} o redes dos a dos. Especialmente importante en aplicaciones  o juegos multiusuario.
+	\item [Push Notification Service.] Proporciona un camino para notificar a los usuarios que una aplicación tiene nueva información relevante. El sistema notifica al usuario la información incluso si la aplicación no está en ejecución.
 
 \end{description}
 
- Para poder desarrollar aplicaciones para el iPhone, Apple pone a disposición un conjunto de herramientas de desarrollo (SDK) gratuito a los desarrolladores disponible a través de su portal web. %\fixme{No entiendo.}
+ Para poder desarrollar aplicaciones para dispositivos iOS, Apple pone a disposición de forma gratuita un conjunto de herramientas de desarrollo (SDK) que se encuentra disponible en su portal web. %\fixme{No entiendo.}
 
-%\begin{afixme}
- % Entiendo que la parte más importante, en lo que afecta a la  aplicación, de todo lo que has contado es el UKit y quizá algo del Foundation. Tendrás que hablar en algún momento sobre en qué forma influye en la arquitectura final y porqué y para ello es probable que antes ofrezcas algún dato extra sobre sus típicos usos, incluso algún ejemplo. No lo tengo claro, estoy pensando en el lector y aún no he leído el resto así que puedo estar equivocándome.
-%\end{afixme}
+%PACO CAMBIA ESTO 
+\begin{afixme}
+  Entiendo que la parte más importante, en lo que afecta a la  aplicación, de todo lo que has contado es el UKit y quizá algo del Foundation. Tendrás que hablar en algún momento sobre en qué forma influye en la arquitectura final y porqué y para ello es probable que antes ofrezcas algún dato extra sobre sus típicos usos, incluso algún ejemplo. No lo tengo claro, estoy pensando en el lector y aún no he leído el resto así que puedo estar equivocándome.
+\end{afixme}
 
-\section{Arquitectura del API de BetFair}
+\section{Arquitectura del API de Betfair}
 
-	El API de Betfair esta diseñado bajo un protocolo \emph{SOAP}\footnote{Simple Object Access Protocol: Es un protocolo estándar que define cómo dos objetos en diferentes procesos pueden comunicarse por medio de intercambio de datos XML.} \fixme{Esto hay que solucionarlo mediante una referencia bibliográfica utilizando bibtex, pregunta si no sabes cómo y lo vemos juntos.} que esta disponible a través de una conexión web HTTPS\footnote{Hypertext Transfer Protocol Secure segura} \fxnote{Lo mismo}.  
+	El API de Betfair está diseñado bajo un protocolo \emph{SOAP}\footnote{Simple Object Access Protocol: es un protocolo estándar que define cómo dos objetos en diferentes procesos pueden comunicarse por medio de intercambio de datos XML.} % CAMBIA ESTO
+	\fixme{Esto hay que solucionarlo mediante una referencia bibliográfica utilizando bibtex, pregunta si no sabes cómo y lo vemos juntos.} que esta disponible a través de una conexión web HTTPS\footnote{Hypertext Transfer Protocol Secure segura.} \fxnote{Lo mismo}.  
 
 %\fixme{Creo que se hace fundamental explicar en qué consiste todo este asunto del WSDL, cómo se usa (probablemente hay varios ``workflows'' posibles), un par de ejemplos pueden ser determinantes para entender la filosofía. En estos %momentos, como lector, estoy más interesado en que me cuentes cómo se materializa ese API que en ningún otra cosa. También puedes dar el ejemplo un poco más adelante y avisar al lector. Puedes utilizar subsections para organizar %bien la exposición.}
 
-          El API esta disponible a partir de un fichero en formato WSDL\footnote{Web Services Description Language, un formato XML que se utiliza para describir servicios Web} en el portal de desarrolladores de Betfair. Dicho formato describe la interfaz para todos los servicios web disponibles de BetFair. Un programa cliente que se conecta a un servicio web puede leer el WSDL para determinar qué funciones están disponibles en el servidor. Los tipos de datos especiales se incluyen en el archivo WSDL en forma de XML. El cliente puede usar SOAP para hacer la llamada a una de las funciones listadas en el WSDL. En el capítulo \ref{ch:implemetacion} describimos como hemos hecho uso de este fichero para construir las llamadas al servidor y consumir dichos servicios de BetFair.
+          El API está disponible a partir de un fichero en formato WSDL\footnote{Web Services Description Language, un formato XML que se utiliza para describir servicios Web.} en el portal de desarrolladores de Betfair. Dicho formato describe la interfaz para todos los servicios web disponibles de Betfair. Un programa cliente que se conecta a un servicio web puede leer el WSDL para determinar qué funciones están disponibles en el servidor. Los tipos de datos especiales se incluyen en el archivo WSDL en forma de XML. El cliente puede usar SOAP para hacer la llamada a una de las funciones listadas en el WSDL. En el capítulo \ref{ch:implemetacion} describiremos cómo hemos hecho uso de este fichero para construir las llamadas al servidor y consumir dichos servicios de Betfair.
           
-          
-          
-          
-          
-          
-          Los servicios proporcionados por el API se dividen en dos conjuntos: 
+ Los servicios proporcionados por el API se dividen en dos conjuntos: 
           
 \begin{itemize}
-	\item Global: contiene todas las llamadas referentes a los servicios básicos de BetFair, tales como inicio de sesión, la administración de tu cuenta BetFair, tus fondos y las llamadas para navegar por los diferentes eventos disponibles en el portal de apuestas.
+	\item Global: contiene todas las llamadas referentes a los servicios básicos de Betfair, tales como el inicio de sesión, la administración de tu cuenta Betfair, tus fondos y las llamadas para navegar por los diferentes eventos disponibles en el portal de apuestas.
 	\item Exchange: contiene las llamadas a los servicios relacionados con las apuestas, es decir, apostar por un evento, descripción de los mercados disponibles, actualización o cancelación de las apuestas ya realizadas, historial de todas nuestra apuestas \ldots %\fxnote{usa ldots: \ldots}
 \end{itemize}
 %\begin{figure} [h]
@@ -564,15 +560,15 @@ A continuación una breve descripción de cada capa:
  %   ¿Para qué sirve esta figura?
 %  \end{afixme}
 
-    %\includegraphics[width=0.6\textwidth]{./images/DeveloperBetFair.png}
-  %\caption{API BetFair}
+    %\includegraphics[width=0.6\textwidth]{./images/DeveloperBetfair.png}
+  %\caption{API Betfair}
   %\label{fig:API Betfair}
 %\end{figure}
 
   Para cada conjunto existen dos formas de acceso al API:
 \begin{description}
-	\item [Free Access API.]  Con este acceso tendremos disponibles los servicios básicos del portal. Las herramientas suficientes para poder apostar por los eventos disponibles. Gratuita pero con acceso limitado a las llamadas de los servicios.
-	\item [Full Access API.] Acceso de pago donde están disponibles servicios exclusivos del portal tales como información avanzada de los mercados, gestión avanzada de nuestra cuenta de usuario\ldots Se gestiona a partir de una cuota anual y no existen límites en las llamadas a los servicios del API.
+	\item [Free Access API.]  Con este acceso tendremos disponibles los servicios básicos del portal y las herramientas suficientes para poder apostar por los eventos disponibles. Gratuito pero con acceso limitado a las llamadas de los servicios.
+	\item [Full Access API.] Acceso de pago donde están disponibles los servicios exclusivos del portal tales como la información avanzada de los mercados, la gestión avanzada de nuestra cuenta de usuario\ldots Se gestiona a partir de una cuota anual y no existen límites en las llamadas a los servicios del API.
 \end{description}
 
 
@@ -580,79 +576,78 @@ A continuación una breve descripción de cada capa:
 
 %\fxnote{Quizá aquí puedes dar más detalles sobre SOAP, WSDL su uso en general y el nuestro en particular.}
 
-    Resaltar en este apartado, que nuestra aplicación, al no soportar la plataforma de desarrollo los archivos WSDL ,hubo que implementar cada llamada a los servicios de Betfair bajo la tecnología Apple y su posterior serialización para el tratamiento de datos de la aplicación. Por cada llamada descrita en el archivo de definición de servicios hemos tenido que implementar la estructura de la comunicación mediante mensajes XML\footnote{Extensible Markup Language, es un metalenguaje extensible de etiquetas desarrollado por el World Wide Web Consortium (W3C)}, uno de petición y otro de respuesta con un parser asociado que traduzca dichos mensajes. Veremos en el capítulo \ref{ch:implemetacion} más detalle acerca de la adaptación de WSDL a la plataforma iPhone.
+    Resaltar en este apartado que dado que nuestra aplicación no soporta la plataforma WSDL, hubo que implementar cada llamada a los servicios de Betfair bajo la tecnología de Apple y su posterior serialización para el tratamiento de datos de la aplicación. Por cada llamada descrita en el archivo de definición de servicios hemos tenido que implementar la estructura de la comunicación mediante mensajes XML\footnote{Extensible Markup Language, es un metalenguaje extensible de etiquetas desarrollado por el World Wide Web Consortium (W3C).}, uno de petición y otro de respuesta con un parser asociado que traduzca dichos mensajes. En el capítulo \ref{ch:implemetacion} veremos con más detalle la adaptación de WSDL a la plataforma iOS.
 
     Los servicios básicos que hemos usado para el desarrollo de la aplicación han sido:
 
 %\fixme{Yo elegiría una tipografía específica para nombrar cada servicio. Puede bastar con lstinline.}
 \begin{itemize}
 	\item \lstinline{Login}: 
-		Llamada para poder usar los servicios web de BetFair. 
+		llamada para poder usar los servicios web de Betfair. 
 	\item \lstinline{GetActiveEventTypes}: 
-		Con esta llamada obtenemos todos los eventos deportivos actualmente en marcha por los que se puede apostar.
+		con esta llamada obtenemos todos los eventos deportivos actualmente en marcha por los que se puede apostar.
 	\item  \lstinline{GetAllMarkets}:
-		Con esta llamada obtenemos todos los mercados referentes a un evento.
+		con esta llamada obtenemos todos los mercados referentes a un evento.
 	\item  \lstinline{GetCurrentsBets}:
-		Llamada por la cual obtenemos todas las apuestas activas que hemos realizado.
+		llamada por la cual obtenemos todas las apuestas activas que hemos realizado.
 	\item  \lstinline{GetMarketPrices}:
-		Obtenemos los precios (back y lay) actuales por un evento determinado.
+		obtenemos los precios (back y lay) actuales por un evento determinado.
 	\item  \lstinline{GetMarket}:
-		Esta llamada nos devuelve todos los datos referentes a un mercado.
+		esta llamada nos devuelve todos los datos referentes a un mercado.
 	\item  \lstinline{PlaceBets}:
-		Con esta llamada enviamos una apuesta a betfair.
+		con esta llamada enviamos una apuesta a Betfair.
 	\item  \lstinline{ViewProfile}: 
-		Esta llamada nos devuelve los datos de perfil de usuario.
+		esta llamada nos devuelve los datos de perfil de usuario.
 	\item  \lstinline{RetrieveLIMBMessage}:
-		 Con esta llamada obtenemos los mensajes del sistema pendientes de acción por parte del usuario.
+		 con esta llamada obtenemos los mensajes del sistema pendientes de acción por parte del usuario.
 \end{itemize}
 
-\section{Meta-arquitectura}
-\fixme{Hay una subsección que se llama igual y que creo que debe ser otra sección. Creo que ésta sección puede tener otro título, alqo que explique que su contenido son los elementos sobre los que se fundamenta el diseño final. Lo analizamos con más cuidado en una reunión. El cambio de título que he hecho es tentativo y pretencioso.  -> Estructura? Elementos de la arquitectura?}
+\section{Arquitectura de la aplicación}
 %\fixme{Las comillas en LaTeX se escriben ``así''.}
 
- Para el diseño de la arquitectura nos hemos basado en el patrón de diseño ``Modelo Vista Controlador (MVC)''. Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan datos de la aplicación y son persistentes. Fundamentalmente consiste en separar los datos de una aplicación, la interfaz de usuario, y la lógica de control en tres componentes distintos:
+ Para el diseño de la arquitectura nos hemos basado en el patrón de diseño ``Modelo Vista Controlador (MVC)''. Dicho patrón es muy utilizado en la programación orientada a objetos, donde los objetos del modelo representan los datos de la aplicación y son persistentes. Fundamentalmente consiste en separar los datos de una aplicación, la interfaz de usuario, y la lógica de control en tres componentes distintos:
  
  
  \begin{description}
- 	\item [Modelo.] Es la representación de la información con la cual el sistema opera. El modelo se limita a lo relativo de la vista y su controlador facilitando las presentaciones visuales.
-	\item [Vista.] Este presenta el modelo en un formato adecuado para interactuar, usualmente la interfaz de usuario.
-	\item [Controlador.] Se encarga de responder a eventos, normalmente acciones del usuario, e invoca peticiones al modelo y a la vista.
+ 	\item [Modelo.] Es la representación de toda la información con la cual el sistema trabajará. El modelo es independiente de cualquier representación o vista.
+	\item [Vista.] Se encarga de presentar el modelo en un formato adecuado para interactuar, normalmente mediante una interfaz de usuario.
+	\item [Controlador.] Se encarga de responder a eventos. Esto implica cambios en el modelo y en la vista.
 \end{description}
  
-  La razón del uso de este patrón se ha debido a dos cuestiones fundamentales:
+  La razón del uso de este patrón se debe a dos cuestiones fundamentales:
 \begin{itemize}
 	\item La facilidad entre la comunicación del %\fxnote{entre-entre?}
 	modelo de datos y la interfaz. Añadir también que cualquier cambio en la interfaz de usuario no afecta al resto del modelo, por lo que se gana en facilidad a la hora de seguir desarrollando la solución en el futuro.
-	\item Apple, en el uso de las herramientas de desarrolla del SDK, recomienda el uso de dicho patrón para la creación de la interfaz de usuario de la aplicación. Esta recomendación es debido a la arquitectura interna del iPhone OS visto en un capítulo anterior y a que sus herramientas de desarrollo también están orientadas a esta solución.
+	\item Apple, en el uso de las herramientas de desarrollo del SDK, recomienda el uso de dicho patrón para la creación de la interfaz de usuario de la aplicación. Esta recomendación es debido a la arquitectura interna del iOS y a que sus herramientas de desarrollo también están orientadas a esta solución.
 	\item La estructura jerárquica de los datos obtenidos a través del API de Betfair. Este patrón nos facilita la representación de los mismos.
 \end{itemize}
 
 %\fxnote{MVC es un nombre demasiado genérico y bastante manido, quizás quieras explorar con más profundidad las características exactas del patrón que hayas aplicado: http://www.aspiringcraftsman.com/2007/08/interactive-application-architecture/, http://c2.com/cgi/wiki?MvcIsNotObjectOriented}
 
 \subsection{Núcleo de la aplicación}
-	Toda aplicación para el iPhone se desarrolla usando principalmente el framework UIKit y tienen la misma arquitectura base. UIKit proporciona todo lo necesario para lanzar la aplicación, coordinar los \emph{inputs} del usuario y mostrar contenido en la pantalla. 
-	Desde que el usuario pulsa el icono de la aplicación hasta que esta es ejecutada , el framework UIKit gestiona todo lo necesario para lanzar la infraestructura. Toda aplicación, principalmente, recibe eventos continuamente desde el sistema y debe responder a todos estos eventos. 
+	Toda aplicación para iOS se desarrolla usando principalmente el \emph{framework} UIKit. UIKit proporciona todo lo necesario para lanzar la aplicación, coordinar los \emph{inputs} del usuario y mostrar el contenido en la pantalla. 
+	Desde que el usuario pulsa el icono de la aplicación hasta que esta es ejecutada , el \emph{framework} UIKit gestiona todo lo necesario para lanzar la infraestructura. Toda aplicación recibe principalmente eventos continuamente desde el sistema y debe responder a todos estos eventos. 
 	
 	El ciclo %\fxnote{``ciclo de vida'' es un término ambiguo, si lo puedes evitar mejor.} 
-	de una aplicación constituye la secuencia de eventos (pulsación en la pantalla por parte del usuario, llegada de un mensaje\ldots ) %\fxnote{¿Qué es un evento?}
+	de una aplicación esta formado por la secuencia de eventos (pulsación en la pantalla por parte del usuario, llegada de un mensaje\ldots ) %\fxnote{¿Qué es un evento?}
 	 que ocurren entre el inicio %\fxnote{ejecución? quieres decir durante? quieres decir inicio?}
-	 y la finalización de la aplicación. En el sistema operativo del iPhone el usuario lanza la aplicación pulsando sobre el icono de la misma.  A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada o bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a determinados objetos que determinemos, por ejemplo el usuario pulsa una parte de la pantalla %\fxnote{qué significa ``determinemos''?}
-	 así como coordinar las respuestas %\fxnote{¿qué es una respuesta?} 
-	 de las mismas, es decir, que hacer ante la acción del usuario. 
+	 y la finalización de la aplicación. En iOS, el usuario lanza la aplicación pulsando sobre el icono de la misma.  A partir de este momento, UIKit es el encargado de lanzar la interfaz de usuario y de leer los eventos que se produzcan en un bucle hasta que la aplicación sea finalizada bien por el sistema o bien por el usuario. Durante el bucle, UIKit coordina la llegada de eventos a los objetos que determinemos (el usuario pulsa una parte de la pantalla) %\fxnote{qué significa ``determinemos''?}
+	 y coordinar las respuestas %\fxnote{¿qué es una respuesta?} 
+	 de las mismas, es decir, qué hacer ante la acción del usuario. 
 	     
  \begin{figure} [h]
   \centering
     \includegraphics[width=0.8\textwidth]{./images/app_life_cycle.jpg}
-  \caption{Ciclo de una aplicación iPhone }
-  \label{fig:iPhoneOS-layers}
+  \caption{Ciclo de una aplicación iOS }
+  \label{fig:iOS-layers}
 \end{figure}
      
-   La figura \ref{fig:iPhoneOS-layers} %\fxnote{incluir la referencia a la figura: \ref{fig:iPhoneOS layers}}
-    muestra el ciclo de una aplicación para el iPhone. Tal y como vemos, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique de la finalización de la aplicación.
+   La figura \ref{fig:iOS-layers} %\fxnote{incluir la referencia a la figura: \ref{fig:iPhoneOS layers}}
+    muestra el ciclo de una aplicación para iOS. Tal y como vemos, UIKit se encarga del arranque de la aplicación y de la gestión de eventos. Nuestro código será el encargado de gestionar esos eventos justo cuando reciba la notificación de que la aplicación ha sido lanzada. También podremos gestionar las accionas oportunas (guardar preferencias o cambios producidos en la aplicación) cuando UIKit nos notifique la finalización de la aplicación.
    
-    En el iPhone solo se finaliza una aplicación por tres motivos:
+    En iOS sólo se finaliza una aplicación por tres motivos:
     \begin{itemize}
-	\item El usuario desea finalizar la misma pulsando el botón \textsf{Home} %\fxnote{Yo usaría tipografía para el UI, por ejemplo \textsf{Home}.}.
+	\item El usuario finaliza la misma pulsando el botón \textsf{Home}. %\fxnote{Yo usaría tipografía para el UI, por ejemplo \textsf{Home}.}.
 	\item El sistema recibe una notificación prioritaria que atender (una llamada por ejemplo) y por tanto finaliza la aplicación. %\fxnote{Qué brusquedad! ¿realmente finaliza la aplicación? ¿no la suspende o algo parecido?}
 	\item El sistema detecta un comportamiento erróneo de la aplicación y para salvaguardar la estabilidad del sistema finaliza nuestra aplicación.
      \end{itemize}
@@ -665,9 +660,9 @@ A continuación una breve descripción de cada capa:
 
 %\fxnote{¿Qué es una vista? ¿Te refieres a vistas del MVC o del SDK del iphone? ¿te refieres a controladores del MVC o del SDK?}
  
- Un controlador de vista del SDK proporciona la lógica básica de interfaz de usuario para dibujar las vistas de la aplicación al usuario. Definimos como vista de usuario a la pantalla que se le presenta en un momento dado. Apple dispone de varios patrones de interfaces de usuario para ayudar a representar en las aplicaciones el conjunto de datos hacia el usuario dentro de los dispositivos móviles. 
+ Un controlador de vista del SDK proporciona la lógica básica de interfaz de usuario para dibujar las vistas de la aplicación. Definimos como vista de usuario la pantalla que se le presenta en un momento dado. Apple dispone de varios patrones de interfaces de usuario para ayudar a representar el conjunto de datos hacia el usuario en las aplicaciones dentro de los dispositivos móviles. 
  
-  Un controlador de vistas gestiona la vista de nuestra aplicación que aparecen entre las barras superiores e inferiores (véase figura \ref{fig:layout-of-views} %\fxnote{\ref{fig:layout-of-views}}). 
+  Un controlador de vistas gestiona la vista de nuestra aplicación que aparece entre las barras superiores e inferiores (véase figura \ref{fig:layout-of-views}).%\fxnote{\ref{fig:layout-of-views}}). 
   La vista de la aplicación aparece entre la barra de estado y la barra de navegación si ésta está presente. En una vista de aplicación se muestra una parte de datos y controles que el desarrollador quiere mostrar al usuario en un tiempo determinado. El controlador de la vista simplemente gestiona la presentación de esta vista y la siguiente en aparecer para un patrón de diseño establecido.
  
  \begin{figure} [h]
@@ -680,7 +675,7 @@ A continuación una breve descripción de cada capa:
  
  Usando controladores de vista eliminamos el código redundante e innecesario en las aplicaciones %\fxnote{¿en qué sentido?}
   y proporcionamos una interfaz de usuario familiar %\fxnote{¿familiar al ser usada por ``todos'' los programadores?}
-  hacia los usuarios acostumbrados a la interfaz del terminall. %\fxnote{usuario-usuario}. 
+  hacia los usuarios acostumbrados a la interfaz del terminal. %\fxnote{usuario-usuario}. 
  Los controladores de vista nos ahorran código al automatizar la presentación de cada vista al usuario. % \fxnote{¿Qué quieres decir?}. 
  También ayudan al diseño orientado de objetos separando los detalles de la interfaz de usuario de la lógica de la aplicación.
  
@@ -692,10 +687,10 @@ A continuación una breve descripción de cada capa:
  \subsection{Controlador Vista de tablas}	
 
   Es muy común usar vistas de tabla para mostrar un conjunto de datos de tipo jerárquico unido a los controladores de navegación para poder recorrerlos.  %\fxnote{¿Quieres decir que para implementar un modelo de datos jerárquico utilizas tablas + controladores de navegación? ¿qué es un controlador de navegación?}. 
-  Para ello disponemos % \fxnote{Yo evitaría utilizar tanto la palabra ``Apple'', puedes decir ``Para ello disponemos\ldots{}''.} dispone
+  Para ello, disponemos % \fxnote{Yo evitaría utilizar tanto la palabra ``Apple'', puedes decir ``Para ello disponemos\ldots{}''.} dispone
    de una plantilla o ejemplo en las herramientas del SDK % \fxnote{¿Qué es una plantilla?} 
-   de controlador llamada ``Controlador de vistas de tabla'' que nos proporciona todo lo necesario para ello. En nuestra aplicación, tenemos que mostrar el modelo de datos que recogemos de los servidores de BetFair. Éstos están organizados de forma jerárquica, de los más general a los más específico. Para poder realizar una apuesta en un partido de fútbol específico antes hemos tenido que elegir deporte, categoría, país, división y finalmente el partido.
- La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomienda las hojas de estilo de Apple. Es la figura \ref{fig:table-view-top} podemos ver un esquema representativo de la información más general.
+   de controlador llamada ``Controlador de vistas de tabla'' que nos proporciona todo lo necesario para ello. En nuestra aplicación, tenemos que mostrar el modelo de datos que recogemos de los servidores de Betfair. Éstos están organizados de forma jerárquica, de lo más general a lo más específico. Para poder realizar una apuesta en un partido de fútbol concreto antes hemos tenido que elegir deporte, categoría, país, división y finalmente el partido.
+ La mejor forma de representarlos es mediante una vista de tabla tal y como nos recomiendan las hojas de estilo de Apple. Es la figura \ref{fig:table-view-top} podemos ver un esquema representativo de la información más general.
 
 %\fixme{Creo que es muy importante resaltar esta justificación y para ello hemos de hablar antes del modelo de datos que impone Betfair.}
   
@@ -706,7 +701,7 @@ A continuación una breve descripción de cada capa:
   \label{fig:table-view-top}
 \end{figure} 
 
- En la figura \ref{fig:table-view-middle} nos encontramos a la mitad de recorrido de una información de tipo jerárquica. Podemos asociarla al ejemplo de la elección de la división.
+ En la figura \ref{fig:table-view-middle} nos encontramos una información de tipo jerárquica en la mitad de recorrido. Podemos asociarla al ejemplo de la elección de la división.
 
 \begin{figure}[ht!]
   \centering
@@ -715,7 +710,7 @@ A continuación una breve descripción de cada capa:
   \label{fig:table-view-middle}
 \end{figure} 
 
- A continuación representamos el final de nuestro recorrido por el modelo de datos como podemos observar en la figura \ref{fig:detail-table-view} hemos alcanzado la información más específica.
+ A continuación representamos el final de nuestro recorrido por el modelo de datos. Como podemos observar en la figura \ref{fig:detail-table-view}, hemos alcanzado la información más específica.
 
 \begin{figure}[ht!]
   \centering
@@ -724,166 +719,106 @@ A continuación una breve descripción de cada capa:
   \label{fig:detail-table-view}
 \end{figure} 
 
-\fixme{No es necesario que pongas cualquier diagrama o imagen dentro de una figura, puedes incrustarla entre los párrafos.}
+%\fixme{Estas tres figuras así sueltas no aportan nada, tienes que explicar su significado y me parece superrelevante porque parece que con ello explicas cómo haces aparecer las listas en el iPhone.}
 
-\section{Arquitectura de la aplicación}	
-%\fxnote{He promocionado esto a sección.}
+\subsection{Arquitectura de la aplicación}	
    
-   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con la interfaz de los servicios web de Betfair. A este módulo le llamaremos de aquí en adelante API. %\fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
+   Como ya hemos visto en apartados anteriores, la aplicación esta formada principalmente por un conjunto de controladores de vista más un módulo encargado de comunicarse con el API de Betfair. %\fixme{Fíjate que ésta es una decisión de diseño que aún no has explicado.}
    
    \begin{figure} [h]
      \centering
      \includegraphics[width=0.8\textwidth]{./images/modelo1.png}
-     \caption{Esquema simplifado }
-     \label{fig:esquema-simplificado}
-     \fixme{Propongo hacer explícito que el API es el de BF}
-     \fixme{No tengo claro si estás usando algún diagrama de UML para describir la arquitectura, yo usaría alguno de estos diagramas: objetos, componentes, deployment. Podemos hablarlo en detalle en una reunión, lo que no quiero es utilizar algo que no se sabe lo que significa.}
+     \caption{Esquema modelo vista controlador }
+     \label{fig:esquema-MVC}
    \end{figure}
    
     En la figura \ref{fig:esquema-MVC} podemos ver un esquema del modelo Vista Controlador usado. % \fxnote{de la arquitectura?}.
-     Los controladores de vista se encargan de recoger los eventos de la aplicación principalmente \emph{inputs} del usuario. % \fxnote{eventos?}. 
-     En el caso de que el input involucre datos de BetFair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
-
-%\begin{afixme}
- % Desde mi punto de vista, lo que llamas API en la arquitectura es el
- % modelo de datos. No propongo cambiar el nombre pero sí que el lector
- % entienda que el modelo utilizado es directamente el que proporciona
- % el API de BF. Esto tiene ventajas (prototipado rápido) e
-  %inconvenientes (acceso a web continuamente, tiempos de respuesta,
-  %generación de tráfico, etc.). Estas cosas hay que escribirlas, aquí
-  %o en conclusiones (probablemente aquí sin entrar en detalle y en
-  %conclusiones para aportar soluciones).
-%\end{afixme}
+     Los controladores de vista se encargan de recoger los eventos de la aplicación, principalmente \emph{inputs} del usuario. % \fxnote{eventos?}. 
+     En el caso de que el input involucre datos de Betfair, el controlador envía los datos necesarios para que el módulo de comunicación obtenga la respuesta por parte del API de Betfair. 
     
-%\begin{afixme}
- % Antes de comenzar a describir cada controlador es necesario
-  %listarlos. ¿Podemos ponerlos en un diagrama todos juntos? ¿Hay una
-  %relación de dependencia o jerarquía entre ellos?
-%\end{afixme}
-
 \subsubsection{Controlador principal}
 
- Es la clase principal %\fxnote{¿es una clase singleton? ¿son todos los controladores singleton? ¿hay varios objetos controladores de los distintos ``tipos'' de controlador?} 
- de la aplicación, común en todas los desarrollos para la plataforma iPhone. Es la encargada de:
- 
- \begin{itemize}
-	\item La gestión de memoria de la aplicación.
-	\item La gestión de los eventos del sistema: describir comportamiento al recibir por ejemplo una llamada telefónica, un correo electrónica\ldots
-	\item Será encargado de recoger los eventos del usuario, es decir, de recoger las posiciones de pantalla donde el usuario ha pulsado y lanzar las acciones que el desarrollador haya especificado.
-    \end{itemize} 
-
-%\begin{afixme}
- % Me cuesta un poco digerir tanta ``prosa''. Yo creo que hay aspectos
-  %de cada controlador que puedes presentar de forma algo más
- % metódica. Tienes una ``descripción'' y una enumeración de las
-  %responsabilidades. ¿No estaría bien incluir a qué eventos responde y
-  %qué hace cuando recibe cada uno de ellos? ¿Podemos usar simplemente
-  %diagramas de secuencia para describir ese comportamiento? ¿podemos
-  %usar máquinas de estado? Tenemos que explorarlo y ver qué tal
-  %quedaría y cuál es el grado de complejidad. -> OK, lo podemos ver en la siguiente reunión.
-%\end{afixme}
+ Es la clase principal de la aplicación. Es la encargada de iniciar el controlador de vista que será encargado de recoger los eventos del usuario, así como la gestión de memoria y la gestión de los eventos del sistema.
  
 \subsubsection{Controlador de menú principal}
- Esta clase es la encargada de mostrar las opciones principales del programa y  lanzar el controlador adecuado a la elección del usuario %\fxnote{¿puedes lanzar cualquier controlador? ¿podemos recoger esa info en la jerarquía que mencionaba anteriormente?}.
-  Los controladores que gestiona son los siguientes:
-   \begin{itemize}
-	\item Controlador de eventos y mercados.
-	\item Controlador de las categorías de mis apuestas.
-	\item Controlador de la información de cuenta de Betfair.
-	\item Controlador de inicio de sesión para los servicos web de Betfair. Para ello hace uso del servicios \emph{login} de Betfair a través de la clase de comunicación llamada API que explicaremos más adelante.
-    \end{itemize} 
-    \includegraphics[width=1.2\textwidth]{./images/c_principal.png}
+ Es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicio \emph{login} de Betfair a través de la clase de comunicación llamada API.
  
 \subsubsection{Controlador de tipos de eventos}
- Es el encargado de mostrar al usuario una lista con todos los tipos de eventos deportivos activos de los que dispone Betfair %\fxnote{¿Qué es un evento? Hasta ahora no los has mencionado.} 
- por los que se puede apostar. %\fxnote{Si es futuro no va aquí.}. 
- Una vez seleccionado el evento deseado lanza el controlador de eventos y mercados relacionados con el evento seleccionado. Hace uso del servicio de BetFair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
+ Muestra al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de Betfair. En un futuro se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado, se lanza el controlador de eventos y mercados con la información relativa al evento previamente seleccionado. Hace uso del servicio de Betfair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
  
 \subsubsection{Controlador de eventos y mercados}
 
- Betfair nos proporciona una lista de eventos deportivos donde podemos realizar una apuesta. Dentro de un evento deportivo encontramos la información de mercado relativa al evento, es decir, las cuotas para los distintos protagonistas de los eventos. Esta clase es la encargada de mostrar de forma jerárquica los eventos %\fxnote{subeventos?}
-  y mercados %\fxnote{mercados?} 
-  relacionados con un eventos seleccionado previamente en el \emph{controlador de eventos}. Gestiona dos tipos de acciones: 
- \begin{itemize}
-  \item En caso de ser seleccionado un evento se mostrará los mercados y eventos relaciones con la selección.
-  \item En caso de ser seleccionado un mercado se procederá a lanzar el \emph{controlador de información de mercado} . Para ello recaba la información obtenida a través del servicio web \emph{GetEvents} de BetFair.
-  \end{itemize}
-    
-     \includegraphics[width=0.8\textwidth]{./images/c_eventos.png}
-
+ Es la clase encargada de mostrar de forma jerárquica los subeventos y mercados relacionados con un evento seleccionado previamente en el controlador de eventos. Igualmente se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. En caso de ser seleccionado un evento, se le mostrará los mercados y subeventos relacionados con los mismos. Si se selecciona un mercado se procederá a lanzar el controlador de información de mercado. Para ello recaba la información obtenida a través del servicio web \emph{GetEvents} de Betfair.
+ 
 \subsubsection{Controlador de información de mercado}
 
- Esta clase es la responsable de gestionar toda la información relevante al mercado en cuestión. Gestionará el estado del mercado y sus propiedades obteniendo todo lo necesario del portal de Betfair a través de sus servicios web para ello hace uso de las llamadas:
+ Es el responsable de gestionar toda la información relevante al mercado en cuestión. Gestionará el estado del mercado y sus propiedades obteniendo todo lo necesario del portal de Betfair a través del API de sus servicios web haciendo uso de las llamadas del API:
  
   \begin{itemize}
 	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado.
-	\item \emph{GetMarketPrices}: obtiene todos los precios y cuotas actuales del mercado en cuestión.
+	\item \emph{GetMarketPrices}: obtiene todos los precios actuales del mercado en cuestión.
 \end{itemize}
 
 \subsubsection{Controlador de apuesta por un mercado}
- Es la encargada de gestionar todos los datos necesarios e introducidos por el usuarios para realizar una apuesta y enviarla a BetFair. El método usado para enviar la apuesta a BetFair a través de la clase interfaz de comunicación es \emph{PlaceBets}.
+ Gestiona todos los datos necesarios e introducidos por el usuarios para realizar una apuesta y enviarla a Betfair. El método usado para enviar la apuesta a Betfair a través de la clase interfaz de comunicación es \emph{PlaceBets}.
 
 \subsubsection{Controlador de las categorías de Mis Apuestas}
- Es la clase encargada de gestionar las apuestas ya realizadas en BetFair por el usuario y que siguen activas. Las clasifica por categorías de mercado. Recoge la información como resultado de las llamadas a los siguientes servicios web de BetFair:
+ Es la clase encargada de gestionar las apuestas ya realizadas en Betfair y que siguen activas. Las clasifica por categorías de mercado. Recoge la información como resultado de las llamadas a los siguientes servicios web de Betfair:
   \begin{itemize}
 	\item \emph{GetMarket}: obtiene todos los parámetros acerca del mercado de una apuesta en cuestión.
-	\item \emph{GetCurrentBets}: obtiene todas las apuestas realizadas por el usuario del servicios BetFair.
+	\item \emph{GetCurrentBets}: obtiene todas las apuestas realizadas por el usuario del servicios Betfair.
 \end{itemize}
  
 \subsubsection{Controlador de Mis Apuestas}
- Esta clase se encarga de gestionar las apuesta realizadas por el usuario dentro de una categoría determinada. En ella se muestra resumidamente el nombre de la apuesta en cuestión, la cuota apostada y la cuota actualizada en ese momento. 
-
-     \includegraphics[width=0.8\textwidth]{./images/c_miapuesta.png}
-
+ Esta clase se encarga de gestionar las apuestas realizadas por el usuario dentro de una categoría determinada. En ella se muestra resumidamente el nombre de la apuesta en cuestión, la cuota apostada y la cuota actualizada en ese momento. 
 
 \subsubsection{Controlador de detalles de una apuesta}
- Se encarga de gestionar todos los detalles sobre una apuesta determinada: parámetros, stake, apuesta a favor o en contra relacionadas con la presentada\ldots También incluye información de mercado actual completa referente al mercado de la apuesta y el asesoramiento de trading acerca de la misma.
+ Se encarga de gestionar todos los detalles sobre una apuesta determinada: parámetros, stake, apuesta a favor o en contra relacionadas con la presentada\ldots También incluye información completa del mercado actual referente al mercado de la apuesta y el trading acerca de la misma.
+
  
 \subsubsection{API: Interfaz a Betfair}
-%\fxnote{Habrá que analizar donde colocamos exáctamente esta descripción.}
- Esta clase se encarga de gestionar las comunicaciones con los servidores de BetFair. Envía las peticiones a los servicios web de BetFair y se encarga de realizar la decodificación de la respuesta a dichas peticiones en un formato adecuado para la aplicación. En el apartado \ref{sc:xml} se describe con mas detalle la interfaz.
+ Esta clase se encarga de gestionar las comunicaciones con los servidores de Betfair. Envía las peticiones a los servicios web de Betfair y se encarga de realizar la decodificación de la respuesta a dichas peticiones en un formato adecuado para la aplicación.
 
 \section{Diagrama de Clases}
-\fxnote{Es probable que esto haya que adelantarlo o que sea de esta información de la que podamos extraer los diagramas de arquitectura que te mencionaba antes.}
- En la siguiente figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase "API". Como bien hemos descrito es la encargada de comunicarse con el servidor de BetFair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un \emph{parser} de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase ``ParserXML''.
+ En la siguiente figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo de esta aplicación es la clase ``API". Como bien hemos descrito es la encargada de comunicarse con el servidor de Betfair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un \emph{parser} de XML para obtener los datos del mensaje de respuesta, de esta tarea se encarga la clase ``ParserXML''.
  
-  A partir de ahí observamos que le rodean todos los controladores de vista de la aplicación, ya que son los que reciben las peticiones de la vista y la envían a la clase ``API''. La clase ``RootViewController'' es la principal cuando se carga la aplicación y es la encargada de procesar el menú de la misma.
+  A partir de ahí observamos que le rodean todos los controladores de vista de la aplicación, ya que son los que reciben las peticiones de la vista y la envían a la clase ``API''. ``RootViewController'' es la clase principal. Se lanza cuando se carga la aplicación y es la encargada de procesar el menú de la misma.
 
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.2\textwidth]{./images/classView.png}
+       \includegraphics[width=1.2\textwidth]{./images/DiagramaDeClases3.png}
      \caption{Diagrama de clases}
-   \label{fig:diagrama-de-clases}
+   \label{fig:Diagrama de clases}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Implementación}
 \label{ch:implemetacion}
- En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos describiendo el entorno de ejecución y del lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevantes de la implementación.
+ En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos detallando el entorno de ejecución y el lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevantes de la implementación.
  
 \section{Entorno de ejecución}
- La aplicación desarrollada se ejecuta en un entorno llamado \emph{Cocoa Touch}. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el sistema operativo del terminal iPhone. Este entorno de desarrollo nos facilita a los desarrolladores la tarea de pasar de la etapa diseño a la etapa del desarrollo para crear una aplicación. Cocoa Touch proviene del entorno de la plataforma \emph{Mac OS}, entorno de la que dependen los equipo de sobremesa de Apple. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
+ La aplicación desarrollada se ejecuta en un entorno llamado \emph{Cocoa Touch}. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el sistema operativo iOS. Este entorno de desarrollo nos facilita a los desarrolladores la tarea de pasar de la etapa de diseño a la etapa de desarrollo para crear una aplicación. Cocoa Touch proviene del entorno de la plataforma \emph{Mac OS}, entorno de la que dependen los equipo de sobremesa de Apple. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
  
  Como ya hemos comentado, Cocoa presenta dos caras: 
  \begin{itemize}
-	\item Entorno de ejecución: las aplicaciones desarrolladas en Cocoa presentan la interfaz de usuario de la aplicación y están fuertemente integradas con otras partes de sistema operativo como por ejemplo el buscador del sistema de ficheros.
-	\item Entorno de desarrollo: Cocoa es una suite de componentes software orientados a objetos que te permiten rápidamente crear robustas y completas aplicaciones para el sistema operativo.
+	\item Entorno de ejecución: las aplicaciones desarrolladas en Cocoa presentan la interfaz de usuario de la aplicación y están fuertemente integradas con otras partes del sistema operativo como por ejemplo el buscador del sistema de ficheros.
+	\item Entorno de desarrollo: Cocoa es una suite de componentes software que están orientados a objetos y que te permiten rápidamente crear robustas y completas aplicaciones para el sistema operativo.
 \end{itemize}
   
  \begin{figure}[ht!]
     \centering
        \includegraphics[width=0.9\textwidth]{./images/architecture_stack.jpg}
-     \caption{Entorno iPhone OS }
-   \label{fig:Iphone OS Platform}
+     \caption{Entorno iOS }
+   \label{fig:iOS Platform}
 \end{figure}
  
- A pesar de que la estructura del iPhone OS es similar a la de la plataforma Mac OS, existen diferencias significantes. El diagrama del iPhone OS muestra una plataforma como una serie de capas que van desde en núcleo de sistema operativo hasta un conjunto de frameworks de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
+ A pesar de que la estructura del iOS es similar a la de la plataforma Mac OS, existen diferencias significantes. El diagrama del iOS muestra una plataforma como una serie de capas que van desde en núcleo de sistema operativo hasta un conjunto de frameworks de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
  
- Para desarrollar en entornos Cocoa se utiliza el lenguaje \emph{Objective-C}. Este lenguaje esta basado en la programación orientada a objetos. Se define como un superconjunto del lenguaje de programación \emph{C}, es decir, podemos considerarle como una fina capa que complementa a C. La sintaxis de objetos de Objective-C deriva de \emph{Smalltalk}\footnote{Smalltalk es un lenguaje de programación que permite realizar tareas de computación mediante la interacción con un entorno de objetos virtuales.}.
+ Para desarrollar en entornos Cocoa se utiliza el lenguaje \emph{Objective-C}. Este lenguaje está basado en la programación orientada a objetos. Se define como un superconjunto del lenguaje de programación \emph{C}, es decir, podemos considerarle como una fina capa que complementa a C. La sintaxis de objetos de Objective-C deriva de \emph{Smalltalk}\footnote{Smalltalk es un lenguaje de programación que permite realizar tareas de computación mediante la interacción con un entorno de objetos virtuales.}.
  
-  Como todo lenguaje de programación orientada a objetos, Objective-C nos proporciona principalmente:
+  Como todo lenguaje de programación orientado a objetos, Objective-C nos proporciona principalmente:
  \begin{itemize}
-	\item Un lenguaje de programación orientada a objetos.
+	\item Un lenguaje de programación orientado a objetos.
 	\item Una extensa librería de objetos.
 	\item Una conjunto software de herramientas de desarrollo.
 	\item Un entorno de ejecución propio.
@@ -892,33 +827,33 @@ A continuación una breve descripción de cada capa:
  Aparte de las características propias del lenguaje, al estar basado en el lenguaje C, su compilador es capaz de ejecutar líneas de código codificadas en C. Esta característica permite usar librerías realizadas en C en programas desarrollados en Objective-C. 
  
 \section{Estructura de la aplicación}
- Cuando construimos una aplicación del iPhone usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar poryecto escrito en Objective-C. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que Xcode es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas ...). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
+ Cuando construimos una aplicación para el sistema operativo iOS usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar proyecto escrito en Objective-C. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que Xcode es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas \ldots). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
  
 \begin{tabularx}{15cm}{|lX|Xl|} 
 \hline 
 \rowcolor[gray]{0.9}Archivo & Descripción\\ 
 \hline 
-BetFairApp & El fichero ejecutable de la aplicación. El nombre de este fichero es el mismo que el de la aplicación más la extensión app.\\ 
+BetfairApp & El fichero ejecutable de la aplicación. El nombre de este fichero es el mismo que el de la aplicación más la extensión app.\\ 
 \hline 
-Default.png & Imagen de 480 x 320 pixeles que se muestra nada más iniciarse la aplicación  a modo de introducción. El sistema usa esta imagen mientras realiza tareas en segundo plano que requieren de un tiempo sensible para el usuario.\\
+Default.png & Imagen de 480 x 320 píxeles que se muestra nada más iniciarse la aplicación  a modo de introducción. El sistema usa esta imagen mientras realiza tareas en segundo plano que requieren de un tiempo sensible para el usuario.\\
 \hline
 Settings.bundle & Es un fichero que contiene las preferencias de la aplicación a personalizar por el usuario, como por ejemplo el lenguaje de la aplicación, el tipo de moneda a mostrar\ldots \\
 \hline
-iconBF.png & Icono de 57 x 57 pixeles que representa la aplicación en la pantalla principal del dispositivo. \\
+iconBF.png & Icono de 57 x 57 píxeles que representa la aplicación en la pantalla principal del dispositivo. \\
 \hline
-Info.plist & También conocida como lista de propiedades, este fichero es un lista donde se definen la valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
+Info.plist & También conocida como lista de propiedades. Este fichero es un lista donde se definen los valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
 \hline
-en.lproj & Archivo que contiene los textos de la interfaz en Inglés. Usado por el sistema cuando este lenguaje esta por defecto para lanzar aplicación o definido en las preferencias de la aplicación.\\
+en.lproj & Archivo que contiene los textos de la interfaz en inglés. Usado por el sistema cuando este lenguaje esta por defecto para lanzar aplicación o definido en las preferencias de la aplicación.\\
 \hline
-es.lproj &Archivo que contiene los textos de la interfaz en Español.\\
+es.lproj &Archivo que contiene los textos de la interfaz en español.\\
 \hline
-MainWindows.xib & Contiene la interfaz por defecto a cargar por el sistema una vez lanzada la aplicación. Contiene la ventana principal de la interfaz de usuario. \\
+MainWindows.xib & Contiene la interfaz a cargar por defecto por el sistema una vez lanzada la aplicación. Contiene la ventana principal de la interfaz de usuario. \\
 \hline
 RootViewController.xib & Contiene los objetos necesarios de la interfaz de usuario del menú principal. \\
 \hline
 EventsControllerView.xib &Contiene los objetos necesarios de la interfaz de usuario del menú de los eventos activos. \\
 \hline
-EventsTypesControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los tipos de eventos de BetFair. \\
+EventsTypesControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los tipos de eventos de Betfair. \\
 \hline
 EventsAndMarketsControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los eventos y mercados disponibles. \\
 \hline
@@ -930,11 +865,11 @@ MyBetsControllerView.xib & Contiene los objetos necesarios de la interfaz de usu
 \hline
 MyBetsCategoryController.xib & Contiene los objetos necesarios de la interfaz de usuario de las categorías de apuestas realizadas por el usuario. \\
 \hline
-MyBetsDetailsView.xib & Contiene los objetos necesarios de la interfaz de usuario de los detalles de una apuesta ya realizada con las opciones disponibles. \\
+MyBetsDetailsView.xib & Contiene los objetos necesarios de la interfaz de usuario con los detalles de una apuesta ya realizada y las opciones disponibles. \\
 \hline
-MyBetPropertiesView.xib & Explicacion \\
+MyBetPropertiesView.xib & Contiene los objetos necesarios de la interfaz de usuarios de los datos del mercados en los que se realizó la apuesta con las opciones posibles a realizar sobre esta. \\
 \hline
-TradingController.xib & Contiene los objetos necesarios de la interfaz de usuario de los detalles acerca del trading sobre una apuesta. \\
+TradingController.xib & Contiene los objetos necesarios de la interfaz de usuario con los detalles acerca del trading sobre una apuesta. \\
 \hline 
 \label{fig:componentes}
 \end{tabularx} 
@@ -942,7 +877,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   
  
 \section{Internacionalización}
- Una parte a destacar en el proyecto es la posibilidad de establecer el lenguaje de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación del iPhone debe tener la posibilidad de poder mostrar varios lenguajes y tener uno por defecto. Cada lenguaje esta implementado en la carpeta X.lprj del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos lenguajes también se podrá especificar una imagen  de portada, icono de la aplicación, mensajes de alerta\ldots adecuado al lenguaje escogido por el usuario. Por defecto, el sistema operativo del iPhone, arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo lenguaje especificado en las preferencias del terminal, es decir, es el mismo lenguaje que este configurado este. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
+ Una parte importante a destacar en el proyecto es la posibilidad de establecer el lenguaje de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación del iPhone debe tener la posibilidad de poder mostrar varios lenguajes y tener uno por defecto. Cada lenguaje esta implementado en la carpeta X.lprj del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos lenguajes también se podrá especificar una imagen  de portada, icono de la aplicación, mensajes de alerta\ldots  adecuado al lenguaje escogido por el usuario. Por defecto, el sistema operativo iOS arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo lenguaje especificado en las preferencias del terminal, es decir, es el mismo lenguaje que esté configurado en éste. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
 
   \begin{figure}[h!]
     \centering
@@ -952,24 +887,23 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 \end{figure}
 
  
-  En esta implementación se procederá a dar soporte al Español y al Inglés, estando estos dos lenguajes dentro de la lista mundial de los más hablados.
+  En esta implementación se procederá a dar soporte al español y al inglés, dos de los lenguajes más hablados dentro de la lista mundial.
   
-   \begin{figure}[h!]
-    \centering
-       \includegraphics[width=1.2\textwidth]{./images/idiomas.png}
-     \caption{Ejemplo de internacionalización }
-   \label{fig:Soporte multilenguaje}
-\end{figure}  
+  
+  
+  (ADJUNTAR IMAGEN COMPARATIVA ENTRE LAS DOS PANTALLAS, SILVIA NO TENGO PHOTOSHOP PERO EN ESTE FINDE LO INSTALO :) ). %ARRRR SACAR IMAGEN DEL TERMINAL
+  
+  
   
   Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}. Este archivo se ubica dentro de la carpeta es.lpjr o en.lpjr según sea la tabla de traducción en inglés o en español. A continuación se muestra un ejemplo del contenido de dicho fichero.
   
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
 /* 
    Localizable.strings
-   BetFair App
+   Betfair App
 
-   Created by Francisco on 21/12/09.
-   Copyright 2009  . All rights reserved.
+   Created by Francisco on 21/12/11.
+   Copyright 2011  . All rights reserved.
 */
 "Events" = "Eventos";
 "My bets" = "Mis apuestas";
@@ -985,15 +919,14 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 \end{lstlisting}
 
    
-\section{Interpretación XML de BetFair a Cocoa Touch}
-\label{sc:xml}
- Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave de este trabajo de fin de carrera a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
+\section{Interpretación XML de Betfair a Cocoa Touch}
+ Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
  
-  BetFair ofrece el acceso a todos sus servicios a todos aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas o para usuarios expertos que requieran de una interfaz de usuario más experta, orientada a sus necesidades. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
+  Betfair ofrece el acceso a todos sus servicios a aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas o para usuarios expertos que requieran de una interfaz de usuario más experta, orientada a sus necesidades. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
    
-  En el diseño de una aplicación que debe hacer uso de servicios ofrecidos por un sistema externo se necesita algún tipo de API o interfaz para acceder a los mismos. Lo primero a tener en cuenta es lo que se necesita para hacer uso de las funciones proporcionadas por el API. Para acceder a los servicios ofrecidos por Betfair, ya vimos que su interfaz de acceso se describía mediante un archivo en formato WSDL. Este tipo de archivo es muy común y se usa para describir interfaces públicas de acceso a servicios web. Esta basado en XML y contiene la descripción de la forma de comunicación con el servidor que ofrece los servicios web, es decir, los requisitos, parámetros y formatos de los mensajes necesarios para interactuar con los servicios disponibles. 
+  En el diseño de una aplicación que debe hacer uso de servicios ofrecidos por un sistema externo se necesita algún tipo de API o interfaz para acceder a los mismos. Lo primero a tener en cuenta es lo que se necesita para hacer uso de las funciones proporcionadas por el API. Para acceder a los servicios ofrecidos por Betfair, ya vimos que su interfaz de acceso se describía mediante un archivo en formato WSDL. Este tipo de archivo es muy común y se usa para describir interfaces públicas de acceso a servicios web. Está basado en XML y contiene la descripción de la forma de comunicación con el servidor que ofrece los servicios web, es decir, los requisitos, parámetros y formatos de los mensajes necesarios para interactuar con los servicios disponibles. 
    
-   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo de los aspectos más básicos de la comunicación. Siendo el iPhone una plataforma novedosa, no existe a día de hoy este tipo de herramientas con lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
+   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo los aspectos más básicos de la comunicación. Siendo el iPhone una plataforma novedosa, no existe a día de hoy este tipo de herramientas por lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
       
    A continuación se muestra un ejemplo del proceso de comunicación con Betfair para, en este caso, hacer uso del servicio \emph{Login } definido en el archivo WSDL que ofrece Betfair. En él se muestra la descripción de los parámetros necesarios de la comunicación.
    
@@ -1031,7 +964,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   </SOAP-ENV:Envelope> 
  \end{lstlisting}
  
-  Una vez construido el cuerpo del mensaje, solo nos hace falta conocer la dirección de destino para el mensaje HTML a enviar a los servidores de Betfair:
+  Una vez construido el cuerpo del mensaje, sólo nos hace falta conocer la dirección de destino para el mensaje HTML a enviar a los servidores de Betfair:
   
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
   	URL = "https://api.betfair.com/betex-api-public-ws/BFService";
@@ -1063,42 +996,42 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 </soap:Envelope>
  \end{lstlisting}
  
-  Si observamos los campos errorCode vemos que se reciben en ambos casos un OK al envío anterior. Una vez comprobado la coherencia en la respuesta a salvo de fallos de recepción se procede a descifrar la respuesta. Para ello se implementó un parser que convierte este mensaje en una estructura de datos válida para nuestra aplicación.  Este se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la figura \ref{fig:proceso} se muestra el procedimiento completo del proceso.
+  Si observamos los campos \emph{errorCode} vemos que se reciben en ambos casos un \emph{OK} al envío anterior. Una vez comprobado la coherencia en la respuesta a salvo de fallos de recepción se procede a descifrar la respuesta. Para ello, se implementó un parser que convierte este mensaje en una estructura de datos válida para nuestra aplicación.  Este se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la figura \ref{fig:proceso} se muestra el procedimiento completo del proceso.
        
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.2\textwidth]{./images/modelo_secuencia.png}
+       \includegraphics[width=1.2\textwidth]{./images/modelo_accion.png}
      \caption{Ejemplo de comunicación API }
    \label{fig:proceso}
 \end{figure}
  
     
-    Toda la aplicación gira en torno a este proceso. Es lógico tratarlo así ya que las aplicaciones móviles suelen usar siempre servicios web y por tanto necesitan de conectividad. Esta aplicación no guarda información alguna salvo los datos de acceso al servicio. Es la definición en si de aplicación móvil, la información que necesito disponible este donde este, donde tener información duplicada en el dispositivo no tendría mucho sentido debido a la actualización constante de la información relevantes al mundo de las apuestas, eso sí, tendría sentido quizá dotar en un futuro a la aplicación de una cache con caducidad para minimizar el consumo de batería del dispositivo. Por supuesto estas son todas las ventajas de guardar toda la información en servidores externos a la aplicación. Los contras a cambio suponen un tiempo de retardo entre que se pide la información y se recibe. Afortunadamente hoy el día los terminales están dotados con la tecnología de acceso a la red 3G, lo que supone velocidades de acceso a la red cercana a un ADSL, con lo que el retardo máximo lo podemos estimas en pocos segundos, siendo un tiempo aceptable para este tipo de aplicaciones.  
+    Toda la aplicación gira en torno a este proceso. Sin él es incomprensible el resto del aplicativo. Es en él donde obtenemos los datos directamente de BetFair. Es lógico tratarlo así ya que las aplicaciones móviles suelen usar siempre servicios web y por tanto necesitan de conectividad. Esta aplicación no guarda información alguna salvo las credenciales de acceso al servicio. En una aplicación móvil nos interesa que la información que se necesita esté disponible cualquiera que sea el lugar donde nos encontremos. En el contexto de las apuestas lo más importante es tener la información lo más actualizada posible, es por eso que no se guarda la información de los mercados. Eso sí, tendría sentido quizá dotar en un futuro a la aplicación de una caché ,opcional a la elección del usuario, con caducidad para, por ejemplo, minimizar el consumo de batería del dispositivo en el caso que se necesitase.  
    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusiones}
 \label{ch:conclusiones}
 
- En el presente trabajo de Fin de Carrera se ha documentado el proceso de diseño y  creación de una herramienta software para manejar apuestas bajo el terminal móvil iPhone 3GS. 
+ En el presente trabajo de Fin de Carrera se ha documentado el proceso de diseño y  creación de una herramienta software para manejar apuestas bajo los terminales móviles iOS. 
  
- Uno de los puntos más importantes de trabajado ha sido el portado de un servicio web originalmente diseñado para el mundo de navegadores web a una plataforma móvil de última generación. En este trabajo de fin de carrera se ha elegido el API de BetFair y su portado ha sido exitoso. Para ello se ha diseñado y codificado un parser que hace de nexo de unión entre el servidor de Betfair y la aplicación realizando las funciones de un codificador y encapsulador de datos.
+El punto más importante del presente trabajo ha sido el portado de un servicio web originalmente diseñado para el mundo de navegadores web de PC a una plataforma móvil de última generación. En este trabajo de fin de carrera se ha elegido el API de Betfair y podemos concluir que su portado ha sido exitoso. La clave de este éxito ha sido el diseño e implementación de un parser, que hace de nexo de unión entre el servidor de Betfair y la aplicación, que realiza las funciones de un codificador y encapsulador de datos.
  
- No todas las funcionalidades del API se han implementado, se ha debido al tipo de licencia elegido. Por eso, se ha diseñado desde el primer momento la aplicación de tipo modular para que en un futuro se agreguen el resto de las funcionalidades sin ningún tipo de complicación. La arquitectura del desarrollo permite este tipo de ampliaciones siguiendo las técnicas de software específicas.
+ Se han implementado los servicios básicos del API. Está limitación de servicios se ha debido al tipo de licencia elegido. Por este motivo se ha diseñado, desde el primer momento, una aplicación de tipo modular para que en un futuro se agreguen el resto de las funcionalidades sin ningún tipo de complicación. La arquitectura del desarrollo permite este tipo de ampliaciones siguiendo las técnicas de software específicas.
  
- Se ha implementado la funcionalidad de trading. La aplicación es capaz de recalcular las condiciones del mercado basándose en una apuesta ya realizada y asistir al usuario para una ganancia segura o minimizar la pérdida según evolucione el mercado. Se ha dejado preparada la arquitectura de la aplicación para que en un futuro cercano el trading se realicé sobre múltiples eventos y mercados.
+ Un hecho importante, diferenciador y clave en este trabajo es la implementación de la funcionalidad de trading. La aplicación es capaz de recalcular las condiciones del mercado basándose en una apuesta ya realizada y asistir al usuario para una ganancia segura o minimizar la pérdida según la evolución del mercado. La arquitectura de la aplicación esta diseñada para que en un futuro cercano se pueda desarrollar esta funcionalidad para que se realice sobre múltiples eventos y mercados.
  
- Se ha conseguido no almacenar información redundante de la aplicación. Debido al uso de servicios web todos los datos de consulta y de generación por parte del usuario se guardan en el servidor. Por lo tanto, si el usuario no dispone de cobertura móvil o usa algún otra aplicación en otra plataforma no sería necesario ningún mecanismo de sincronización. En este tipo de contextos en mejor recuperar datos actualizados directamente desde el servidor que manejar cache de datos desactualizadas al poco tiempo de descargarse del servidor.
+ Se ha conseguido no almacenar información localmente redundante de la aplicación. Debido al uso de servicios web todos los datos de consulta y de generación por parte del usuario se guardan en el servidor. Por lo tanto, si el usuario usa alguna otra aplicación en otra plataforma no sería necesario ningún mecanismo de sincronización de información. En este tipo de contextos es mejor disponer de datos lo más actualizados posibles directamente desde el servidor que manejar una caché de datos desactualizadas al poco tiempo de descargarse del servidor. Los mercados están en continua evolución.
  
- Una decisión de diseño importante ha sido la implementación de la internacionalización de la aplicación. La aplicación estará disponible a través de la tienda iTunes Store. Esta tienda tiene un acceso mundial y debido a ello se ha adoptado los principales idiomas para que la aplicación sea lo mas extendida posible. 
+ Otra decisión de diseño importante ha sido la implementación de la internacionalización de la aplicación. La aplicación estará disponible a través de la tienda iTunes Store. Esta tienda tiene un acceso mundial y debido a ello se ha adoptado los principales idiomas para que la aplicación sea lo más extendida posible. 
  
 \section{Trabajo futuro}
- Como ya hemos visto en la arquitectura de la aplicación, el sistema esta preparado para posibles futuras funcionalidades extras que podemos aportar con los datos que nos ofrece el API. Debido a que el núcleo de la aplicación es la obtención y proceso de la información contenida en Betfair, cualquier desarrollador puede añadir una funcionalidad extra usando los datos anteriores y acoplarlas fácilmente a la arquitectura de la aplicación. Al usar el modelo vista-controlador, la sencillez a la hora de implementar nuevas funcionalidades está mas que probada.
+ Como ya hemos visto en la arquitectura de la aplicación, el sistema está preparado para posibles futuras funcionalidades extras que podemos aportar con los datos que nos ofrece el API. Debido a que el núcleo de la aplicación es la obtención y proceso de la información contenida en Betfair, cualquier desarrollador puede añadir una funcionalidad extra usando los datos anteriores y acoplarlas fácilmente a la arquitectura de la aplicación. Al usar el modelo vista-controlador, la sencillez a la hora de implementar nuevas funcionalidades está mas que probada.
  
 \subsection{Trading global por lista de eventos}
- Una mejora interesante a implementar en un futuro sería la de poder realizar trading sobre un mercado entero. Al principio del presente trabajo hemos definido el trading como apostar a favor y en contra de un evento determinado para, según nuestra primera apuesta, obtener beneficio seguro o minimizar la pérdida. Pero, apostar a favor de un evento ¿puede suponer que este afecte al resto del mercado? Pongamos un ejemplo, supongamos que estamos apostando por quien va a ser el campeón del mundial de Sudáfrica. Apostar a favor de un equipo puede llevar la consecuencia de apostar en contra de los restantes participantes si en vez de pensar en un equipo concreto pensamos en el mercado completo. 
+ Una mejora interesante a implementar en un futuro sería la de poder realizar trading sobre un mercado entero. Al principio del presente trabajo hemos definido el trading como apostar a favor y en contra de un evento determinado para, según nuestra primera apuesta, obtener beneficio seguro o minimizar la pérdida. Pero, apostar a favor de un evento ¿puede suponer que éste afecte al resto del mercado? Pongamos un ejemplo, supongamos que estamos apostando por quién va a ser el campeón del mundial de Sudáfrica. Apostar a favor de un equipo puede llevar la consecuencia de apostar en contra de los restantes participantes si en vez de pensar en un equipo concreto pensamos en el mercado completo. 
  
-  Este cambio en nuestro planteamiento supone llevar a cabo un gran control sobre todas las variables que afectan al mercado completo y no solo por un evento. Para poder analizar completamente los datos de mercado (cuota y precio) necesitamos analizar los datos concretos de cada evento de dicho mercado. Para poder obtener cual sería el conjunto de apuestas a realizar en el mercado para obtener el beneficio tenemos que resolver un conjunto de ecuaciones linealess que representan al mercado cuyas incógnitas serán las cuotas y cantidad a apostar por cada eventos de dicho mercado.
+  Este cambio en nuestro planteamiento supone llevar a cabo un gran control sobre todas las variables que afectan al mercado completo y no sólo por un evento. Para poder analizar completamente los datos de mercado (cuota y precio) necesitamos analizar los datos concretos de cada evento de dicho mercado. Para poder obtener cual sería el conjunto de apuestas a realizar en el mercado para obtener el beneficio tenemos que resolver un conjunto de ecuaciones linealess que representan al mercado cuyas incógnitas serán las cuotas y cantidad a apostar por cada eventos de dicho mercado.
    
     Incluir ejemplo de información de todo el mercado
     
@@ -1107,15 +1040,15 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   
   
   
-   La idea es tener una máquina servidora capaz de realizar estas cálculos cada, pongamos por ejemplo, una hora. Se trata de analizar continuamente el mercado para encontrar el momento idóneo para el trading global. El incluir otra máquina a parte del terminal es debido a la restricción de la batería. Si hiciéramos uso del terminal para estos cálculos reduciría drásticamente la vida útil de la misma. La máquina avisaría a la aplicación móvil del terminal en cuanto encontrase una solución adecuada a los parámetros configurados. 
+   La idea es tener una máquina servidora capaz de realizar estos cálculos cada, pongamos por ejemplo, una hora. Se trata de analizar continuamente el mercado para encontrar el momento idóneo para el trading global. El incluir otra máquina a parte del terminal es debido a la restricción de la batería. Si hiciéramos uso del terminal para estos cálculos reduciría drásticamente la vida útil de la misma. La máquina avisaría a la aplicación móvil del terminal en cuanto encontrase una solución adecuada a los parámetros configurados. 
    
-    El procedimiento por el cual es usuario es notificado con la solución es implementar la solución de mensajería tipo push de Apple en el iPhone. A continuación mostramos como son las notificaciones en el terminal, también como mejora a añadir al proyecto.
+    El procedimiento por el cual el usuario es notificado con la solución es implementar la solución de mensajería tipo push de Apple en el iPhone. A continuación mostramos como son las notificaciones en el terminal, también como mejora a añadir al proyecto.
     
  \subsubsection{Notificación por mensajes Push de Apple}
    
-   En un modelo típico de cliente-servidor, el cliente es el encargado de contactar con el servidor para la descarga de nuevos datos, como por ejemplo el servicio de correo electrónico. En el móvil, el cuál siempre tiene el inconveniente de la batería, esta solución no es válida debido al consumo energético en cada consulta al servidor. Para estos casos las notificaciones push son las solución a este dilema. Una notificación push es un mensaje corto que el servidor envía al cliente para notificarle que tiene datos para ser descargados. 
+   En un modelo típico de cliente-servidor, el cliente es el encargado de contactar con el servidor para la descarga de nuevos datos, como por ejemplo el servicio de correo electrónico. En un dispositivo móvil, el cuál siempre tiene el inconveniente de la batería, esta solución no es válida debido al consumo energético en cada consulta al servidor. Para estos casos las notificaciones push son las solución a este dilema. Una notificación push es un mensaje corto que el servidor envía al cliente para notificarle que tiene datos para ser descargados o eventos pendientes tales como nueva versión de la aplicación. 
    
-    Cuando un terminal recibe una notificación de una aplicación que no esta ejecutada en ese momento, ésta notifica al usuario a través de un mensaje de alerta, un sonido determinado o un número indicador en el icono de la aplicación (o una combinación de este conjunto) de un evento a tratar por parte del usuario. El usuario, en todo momento, tiene la posibilidad de ejecutar la aplicación para obtener los datos notificado o simplemente ignorar el mensaje.
+    Cuando un dispositivo móvil recibe una notificación de una aplicación que no está ejecutada en ese momento, el sistema notifica al usuario a través de un mensaje de alerta, un sonido determinado o un número indicador en el icono de la aplicación (o una combinación de este conjunto) de un evento a tratar por parte del usuario. El usuario, en todo momento, tiene la posibilidad de ejecutar la aplicación para obtener los datos notificados o simplemente ignorar el mensaje.
 
      \begin{figure}[h!]
     \centering
@@ -1171,12 +1104,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
    \label{fig:Notificacion envio}
 \end{figure}
 
- Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.\cite{betfair:web}
-
-\bibliographystyle{plain}
-\bibliography{betting.bib}
-
-
+ Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.
 
 \end{document}
 
