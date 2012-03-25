@@ -191,7 +191,7 @@ Debido a la aparición de estas casas de intercambio, aparecen dos nuevas modalid
  
  \subsection{Trading}
  
-  Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros.  Esta modalidad se puede realizar en la casa de apuestas tradicionales pero para ello necesitas usar varias casas. Es decir, en una casa cubre la apuesta a favor de un evento mientras que otra casa ve más interesante cubrir la opuesta. Este término también se suele usar en operaciones financieras, como por ejemplo la Bolsa.
+ Se trata de apostar a favor y en contra sobre un mismo evento obteniendo así una ganancia segura en unos casos o minimizar la pérdida en otros.  Esta modalidad se puede realizar en la casa de apuestas tradicionales pero para ello necesitas usar varias casas. Es decir, en una casa cubre la apuesta a favor de un evento mientras que otra casa ve más interesante cubrir la opuesta. Este término también se suele usar en operaciones financieras, como por ejemplo la Bolsa.
   
   
   Este método se suele dar en dos escenarios típicos:
@@ -204,8 +204,6 @@ Debido a la aparición de estas casas de intercambio, aparecen dos nuevas modalid
 	   Lo contrario que el punto anterior. Es decir, el mercado evoluciona de tal manera que la cuota de la apuesta en contra es mayor que la ya realizada a favor. En este caso lo que se persigue es minimizar la pérdida segura.
 \end{itemize}
 
-%\fxnote{Tienes que pensar en el lector, imagina a alguien que entiende de probabilidades pero que jamás ha hecho una apuesta.}
-%\fxnote{Hay que meter más secciones, aquí empezaría el ``trading''}
 
 A continuación exponemos un ejemplo de caso típico de \emph{trading}.
 %\begin{figure} [h]
@@ -236,11 +234,9 @@ A continuación exponemos un ejemplo de caso típico de \emph{trading}.
 
 En la tabla
 % \fxnote{En Latex jamás escribes un número, todo son referencias: \ref{fig:Inicio}}, 
-podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nadal y Roger Federer. La cuota a favor de Rafa Nadal está mucho más alta que la de Roger Federer.  En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal pierde el primer set, esto desemboca en cambios en la tabla de apuestas. %\fxnote{Es inconsistente, si Nadal pierde el primer set se pagaría más alto que al principio del partido.}
+podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nadal y Roger Federer. La cuota a favor de Rafa Nadal está mucho más alta que la de Roger Federer.  En el mundo de las apuestas, influyen todos los pequeños factores que al aficionado se les escapa. Supongamos que Nadal gana los dos primeros sets, esto desemboca en cambios en la tabla de apuestas. 
 
-  Vemos ahora que el mercado ha cambiado. Ahora mismo se refleja una 
-  %\fxnote{¿clara?} 
-  ventaja para la victoria de Roger Federer.
+  Vemos ahora que el mercado ha cambiado. Ahora la cuota de Nadal a bajado claramente.
    
  \begin{center}
     \begin{tabular}{| c | c | c |}
@@ -249,10 +245,10 @@ podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nad
       players & A favor & En contra\\
       \hline
       \hline
-      Rafa Nadal & 2.5 & 1.2\\
+      Rafa Nadal & 1.2 & 1.5\\
       \hline
       \hline
-      Roger Federer & 1.5 & 2\\
+      Roger Federer & 1.8 & 1.3\\
       \hline
       \hline
     \end{tabular}
@@ -265,42 +261,43 @@ podemos ver las cuotas a favor y en contra de un partido de tenis entre Rafa Nad
    %  \caption{Situacion cambiante}
    %\label{fig:Inicio}
 %\end{figure}
+En las apuestas, al estar ligas claramente a estadísticas, nunca podemos asegurar un resultado por muchas condiciones favorables que se den. En este caso, debido a que es un partido con dos jugadores de primer nivel, tenemos la ocasión de asegurar beneficios si apostamos en contra de Nadal. Aunque pueda parecer raro, siempre puede haber condiciones que afecten claramente a los resultados como por ejemplo una lesión de Nadal.
 
 Al inicio del ejemplo realizamos una apuesta a favor de Rafa Nadal por 50 euros, con lo que tendríamos:
 
 %\fxnote{¿Por qué apostar a favor de Nada? ¿Sabemos algo que nadie sabe? ¿Intuímos algo? ¿Tenemos datos estadísticos?}   	
 	 
 \begin{displaymath}
-  Beneficio = (1.8 \times 50) - 50 =  40 \euro  
+  Beneficio = (2.18 \times 50) - 50 =  59 \euro  
 \end{displaymath}
 
-Por lo que tenemos 40 euros si ganal Nadal, en caso contrario:
+Por lo que tenemos 59 euros si ganal Nadal, en caso contrario:
  
  \begin{displaymath}
   Riesgo = - 50 \euro 
 \end{displaymath}
 Tendremos una pérdida de 50 euros si pierda Nadal.
 	
-Un tiempo más adelante, el mercado ha cambiado debido al resultado del primer set, Nadal ya no es tan favorito para la victoria.
+Un tiempo más adelante, el mercado ha cambiado debido al resultado de los dos primeros set, Nadal ya es favorito pero queremos asegurarnos un beneficio seguro.
   
 Para asegurar el dinero apostado anteriormente realizamos una apuesta en contra de Nadal. De tal forma que nos queda:
   \begin{displaymath}
-  Beneficio = 70 \euro 
+  Beneficio = 60 \euro 
   \end{displaymath} euros si pierde Nadal.
    \begin{displaymath}
-  Riesgo = 70 - (1.2 \times 70) = -14 \euro
+  Riesgo = 60 - (1.5 \times 60) = -30 \euro
   \end{displaymath} euros si gana Nadal.
   
 	 
 Al final si gana Rafa Nadal obtenemos: 
    \begin{displaymath}
-   40 - 14 = 26 \euro 
+   59 - 30 = 29 \euro 
    \end{displaymath}
    
 Si pierde Nadal y por tanto gana Roger Federar tenemos:
    
   \begin{displaymath}
-  70 - 50 = 20 \euro
+  60 - 50 = 10 \euro
   \end{displaymath}
        
    Con lo que estamos cubiertos ante cualquier resultado del partido. En ambos casos tenemos ganancias. 
@@ -308,6 +305,7 @@ Si pierde Nadal y por tanto gana Roger Federar tenemos:
    El escenario expuesto es uno de los mejores casos que nos pueden dar ya que obtenemos beneficio en ambos casos. Pero puede suceder que hayamos apostado por un evento con demasiada confianza y luego en un futuro vemos que puede ser una ruina. En ese escenario, el objetivo prioritario sería minimizar la pérdida apostando en contra del evento en cuestión.
 
  Las casas de apuestas nos ofrecen una gran variedad de apuestas en diferentes deportes que nos permiten adecuarnos a nuestros gustos y conocimientos. 
+
    
 \section{Betfair}
 
@@ -899,7 +897,12 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   
   
   
-  (ADJUNTAR IMAGEN COMPARATIVA ENTRE LAS DOS PANTALLAS, SILVIA NO TENGO PHOTOSHOP PERO EN ESTE FINDE LO INSTALO :) ). %ARRRR SACAR IMAGEN DEL TERMINAL
+  \begin{figure}[h!]
+  	\centering 
+  		\includegraphics[width=0.7\textwidth]{./images/lenguajes.jpg}
+	\caption{Ejemplo de interfaz con distinto lenguaje seleccionado.} 
+	\label{fig:Ejemplo de interfaz con distinto lenguaje seleccionado.}
+\end{figure} 
   
   
   
@@ -1112,7 +1115,11 @@ El punto más importante del presente trabajo ha sido el portado de un servicio w
    \label{fig:Notificacion envio}
 \end{figure}
 
- Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor.
+ Como podemos ver, mediante estas notificaciones podemos tener al cliente lo más actualizado posible minimizando el gasto de batería si le tuviese que conectar periódicamente con algún servidor. \cite{betfair:web}
+
+\bibliography{betting}
+\bibliographystyle{plain}
+\nocite{*}
 
 \end{document}
 
