@@ -1,48 +1,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Requisitos}
 \label{ch:requisitos}
-%\fxnote{En este capítulo, bla bla bla}
 En este capítulo se presentan los requisitos a cumplir por la aplicación. Comenzaremos explicando el escenario al que pertenece la aplicación y terminaremos presentando las historias de uso de la misma.
 \section{Escenario}
-%\fxnote{¿Qué signfica ``escenario'' aquí? La palabra escenario tiene un significado muy claro en la ingeniería de requisitos y suelen ser descripciones de situaciones de uso de la aplicación.}
 
-El escenario que se pretende %\fxnote{corrección ortográfica?} 
-cubrir con la aplicación es la posibilidad de navegar y realizar apuestas sobre eventos deportivos del portal Betfair.com. Se pretende cubrir las funcionalidades básicas que ofrece Betfair en su portal web para poder realizar apuestas. %\fxnote{Cuidado, las funcionalidades son importantes a través de la web, nosotros no las hemos implementado todas.}
-
-%\section{Historias de usuario}
-
-%\fxnote{Otra idea puede ser referirnos al interfaz web para dejar claras algunos requisitos.}
-
-%\fxnote{Entre los requisitos llamados habitualmente ``no funcionales'' (odio el adjetivo) está el de adaptar la forma en la que se muestra la información a las limitaciones y capacidades del propio terminal.}
-
-%\fxnote{¿Qué vas a contar aquí? ¿Qué significa ``historias de uso''? ¿No será ``historias de usuario''? ¿Vas a seguir algún ``estándar''? ¿XP? Como ejemplo: en \url{http://en.wikipedia.org/wiki/User_story} puedes encontrar algo de texto introductorio, incluidas ventajas e inconvenientes. En \url{http://www.agilemodeling.com/artifacts/userStory.htm} puedes encontrar más detalle sobre cómo hacerlas. En el TFC de Antonio puedes encontrar incluso macros latex para que aparezcan más bonitas.}
-
-%\fxnote{Entre los requisitos puedes añadir seguir alguna guía de estilo de Apple o del desarrollo para iPhone (que no se si existen).}
+En el contexto de este trabajo de fin de carrera, un escenario es una descripción concreta del comportamiento de la aplicación en una determinada situación. El escenario general que se pretende cubrir con la aplicación es la posibilidad de navegar y realizar apuestas sobre eventos deportivos del portal Betfair.com. Se pretende cubrir las funcionalidades básicas que ofrece Betfair en su portal web para poder realizar apuestas y la posibilidad de realizar \emph{tranding} en las apuestas realizadas.
 
 \section{Historias de usuario}
-%\fxnote{Mejor ``Historias de Uso''}
-\subsection{Instalación} Para poder instalar la aplicación sólo se necesitará una cuenta del programa iTunes Store de Apple. Es gratuita. La aplicación estará disponible dentro del programa App Store del dispositivo. Solamente habrá que descargar la aplicación de dicho portal. Alternativamente podemos descargarla también desde el programa iTunes para Windows y Mac. Una vez descargada podemos transferirla al dispositivo sincronizando mediante Wifi o cable USB. %\fxnote{¿No existen otras forma de instalar las aplicaciones?}
+ Una de las formas de describir los requisitos es mediante la técnica de historias de uso. Son una representación de un requisito de software en una o dos frases usando un lenguaje común al usuario.
+ 
+\subsection{Instalación} Para poder instalar la aplicación sólo se necesitará una cuenta del programa iTunes Store de Apple. La aplicación estará disponible para su descarga dentro de la tienda de aplicaciones  \emph{App Store} del dispositivo.  Alternativamente se podrá descargar también desde el programa iTunes para Windows y Mac. 
 \subsection{Actualizar la aplicación}
 La aplicación  App Store  del dispositivo será la encargada de comunicar al usuario la aparición de una nueva versión del aplicativo. Para actualizarla simplemente habrá que seguir las indicaciones de dicho programa. %\fxnote{Lo mismo  de antes}
 
 \subsection{Desinstalar}
-Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma unos segundos hasta que el icono empiece a vibrar. Inmediatamente pulsamos sobre el icono X que aparecerá es la esquina superior izquierda del icono de la aplicación. %\fxnote{¿qué es la ``X''? ¿es estándar?} que aparecerá sobre la misma.
+Para desinstalar la aplicación simplemente se mantiene pulsado el icono de la misma unos segundos hasta que el icono empiece a vibrar. Inmediatamente pulsamos sobre el botón \textsf{X} que aparecerá es la esquina superior izquierda del icono de la aplicación. 
 \subsection{Ejecución}
 Para lanzar la aplicación sólo hay que pulsar el icono que aparece en la pantalla principal del dispositivo.
 \subsection{Configurar la aplicación}
-Se podrán configurar los diferentes aspectos de la aplicación tales como el idioma o las credenciales de usuario a través del menú de ajustes del dispositivo. En el caso de ser la primera vez que se lance la aplicación, ésta automáticamente redirigirá al usuario a dicha pantalla para configurarla.
+Se podrán configurar los diferentes aspectos de la aplicación tales como el idioma o las credenciales de acceso del  usuario a través del menú de ajustes del dispositivo. 
+\begin{figure}[H]
+    \centering
+       \includegraphics[width=0.3\textwidth]{./images/req_conf_app.png}
+     \caption{Requisito configurar la aplicación}
+   \label{fig:Requisito configurar la aplicación}
+\end{figure}
 \subsection{Gestión de los eventos}
-Se podrá navegar y obtener información de todos los eventos deportivos disponibles del portal Betfair a través una  %\fxnote{más bien de ``una''}
- jerarquía de menús de la aplicación siguiendo las hojas de estilo de interfaz de usuario de Apple.% \fxnote{¿Qué es un evento?}
+Se podrá navegar y obtener información de todos los eventos deportivos disponibles del portal Betfair. La aplicación ha de representar la información a través una jerarquía descendiente desde eventos hacia mercados de Betfair siguiendo las hojas de estilo de la interfaz de usuario de Apple.
+\begin{figure}[H]
+    \centering
+       \includegraphics[width=0.3\textwidth]{./images/req_eventos.png}
+     \caption{Requisito gestión de los eventos}
+   \label{fig:Requisito eventos}
+\end{figure}
 \subsection{Realizar una apuesta}
-%\fxnote{Recuerda que esto son requisitos, no el manual de usuario. Debemos decir lo que la aplicación ``va'' a permitir o lo que esperamos de ella. El ``cómo'' está más adelante.}
-La aplicación permitirá la realización de una apuesta sobre un evento específico incluyendo la cantidad y cuota deseada. El sistema notificará al usuario el resultado de la operación.
+La aplicación permitirá la realización de una apuesta sobre un mercado específico incluyendo la cantidad y cuota deseada. El sistema notificará al usuario el resultado de la operación.
+\begin{figure}[H]
+    \centering
+       \includegraphics[width=0.3\textwidth]{./images/req_apuestas.png}
+     \caption{Requisito realizar una apuesta}
+   \label{fig:Requisito realizar una apuesta}
+\end{figure}
 \subsection{Gestionar las apuestas}
-La aplicación será capaz de recopilar todas las apuestas realizadas sobre Betfair. Por cada apuesta, el sistema mostrará las opciones disponibles: información detallada de la apuesta, asesoramiento para trading y estado actual del mercado. %\fxnote{¿Que son?}
-\subsection{Realizar trading sobre una apuesta ya realizada}
-El sistema será capaz de asesorar para realizar trading sobre una apuesta ya realizada anteriormente. Para ello, se mostrará una tabla con las opciones disponibles dentro del resumen de una apuesta ya realizada. Se podrán configurar los tradings para que se lancen automáticamente por parte de la aplicación.
-
-%\fxnote{Aunque no acabemos implementando, el asesoramiento para trading automático debería estar en la lista de requisitos.}
+La aplicación será capaz de recopilar todas las apuestas realizadas por el usuario sobre Betfair. Por cada apuesta, el sistema mostrará la información detallada de la apuesta, asesoramiento para \emph{trading} y estado actual del mercado.
+\begin{figure}[H]
+    \centering
+       \includegraphics[width=0.3\textwidth]{./images/req_misapuestas.png}
+     \caption{Requisito gestionar mis apuestas}
+   \label{fig:Requisito gestionar mis apuestas}
+\end{figure}
+\subsection{Realizar \emph{trading} sobre una apuesta ya realizada}
+El sistema será capaz de asesorar para realizar \emph{trading} sobre una apuesta ya realizada anteriormente. La aplicación recomendará la apuesta más asequible a las condiciones del mercado. Se  podrá configurar la aplicación para que el \emph{trading} se realice de manera automática.
+\begin{figure}[H]
+    \centering
+       \includegraphics[width=0.3\textwidth]{./images/req_trading.png}
+     \caption{Requisito realizar \emph{trading} sobre una apuesta}
+   \label{fig:Requisito trading}
+\end{figure}
 
 %%% Local Variables: 
 %%% mode: latex

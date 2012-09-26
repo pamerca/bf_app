@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Implementación}
 \label{ch:implemetacion}
- En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos detallando el entorno de ejecución y el lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevantes de la implementación.
+ En este capítulo se describirán todos los detalles relativos a la implementación de la aplicación. Empezaremos detallando el entorno de ejecución y el lenguaje de programación usado para su desarrollo y terminaremos destacando los detalles relevantes de la implementación. A saber:
  
 \section{Entorno de ejecución}
- La aplicación desarrollada se ejecuta en un entorno llamado \emph{Cocoa Touch}. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el sistema operativo iOS. Este entorno de desarrollo nos facilita a los desarrolladores la tarea de pasar de la etapa de diseño a la etapa de desarrollo para crear una aplicación. Cocoa Touch proviene del entorno de la plataforma \emph{Mac OS}, entorno de la que dependen los equipo de sobremesa de Apple. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
+ La aplicación desarrollada se ejecuta en un entorno llamado \emph{Cocoa Touch}. Cocoa es un conjunto de frameworks orientados a objetos que proporcionan un entorno de ejecución para las aplicaciones que se ejecutan en el sistema operativo \emph{iOS}. Este entorno de desarrollo nos facilita a los desarrolladores la tarea de pasar de la etapa de diseño a la etapa de desarrollo para crear una aplicación. \emph{Cocoa Touch} proviene del entorno de la plataforma \emph{Mac OS}, entorno de los que dependen los equipos de sobremesa de Apple. Se puede decir que es la misma plataforma añadiendo el soporte para los eventos táctiles y orientados a la tecnología móvil. 
  
- Como ya hemos comentado, Cocoa presenta dos caras: 
+ \emph{Cocoa} presenta dos caras: 
  \begin{itemize}
 	\item Entorno de ejecución: las aplicaciones desarrolladas en Cocoa presentan la interfaz de usuario de la aplicación y están fuertemente integradas con otras partes del sistema operativo como por ejemplo el buscador del sistema de ficheros.
 	\item Entorno de desarrollo: Cocoa es una suite de componentes software que están orientados a objetos y que te permiten rápidamente crear robustas y completas aplicaciones para el sistema operativo.
@@ -15,15 +15,15 @@
  \begin{figure}[ht!]
     \centering
        \includegraphics[width=0.9\textwidth]{./images/architecture_stack.jpg}
-     \caption{Entorno iOS }
+     \caption{Entorno \emph{iOS}}
    \label{fig:iOS Platform}
 \end{figure}
  
- A pesar de que la estructura del iOS es similar a la de la plataforma Mac OS, existen diferencias significantes. El diagrama del iOS muestra una plataforma como una serie de capas que van desde en núcleo de sistema operativo hasta un conjunto de frameworks de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
+ A pesar de que la estructura del \emph{iOS} es similar a la de la plataforma \emph{Mac OS}, existen diferencias significantes. El diagrama del \emph{iOS} muestra una plataforma como una serie de capas que van desde en núcleo de sistema operativo hasta un conjunto de frameworks de aplicación, la más crítica (para las aplicaciones) empieza con la capa UIKit.
  
- Para desarrollar en entornos Cocoa se utiliza el lenguaje \emph{Objective-C}. Este lenguaje está basado en la programación orientada a objetos. Se define como un superconjunto del lenguaje de programación \emph{C}, es decir, podemos considerarle como una fina capa que complementa a C. La sintaxis de objetos de Objective-C deriva de \emph{Smalltalk}\footnote{Smalltalk es un lenguaje de programación que permite realizar tareas de computación mediante la interacción con un entorno de objetos virtuales.}.
+ Para desarrollar en entornos \emph{Cocoa} se utiliza el lenguaje \emph{Objective-C}. Este lenguaje está basado en la programación orientada a objetos. Se define como un superconjunto del lenguaje de programación \emph{C}, es decir, podemos considerarle como una fina capa que complementa a \emph{C}. La sintaxis de objetos de \emph{Objective-C} deriva de \emph{Smalltalk}\footnote{Smalltalk es un lenguaje de programación que permite realizar tareas de computación mediante la interacción con un entorno de objetos virtuales.}.
  
-  Como todo lenguaje de programación orientado a objetos, Objective-C nos proporciona principalmente:
+  Como todo lenguaje de programación orientado a objetos, \emph{Objective-C} nos proporciona principalmente:
  \begin{itemize}
 	\item Un lenguaje de programación orientado a objetos.
 	\item Una extensa librería de objetos.
@@ -31,12 +31,18 @@
 	\item Un entorno de ejecución propio.
 \end{itemize}
 
- Aparte de las características propias del lenguaje, al estar basado en el lenguaje C, su compilador es capaz de ejecutar líneas de código codificadas en C. Esta característica permite usar librerías realizadas en C en programas desarrollados en Objective-C. 
+ Aparte de las características propias del lenguaje, al estar basado en el lenguaje \emph{C}, su compilador es capaz de ejecutar líneas de código codificadas en \emph{C}. Esta característica permite usar librerías realizadas en \emph{C} en programas desarrollados en \emph{Objective-C}.  En el presente trabajo hemos optado por usar el lenguaje \emph{Objective-C} en todo el desarrollo por ser el recomendado por Apple para una mejor integración con \emph{iOS}.
  
 \section{Estructura de la aplicación}
- Cuando construimos una aplicación para el sistema operativo iOS usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar proyecto escrito en Objective-C. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que Xcode es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas \ldots). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
+ Cuando construimos una aplicación para el sistema operativo \emph{iOS} usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar proyecto escrito en \emph{Objective-C}. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que \emph{Xcode} es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas \ldots). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
  
-\begin{tabularx}{15cm}{|lX|Xl|} 
+ % \begin{tabularx}{15cm}{|lX|Xl|} 
+ \tablefirsthead{Contenido de un paquete Xcode\\}
+\tablehead{Contenido de un paquete Xcode\\}
+\tabletail{Continua en la siguiente página\\}
+\tablelasttail{\\}
+\tablecaption{Contenido de un paquete Xcode}
+\begin{supertabular}{||c|c||}
 \hline 
 \rowcolor[gray]{0.9}Archivo & Descripción\\ 
 \hline 
@@ -79,12 +85,12 @@ MyBetPropertiesView.xib & Contiene los objetos necesarios de la interfaz de usua
 TradingController.xib & Contiene los objetos necesarios de la interfaz de usuario con los detalles acerca del trading sobre una apuesta. \\
 \hline 
 \label{fig:componentes}
-\end{tabularx} 
+\end{supertabular} 
   
   
  
 \section{Internacionalización}
- Una parte importante a destacar en el proyecto es la posibilidad de establecer el lenguaje de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación del iPhone debe tener la posibilidad de poder mostrar varios lenguajes y tener uno por defecto. Cada lenguaje esta implementado en la carpeta X.lprj del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos lenguajes también se podrá especificar una imagen  de portada, icono de la aplicación, mensajes de alerta\ldots  adecuado al lenguaje escogido por el usuario. Por defecto, el sistema operativo iOS arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo lenguaje especificado en las preferencias del terminal, es decir, es el mismo lenguaje que esté configurado en éste. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
+ Una parte importante a destacar en el proyecto es la posibilidad de establecer el idioma de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación de \emph{iOS} debe tener la posibilidad de poder mostrar varios idiomas y tener uno por defecto. Cada lenguaje esta implementado en la carpeta \emph{nombre-aplicación.lprj} del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos idiomas también se podrá especificar una imagen de portada, icono de la aplicación, mensajes de alerta\ldots  adecuado al idioma escogido por el usuario. Por defecto, el sistema operativo \emph{iOS} arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo idioma especificado en las preferencias del terminal, es decir, es el mismo lenguaje que esté configurado en éste. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
 
   \begin{figure}[h!]
     \centering
@@ -101,13 +107,13 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   \begin{figure}[h!]
   	\centering 
   		\includegraphics[width=0.7\textwidth]{./images/lenguajes.jpg}
-	\caption{Ejemplo de interfaz con distinto lenguaje seleccionado.} 
-	\label{fig:Ejemplo de interfaz con distinto lenguaje seleccionado.}
+	\caption{Ejemplo de interfaz con distinto idioma seleccionado.} 
+	\label{fig:Ejemplo de interfaz con distinto idioma seleccionado.}
 \end{figure} 
   
   
   
-  Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}. Este archivo se ubica dentro de la carpeta es.lpjr o en.lpjr según sea la tabla de traducción en inglés o en español. A continuación se muestra un ejemplo del contenido de dicho fichero.
+  Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}.  Este archivo contiene una lista de la tupla etiqueta-traducción. El sistema, cada vez que encuentra una etiqueta en la interfaz de usuario la sustituye por la traducción del idioma en el que este configurado el terminal. A continuación se muestra un ejemplo del contenido de dicho fichero.
   
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
 /* 
@@ -130,17 +136,21 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 "Bet for" = "Apostar por";  
 \end{lstlisting}
 
+  
+   Por ejemplo, para mostrar el título ``Mis Apuestas'' en español el sistema buscará la etiqueta en el archivo \emph{Localizable.string} perteneciente al idioma español. En el código especificaremos la etiqueta a mostrar ``My bets'' y el sistema, en tiempo de ejecución, mostrará su traducción, en este caso ``Mis apuestas''.  Este archivo se ubica dentro de la carpeta es.lpjr o en.lpjr según sea la tabla de traducción en inglés o en español. 
+   
+   Berfair, en su \emph{API} nos permite especificar en cada servicio en que idioma queremos recibir la respuesta. Con la combinación de ambas funcionalidades tenemos en el presente fin de carrera la aplicación completamente traducidas en dos idiomas disponibles: inglés y español. 
    
 \section{Interpretación XML de Betfair a Cocoa Touch}
- Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave a destacar es la adaptación del API de Betfair a la arquitectura del terminal iPhone. 
+ Como ya tratamos en el capítulo \ref{ch:diseno}, un tema clave a destacar es la adaptación del \emph{API} de Betfair a la arquitectura del terminal iPhone. 
  
   Betfair ofrece el acceso a todos sus servicios a aquellos programadores que quieren incluirlos a través de aplicaciones. Es un camino eficaz para hacer llegar sus servicios a usuarios de otras plataformas o para usuarios expertos que requieran de una interfaz de usuario más experta, orientada a sus necesidades. Por supuesto que esta política requiere de un sistema de seguridad para evitar fraudes o ataque por parte de la comunidad de hackers.
    
-  En el diseño de una aplicación que debe hacer uso de servicios ofrecidos por un sistema externo se necesita algún tipo de API o interfaz para acceder a los mismos. Lo primero a tener en cuenta es lo que se necesita para hacer uso de las funciones proporcionadas por el API. Para acceder a los servicios ofrecidos por Betfair, ya vimos que su interfaz de acceso se describía mediante un archivo en formato WSDL. Este tipo de archivo es muy común y se usa para describir interfaces públicas de acceso a servicios web. Está basado en XML y contiene la descripción de la forma de comunicación con el servidor que ofrece los servicios web, es decir, los requisitos, parámetros y formatos de los mensajes necesarios para interactuar con los servicios disponibles. 
+  En el diseño de una aplicación que debe hacer uso de servicios web ofrecidos por un sistema externo se necesita algún tipo de \emph{API} o interfaz para acceder a los mismos. Lo primero a tener en cuenta es lo que se necesita para hacer uso de las funciones proporcionadas por el \emph{API}. Para acceder a los servicios ofrecidos por Betfair, como ya vimos en la figura \ref{fig:servicioweb} necesitamos conocer la interfaz de acceso que se describe  en un archivo en formato WSDL. Este tipo de archivo es muy común y se usa para describir interfaces públicas de acceso a servicios web. Está basado en XML y contiene los requisitos, parámetros y formatos de los mensajes necesarios para interactuar con los servicios disponibles. 
    
-   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo los aspectos más básicos de la comunicación. Siendo el iPhone una plataforma novedosa, no existe a día de hoy este tipo de herramientas por lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
+   Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo los aspectos más básicos de la comunicación. Siendo \emph{iOS} una plataforma novedosa, no existe a día de hoy este tipo de herramientas por lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
       
-   A continuación se muestra un ejemplo del proceso de comunicación con Betfair para, en este caso, hacer uso del servicio \emph{Login } definido en el archivo WSDL que ofrece Betfair. En él se muestra la descripción de los parámetros necesarios de la comunicación.
+   A continuación se muestra un fragmento del archivo WSDL de Betfair. En este caso describe los parámetros necesarios para hacer uso del servicio \emph{Login }.
    
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
 
@@ -156,8 +166,9 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
       </xsd:complexType>
 \end{lstlisting}
 
-
-   Para comenzar, construimos la estructura de los mensajes a enviar en formato XML, haciendo un esquema por cada servicio disponible. Para ello, se desglosó el archivo en varias partes. La primera fue establecer la dirección web donde enviar los mensajes. La segunda fue construir las estructuras XML de cada servicio web. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. Para este caso concreto, formato del mensaje en XML a enviar sería el siguiente:
+   En el listado podemos comprobar como nos hacen falta 6 parámetros para poder hacer uso del servicio \emph{Login}: \emph{ipAddress}, \emph{locationId}, \emph{password}, \emph{productId}, \emph{username} y \emph{vendorSoftwareId}. Todos estos parámetros nos lo proporciona Betfair cuando nos damos de alta en su programa de desarrollo.
+   
+   En la aplicación, para comenzar la comunicación con el servidor de Betfair, necesitamos construir la estructura de los mensajes a enviar en formato XML. Para ello, se desglosa el archivo en varias partes. La primera establecer la dirección web donde enviar los mensajes. La segunda construir las estructuras XML de cada servicio web tal y como viene descrito en el archivo WSDL. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. Para el caso concreto del \emph{Login} el formato del mensaje en XML a enviar sería el siguiente:
  
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
   <?xml version="1.0" encoding="UTF-8"?>
@@ -176,15 +187,15 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   </SOAP-ENV:Envelope> 
  \end{lstlisting}
  
-  Una vez construido el cuerpo del mensaje, sólo nos hace falta conocer la dirección de destino para el mensaje HTML a enviar a los servidores de Betfair:
+  Una vez construido el cuerpo del mensaje, sólo nos hace falta conocer la dirección de destino para el mensaje a enviar a los servidores de Betfair. Dicha dirección también viene descrita en el archivo WSDL:
   
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
   	URL = "https://api.betfair.com/betex-api-public-ws/BFService";
 \end{lstlisting}
 
-  Con todo lo necesario se encapsula toda la información bajo un mensaje HTML y se envía a Betfair. 
+  Una vez la aplicación ha realizado estos pasos, toda la información se envía a Betfair en un mensaje HTML. 
   
-  Para este caso concreto, una vez enviado el mensaje de petición esperamos la respuesta con el siguiente formato:
+  Una vez enviado el mensaje de petición la aplicación espera la respuesta de Betfair. El formato de la respuesta también viene definido en el archivo WSDL. En este caso la repuesta se recibe con el siguiente formato:
 
 \begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -208,7 +219,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 </soap:Envelope>
  \end{lstlisting}
  
-  Si observamos los campos \emph{errorCode} vemos que se reciben en ambos casos un \emph{OK} al envío anterior. Una vez comprobado la coherencia en la respuesta a salvo de fallos de recepción se procede a descifrar la respuesta. Para ello, se implementó un parser que convierte este mensaje en una estructura de datos válida para nuestra aplicación.  Este se procesa y se muestra al usuario la información recibida en un formato más adecuado. En la figura \ref{fig:proceso} se muestra el procedimiento completo del proceso.
+  Lo primera que realiza la aplicación al recibir el mensaje es observar los campos \emph{errorCode}. Este campo nos indica si hay algún problema en los parámetros de la petición anteriormente enviada. En el ejemplo, en ambos casos recibimos un \emph{OK}. Una vez comprobado la coherencia en la respuesta a salvo de fallos de recepción se procede a descifrar la respuesta. Para ello, en la aplicación se implementó un parser que convierte este mensaje en una estructura de datos válida para nuestro desarrollo.  La aplicación procesa el mensaje en XML y finalmente muestra al usuario la información recibida en un formato más adecuado. En la figura \ref{fig:proceso} se muestra el procedimiento completo del proceso.
        
  \begin{figure}[h!]
     \centering
