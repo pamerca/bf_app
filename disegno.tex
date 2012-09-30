@@ -247,7 +247,7 @@ Resaltar en este apartado que dado que nuestra aplicación no soporta la platafo
   
  \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.7\textwidth]{./images/tv_datamodel_top.jpg}
+    \includegraphics[width=0.8\textwidth]{./images/tabla_top.png}
   \caption{Vista de tabla del top de la jerarquía }
   \label{fig:table-view-top}
 \end{figure} 
@@ -256,7 +256,7 @@ Resaltar en este apartado que dado que nuestra aplicación no soporta la platafo
 
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.7\textwidth]{./images/tv_datamodel_middle.jpg}
+    \includegraphics[width=0.8\textwidth]{./images/tabla_middle.png}
   \caption{Vista de tabla de la mitad de la jerarquía}
   \label{fig:table-view-middle}
 \end{figure} 
@@ -265,7 +265,7 @@ Resaltar en este apartado que dado que nuestra aplicación no soporta la platafo
 
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.8\textwidth]{./images/tv_datamodel_detail.jpg}
+    \includegraphics[width=0.8\textwidth]{./images/tabla_detail.png}
   \caption{Vista de tabla detallada del final de la jerarquía }
   \label{fig:detail-table-view}
 \end{figure} 
@@ -291,6 +291,9 @@ Resaltar en este apartado que dado que nuestra aplicación no soporta la platafo
  
 \subsubsection{Controlador de menú principal (RootViewController)}
  Es la encargada de mostrar las opciones principales del programa y recoger los inputs del usuario para lanzar el controlador adecuado a la elección del usuario. También se encarga de gestionar el inicio de sesión del usuario para los servicios web de Betfair. Para ello hace uso del servicio \emph{login} de Betfair a través de la clase de comunicación llamada API.
+ 
+ \subsubsection{Controlador de perfil de usuario (ViewProfileController)}
+ Muestra al usuario una lista con toda la información registrada en su perfil de Betfair, tales como el nombre de usuario, información de contacto y límite de apuestas diaría. Hace uso del servicio de Betfair \emph{ViewProfile}  a través de la clase API del modelo de la aplicación.
  
 \subsubsection{Controlador de tipos de eventos (EventsTypeController)}
  Muestra al usuario una lista con todos los tipos de eventos activos por los que se puede apostar dentro de Betfair. En un futuro se podrá gestionar por fecha de finalización, orden alfabético o búsqueda directa de eventos. Una vez seleccionado el evento deseado, se lanza el controlador de eventos y mercados con la información relativa al evento previamente seleccionado. Hace uso del servicio de Betfair \emph{GetActiveEventsTypes}  a través de la clase API del modelo de la aplicación.
@@ -336,16 +339,16 @@ Resaltar en este apartado que dado que nuestra aplicación no soporta la platafo
 \subsubsection{Controlador Parser (ParserXML)}
  Es la clase encargada de estructurar los datos de envío o recepción del servicio web a una estructura de datos adecuada para la aplicación y para la comunicación con Betfair.
 
-\section{Diagrama de Clases}
- En la siguiente figura podemos ver el diagrama de clases del proyecto. Observamos que el núcleo principal de esta aplicación es la clase ``API''. Como bien hemos descrito, es la encargada de comunicarse con el servidor de Betfair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un \emph{parser} de XML para procesar los datos tantos del mensaje de petición de servicio como del mensaje de respuesta. De esta tarea se encarga la clase ``ParserXML''.
+\section{Diagrama de Estructura UML}
+ En la siguiente figura podemos ver el diagrama de la estructura del proyecto. Observamos que el núcleo principal de esta aplicación es la clase ``API''. Como bien hemos descrito, es la encargada de comunicarse con el servidor de Betfair tanto para enviar las peticiones como de procesar las respuestas. Esta clase necesita un \emph{parser} de XML para procesar los datos tantos del mensaje de petición de servicio como del mensaje de respuesta. De esta tarea se encarga la clase ``ParserXML''.
  
   Las clases que rodean a API son todos los controladores de vista de la aplicación. Son los que reciben las peticiones de la vista y, según el caso, hacer uso de un servicio concreto de Betfair a través de la clase ``API''. ``RootViewController'' es la clase a la que el sistema le otorga el control una vez se ha lanzado la aplicación. Su principal función es procesar el menú principal.
 
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.2\textwidth]{./images/class_diagram.png}
-     \caption{Diagrama de clases}
-   \label{fig:Diagrama de clases}
+       \includegraphics[width=1.2\textwidth]{./images/UML_Diagram.png}
+     \caption{Diagrama de estructura UML}
+   \label{fig:Diagrama de estructura UML}
 \end{figure}
 
 %%% Local Variables: 
