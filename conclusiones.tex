@@ -18,7 +18,7 @@ Uno de los puntos claves del presente trabajo ha sido el portado de un servicio 
 \section{Trabajo futuro}
  Como ya hemos visto en la arquitectura de la aplicación, el sistema está preparado para posibles futuras funcionalidades extras que podemos aportar con los datos que nos ofrece el API. Debido a que el núcleo de la aplicación es la obtención y proceso de la información contenida en Betfair, cualquier desarrollador puede añadir una funcionalidad extra usando los datos anteriores y acoplarlas fácilmente a la arquitectura de la aplicación. Al usar el modelo vista-controlador, la sencillez a la hora de implementar nuevas funcionalidades está mas que probada.
  
-\subsection{\emph{Trading} global por lista de eventos}
+\subsection*{\emph{Trading} global por lista de eventos}
  Una mejora interesante a implementar en un futuro sería la de poder realizar \emph{trading} sobre un mercado entero. Al principio del presente trabajo hemos definido el \emph{trading} como apostar a favor y en contra de un evento determinado para, según nuestra primera apuesta, obtener beneficio seguro o minimizar la pérdida. Pero, apostar a favor de un evento ¿puede suponer que éste afecte al resto del mercado? Pongamos un ejemplo, supongamos que estamos apostando por quién va a ser el campeón del mundial de Sudáfrica. Apostar a favor de un equipo puede llevar la consecuencia de apostar en contra de los restantes participantes si en vez de pensar en un equipo concreto pensamos en el mercado completo. 
  
   Este cambio en nuestro planteamiento supone llevar a cabo un gran control sobre todas las variables que afectan al mercado completo y no sólo por un evento. Para poder analizar completamente los datos de mercado (cuota y precio) necesitamos analizar los datos concretos de cada evento de dicho mercado. Para poder obtener cual sería el conjunto de apuestas a realizar en el mercado para obtener el beneficio tenemos que resolver un conjunto de ecuaciones lineales que representan al mercado cuyas incógnitas serán las cuotas y cantidad a apostar por cada eventos de dicho mercado.    
@@ -31,7 +31,7 @@ Uno de los puntos claves del presente trabajo ha sido el portado de un servicio 
    
     El procedimiento por el cual el usuario es notificado con la solución es implementar la solución de mensajería tipo \emph{push} de Apple en el \emph{iPhone}. A continuación mostramos como son las notificaciones en el terminal, también como mejora a añadir al proyecto.
     
- \subsubsection{Notificación por mensajes \emph{Push} de Apple}
+ \subsubsection*{Notificación por mensajes \emph{Push} de Apple}
    
    En un modelo típico de cliente-servidor, el cliente es el encargado de contactar con el servidor para la descarga de nuevos datos, como por ejemplo el servicio de correo electrónico. En un dispositivo móvil, el cuál siempre tiene el inconveniente de la batería, esta solución no es válida debido al consumo energético en cada consulta al servidor. Para estos casos las notificaciones \emph{push} son las solución a este dilema. Una notificación \emph{push} es un mensaje corto que el servidor envía al cliente para notificarle que tiene datos para ser descargados o eventos pendientes tales como nueva versión de la aplicación. 
    
@@ -65,11 +65,12 @@ Uno de los puntos claves del presente trabajo ha sido el portado de un servicio 
     
  \begin{figure}[h!]
     \centering
-       \includegraphics[width=1.1\textwidth]{./images/remote_notif_simple.jpg}
+       \includegraphics[width=0.95\linewidth]{./images/remote_notif_simple.jpg}
      \caption{Proceso general }
    \label{fig:Notificacion proceso}
 \end{figure}
-   \subsubsection{Registro}
+
+   \subsubsection*{Registro}
 
      El primer paso del proceso es el registro de la aplicación en el servidor de Apple para activar el servicio de notificaciones. Tal y como se muestra en la figura \ref{fig:Notificacion Registro}, la aplicación cliente se conecta al \emph{APNS}\footnote{Apple Push Notification Server, el servidor encargado de recibir y enviar el mensaje de un tercero a un terminal iphone} para la obtención de un identificador (\emph{token}) único para cada aplicación cliente y terminal. El APNS, después de comprobar las credenciales del terminal, genera y registra el \emph{token} a partir del ID del dispositivo y devuelve al terminal su \emph{token} generado. Este \emph{token} identifica al terminal y por lo tanto lo ha de usar nuestro servidor para poder enviar a este terminal un mensaje \emph{push}. Por eso, el último paso del registro es notificar al servidor desde el terminal el \emph{token} generado para su registro interno.
      
@@ -80,7 +81,7 @@ Uno de los puntos claves del presente trabajo ha sido el portado de un servicio 
    \label{fig:Notificacion Registro}
 \end{figure}
   
-     \subsubsection{Envío de una notificación}
+     \subsubsection*{Envío de una notificación}
      
      Tal y como se muestra en la figura \ref{fig:Notificacion envio} cuando el servidor requiere enviar una notificación a un cliente determinado para indicarle que dispone de datos nuevos que descargar, éste envía el mensaje en cuestión junto con el identificador del terminal al APNS. El servidor APNS comprueba que el \emph{token} ha sido generado por un certificado válido y que identifica a un terminal registrado previamente. Si todo esta correcto le envía el mensaje a la aplicación cliente del terminal.
      
