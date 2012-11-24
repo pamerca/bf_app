@@ -34,63 +34,60 @@
  Aparte de las características propias del lenguaje, al estar basado en el lenguaje \emph{C}, su compilador es capaz de ejecutar líneas de código codificadas en \emph{C}. Esta característica permite usar librerías realizadas en \emph{C} en programas desarrollados en \emph{Objective-C}.  En el presente trabajo hemos optado por usar el lenguaje \emph{Objective-C} en todo el desarrollo por ser el recomendado por Apple para una mejor integración con \emph{iOS}.
  
 \section{Estructura de la aplicación}
- Cuando construimos una aplicación para el sistema operativo \emph{iOS} usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar proyecto escrito en \emph{Objective-C}. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que \emph{Xcode} es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas \ldots). La tabla \ref{fig:componentes} lista el contenido del paquete de esta aplicación.
+ Cuando construimos una aplicación para el sistema operativo \emph{iOS} usamos la herramienta que nos proporciona el SDK de Apple \emph{Xcode}. Es un editor software que contiene todos lo necesario para compilar proyecto escrito en \emph{Objective-C}. La ventaja de usar este editor y no uno universal que acepte dicho lenguaje de programación es que \emph{Xcode} es capaz de implementar nuestra aplicación en lo que llamamos un paquete. Este paquete es un directorio en el sistema de ficheros que agrupa los recursos necesarios para la aplicación en un mismo lugar. Dicho paquete contiene el ejecutable y cualquier recurso usado por el mismo (por ejemplo, el icono de la aplicación, imágenes contenidas \ldots). El siguiente cuadro lista el contenido del paquete de esta aplicación.
  
- % \begin{tabularx}{15cm}{|lX|Xl|} 
- \tablefirsthead{Contenido de un paquete Xcode\\}
-\tablehead{Contenido de un paquete Xcode\\}
-\tabletail{Continua en la siguiente página\\}
-\tablelasttail{\\}
-\tablecaption{Contenido de un paquete Xcode}
-\begin{supertabular}{||c|c||}
+\begin{center}
+\tablefirsthead{\hline\hline\rowcolor[gray]{0.9}Archivo & Descripción\\\hline\hline}
+\tablehead{\hline\hline\rowcolor[gray]{0.9}Archivo & Descripción\\\hline\hline}
+% \tabletail{}
+% \tablelasttail{}
+\bottomcaption{Contenido de un paquete Xcode Cap}
+\begin{supertabular}{||p{0.45\linewidth}|p{0.45\linewidth}||}
+\lstinline!BetfairApp! & El fichero ejecutable de la aplicación. El nombre de este fichero es el mismo que el de la aplicación más la extensión app.\\ 
 \hline 
-\rowcolor[gray]{0.9}Archivo & Descripción\\ 
+\lstinline!Default.png! & Imagen de 480 x 320 píxeles que se muestra nada más iniciarse la aplicación  a modo de introducción. El sistema usa esta imagen mientras realiza tareas en segundo plano que requieren de un tiempo sensible para el usuario.\\
+\hline
+\lstinline!Settings.bundle! & Es un fichero que contiene las preferencias de la aplicación a personalizar por el usuario, como por ejemplo el lenguaje de la aplicación, el tipo de moneda a mostrar\ldots \\
+\hline
+\lstinline!iconBF.png! & Icono de 57 x 57 píxeles que representa la aplicación en la pantalla principal del dispositivo. \\
+\hline
+\lstinline!Info.plist! & También conocida como lista de propiedades. Este fichero es un lista donde se definen los valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
+\hline
+\lstinline!en.lproj! & Archivo que contiene los textos de la interfaz en inglés. Usado por el sistema cuando este lenguaje esta por defecto para lanzar aplicación o definido en las preferencias de la aplicación.\\
+\hline
+\lstinline!es.lproj! &Archivo que contiene los textos de la interfaz en español.\\
+\hline
+\lstinline!MainWindows.xib! & Contiene la interfaz a cargar por defecto por el sistema una vez lanzada la aplicación. Contiene la ventana principal de la interfaz de usuario. \\
+\hline
+\lstinline!RootViewController.xib! & Contiene los objetos necesarios de la interfaz de usuario del menú principal. \\
+\hline
+\lstinline!EventsControllerView.xib! &Contiene los objetos necesarios de la interfaz de usuario del menú de los eventos activos. \\
+\hline
+\lstinline!EventsTypesControllerView.xib! & Contiene los objetos necesarios de la interfaz de usuario de los tipos de eventos de Betfair. \\
+\hline
+\lstinline!EventsAndMarketsControllerView.xib! & Contiene los objetos necesarios de la interfaz de usuario de los eventos y mercados disponibles. \\
+\hline
+\lstinline!MarketInfoControllerView.xib! & Contiene los objetos necesarios de la interfaz de usuario de las características de un mercado. \\
+\hline
+\lstinline!PutBetControllerView.xib! & Contiene los objetos necesarios de la interfaz de usuario de la realización de una apuesta. \\
+\hline
+\lstinline!MyBetsControllerView.xib! & Contiene los objetos necesarios de la interfaz de usuario del menú de las apuestas ya realizadas por el usuario. \\
+\hline
+\lstinline!MyBetsCategoryController.xib! & Contiene los objetos necesarios de la interfaz de usuario de las categorías de apuestas realizadas por el usuario. \\
+\hline
+\lstinline!MyBetsDetailsView.xib! & Contiene los objetos necesarios de la interfaz de usuario con los detalles de una apuesta ya realizada y las opciones disponibles. \\
+\hline
+\lstinline!MyBetPropertiesView.xib! & Contiene los objetos necesarios de la interfaz de usuarios de los datos del mercados en los que se realizó la apuesta con las opciones posibles a realizar sobre esta. \\
+\hline
+\lstinline!TradingController.xib! & Contiene los objetos necesarios de la interfaz de usuario con los detalles acerca del trading sobre una apuesta. \\
 \hline 
-BetfairApp & El fichero ejecutable de la aplicación. El nombre de este fichero es el mismo que el de la aplicación más la extensión app.\\ 
 \hline 
-Default.png & Imagen de 480 x 320 píxeles que se muestra nada más iniciarse la aplicación  a modo de introducción. El sistema usa esta imagen mientras realiza tareas en segundo plano que requieren de un tiempo sensible para el usuario.\\
-\hline
-Settings.bundle & Es un fichero que contiene las preferencias de la aplicación a personalizar por el usuario, como por ejemplo el lenguaje de la aplicación, el tipo de moneda a mostrar\ldots \\
-\hline
-iconBF.png & Icono de 57 x 57 píxeles que representa la aplicación en la pantalla principal del dispositivo. \\
-\hline
-Info.plist & También conocida como lista de propiedades. Este fichero es un lista donde se definen los valores claves de la aplicación tales como el identificador de aplicación, la versión y el título.\\
-\hline
-en.lproj & Archivo que contiene los textos de la interfaz en inglés. Usado por el sistema cuando este lenguaje esta por defecto para lanzar aplicación o definido en las preferencias de la aplicación.\\
-\hline
-es.lproj &Archivo que contiene los textos de la interfaz en español.\\
-\hline
-MainWindows.xib & Contiene la interfaz a cargar por defecto por el sistema una vez lanzada la aplicación. Contiene la ventana principal de la interfaz de usuario. \\
-\hline
-RootViewController.xib & Contiene los objetos necesarios de la interfaz de usuario del menú principal. \\
-\hline
-EventsControllerView.xib &Contiene los objetos necesarios de la interfaz de usuario del menú de los eventos activos. \\
-\hline
-EventsTypesControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los tipos de eventos de Betfair. \\
-\hline
-EventsAndMarketsControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de los eventos y mercados disponibles. \\
-\hline
-MarketInfoControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de las características de un mercado. \\
-\hline
-PutBetControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario de la realización de una apuesta. \\
-\hline
-MyBetsControllerView.xib & Contiene los objetos necesarios de la interfaz de usuario del menú de las apuestas ya realizadas por el usuario. \\
-\hline
-MyBetsCategoryController.xib & Contiene los objetos necesarios de la interfaz de usuario de las categorías de apuestas realizadas por el usuario. \\
-\hline
-MyBetsDetailsView.xib & Contiene los objetos necesarios de la interfaz de usuario con los detalles de una apuesta ya realizada y las opciones disponibles. \\
-\hline
-MyBetPropertiesView.xib & Contiene los objetos necesarios de la interfaz de usuarios de los datos del mercados en los que se realizó la apuesta con las opciones posibles a realizar sobre esta. \\
-\hline
-TradingController.xib & Contiene los objetos necesarios de la interfaz de usuario con los detalles acerca del trading sobre una apuesta. \\
-\hline 
-\label{fig:componentes}
 \end{supertabular} 
-  
-  
- 
+\label{fig:componentes}
+\end{center} 
+
 \section{Internacionalización}
- Una parte importante a destacar en el proyecto es la posibilidad de establecer el idioma de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación de \emph{iOS} debe tener la posibilidad de poder mostrar varios idiomas y tener uno por defecto. Cada lenguaje esta implementado en la carpeta \emph{nombre-aplicación.lprj} del paquete de implementación ya comentado en la figura \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos idiomas también se podrá especificar una imagen de portada, icono de la aplicación, mensajes de alerta\ldots  adecuado al idioma escogido por el usuario. Por defecto, el sistema operativo \emph{iOS} arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo idioma especificado en las preferencias del terminal, es decir, es el mismo lenguaje que esté configurado en éste. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
+ Una parte importante a destacar en el proyecto es la posibilidad de establecer el idioma de la aplicación. Mediante la tienda de aplicaciones \emph{iTunes App Store} se puede distribuir la aplicación por diferentes países. Una aplicación de \emph{iOS} debe tener la posibilidad de poder mostrar varios idiomas y tener uno por defecto. Cada lenguaje esta implementado en la carpeta \emph{nombre-aplicación.lprj} del paquete de implementación ya comentado en el cuadro \ref{fig:componentes}. En el conjunto para proporcionar el soporte a distintos idiomas también se podrá especificar una imagen de portada, icono de la aplicación, mensajes de alerta\ldots  adecuado al idioma escogido por el usuario. Por defecto, el sistema operativo \emph{iOS} arranca la aplicación con los argumentos necesarios para que muestre la aplicación en el mismo idioma especificado en las preferencias del terminal, es decir, es el mismo lenguaje que esté configurado en éste. En caso de que no fuera posible, se procederá con el especificado por defecto de la aplicación.
 
   \begin{figure}[h!]
     \centering
@@ -115,7 +112,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
   
   Para implementar esta funcionalidad dentro de nuestro trabajo de fin de carrera hemos de definir la lista de palabras a traducir dentro de un archivo llamado \emph{Localizable.strings}.  Este archivo contiene una lista de la tupla etiqueta-traducción. El sistema, cada vez que encuentra una etiqueta en la interfaz de usuario la sustituye por la traducción del idioma en el que este configurado el terminal. A continuación se muestra un ejemplo del contenido de dicho fichero.
   
-\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
+\begin{lstlisting}
 /* 
    Localizable.strings
    Betfair App
@@ -150,27 +147,26 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
    
    Existen herramientas en el mercado que traducen de forma automática el archivo WSDL en código fuente ahorrando al programador tiempo y excluyendo al mismo los aspectos más básicos de la comunicación. Siendo \emph{iOS} una plataforma novedosa, no existe a día de hoy este tipo de herramientas por lo que se tuvo que afrontar el desarrollo de la comunicación con el servidor de Betfair.
       
-   A continuación se muestra un fragmento del archivo WSDL de Betfair. En este caso describe los parámetros necesarios para hacer uso del servicio \emph{Login }.
+   A continuación se muestra un fragmento del archivo WSDL de Betfair. En este caso describe los parámetros necesarios para hacer uso del servicio \emph{Login } (\lstinline{Login}).
    
-\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
-
-   <xsd:complexType name="LoginReq">
-        <xsd:sequence>
-         <xsd:element name="ipAddress" nillable="false" type="xsd:string"/>
-         <xsd:element name="locationId" nillable="false" type="xsd:int"/>
-         <xsd:element name="password" nillable="false" type="xsd:string"/>
-         <xsd:element name="productId" nillable="false" type="xsd:int"/>
-         <xsd:element name="username" nillable="false" type="xsd:string"/>
-         <xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/>
-        </xsd:sequence>
-      </xsd:complexType>
+\begin{lstlisting}[language=xml]
+<xsd:complexType name="LoginReq">
+ <xsd:sequence>
+  <xsd:element name="ipAddress" nillable="false" type="xsd:string"/>
+  <xsd:element name="locationId" nillable="false" type="xsd:int"/>
+  <xsd:element name="password" nillable="false" type="xsd:string"/>
+  <xsd:element name="productId" nillable="false" type="xsd:int"/>
+  <xsd:element name="username" nillable="false" type="xsd:string"/>
+  <xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/>
+ </xsd:sequence>
+</xsd:complexType>
 \end{lstlisting}
 
    En el listado podemos comprobar como nos hacen falta 6 parámetros para poder hacer uso del servicio \emph{Login}: \emph{ipAddress}, \emph{locationId}, \emph{password}, \emph{productId}, \emph{username} y \emph{vendorSoftwareId}. Todos estos parámetros nos lo proporciona Betfair cuando nos damos de alta en su programa de desarrollo.
    
    En la aplicación, para comenzar la comunicación con el servidor de Betfair, necesitamos construir la estructura de los mensajes a enviar en formato XML. Para ello, se desglosa el archivo en varias partes. La primera establecer la dirección web donde enviar los mensajes. La segunda construir las estructuras XML de cada servicio web tal y como viene descrito en el archivo WSDL. Hay que recalcar que a cada servicio, lo normal, es tener dos mensajes. El primero donde hacemos la petición al servidor y el segundo la respuesta. Para el caso concreto del \emph{Login} el formato del mensaje en XML a enviar sería el siguiente:
  
-\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}]
+\begin{lstlisting}[language=xml]
   <?xml version="1.0" encoding="UTF-8"?>
   <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.betfair.com/publicapi/types/global/v3/" xmlns:ns1="http://www.betfair.com/publicapi/v3/BFGlobalService/">
   <SOAP-ENV:Body>
@@ -189,15 +185,15 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
  
   Una vez construido el cuerpo del mensaje, sólo nos hace falta conocer la dirección de destino para el mensaje a enviar a los servidores de Betfair. Dicha dirección también viene descrita en el archivo WSDL:
   
-\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
-  	URL = "https://api.betfair.com/betex-api-public-ws/BFService";
+\begin{lstlisting}
+URL = "https://api.betfair.com/betex-api-public-ws/BFService";
 \end{lstlisting}
 
   Una vez la aplicación ha realizado estos pasos, toda la información se envía a Betfair en un mensaje HTML. 
   
   Una vez enviado el mensaje de petición la aplicación espera la respuesta de Betfair. El formato de la respuesta también viene definido en el archivo WSDL. En este caso la repuesta se recibe con el siguiente formato:
 
-\begin{lstlisting}[frame=single, language=xml,basicstyle=\small, keywordstyle = \color{blue}] 
+\begin{lstlisting}[language=xml] 
 <?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n2="http://www.betfair.com/publicapi/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <soap:Body>
@@ -206,7 +202,7 @@ TradingController.xib & Contiene los objetos necesarios de la interfaz de usuari
 <header xsi:type="n2:APIResponseHeader">
 <errorCode xsi:type="n2:APIErrorEnum">OK</errorCode>
 <minorErrorCode xsi:nil="1"></minorErrorCode>
-<sessionToken xsi:type="xsd:string">6XbAFn0tqfGgdWtQhRmspOctTJGPDOF0Unr2+5WWngk=</sessionToken>
+<sessionToken xsi:type="xsd:string">6XbAFn0tqfGgdWtQhRmspO</sessionToken>
 <timestamp xsi:type="xsd:dateTime">2009-11-23T11:39:45.644Z</timestamp>
 </header>
 <currency xsi:type="xsd:string">EUR</currency>

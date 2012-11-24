@@ -130,8 +130,13 @@ textheight=225mm]{geometry}
 \definecolor{gray45}{gray}{.45}
  
 \usepackage{listings}
-\lstset{ frame=Ltb,
-     framerule=0pt,
+\lstset{
+     basicstyle=\ttfamily,
+     % showstringspaces = false,
+     commentstyle=\color{gray45},
+     keywordstyle=\color{blue},
+     %
+     frame=single,
      aboveskip=0.5cm,
      framextopmargin=3pt,
      framexbottommargin=3pt,
@@ -140,12 +145,6 @@ textheight=225mm]{geometry}
      rulesep=.4pt,
      backgroundcolor=\color{gray97},
      rulesepcolor=\color{black},
-     %
-     stringstyle=\ttfamily,
-     showstringspaces = false,
-     basicstyle=\small\ttfamily,
-     commentstyle=\color{gray45},
-     keywordstyle=\bfseries,
      %
      numbers=left,
      numbersep=15pt,
